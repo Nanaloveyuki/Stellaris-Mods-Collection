@@ -60,8 +60,9 @@ Community contributions are welcome. This includes:
 
 ## Mods and Repo links
 
-GitHub Repository: https://github.com/non-npc/Stellaris-Mods-Collection
-Steam Mod Collection: https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
+**GitHub Repository**: https://github.com/non-npc/Stellaris-Mods-Collection
+
+**Steam Mod Collection**: https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
 
 ---
 
