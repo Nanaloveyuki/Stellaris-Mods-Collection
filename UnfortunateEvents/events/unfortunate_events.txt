@@ -1,0 +1,2545 @@
+namespace = ue
+
+country_event = {
+    id = ue.0
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_ai = no
+        NOT = { has_country_flag = ue_startup_delay_initialized }
+    }
+
+    immediate = {
+        set_country_flag = ue_startup_delay_initialized
+
+        random_list = {
+            1 = { set_timed_country_flag = { flag = ue_startup_block days = 627 } }
+            1 = { set_timed_country_flag = { flag = ue_startup_block days = 767 } }
+            1 = { set_timed_country_flag = { flag = ue_startup_block days = 907 } }
+        }
+    }
+}
+
+country_event = {
+    id = ue.1
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_ai = no
+        NOT = { has_country_flag = ue_startup_block }
+        NOT = { has_country_flag = ue_recent_event_cooldown }
+    }
+
+    immediate = {
+        random_list = {
+            1 = { set_timed_country_flag = { flag = ue_recent_event_cooldown days = 1277 } }
+            1 = { set_timed_country_flag = { flag = ue_recent_event_cooldown days = 2777 } }
+        }
+
+        random_list = {
+            1 = { country_event = { id = ue.100 } }
+            1 = { country_event = { id = ue.101 } }
+            1 = { country_event = { id = ue.102 } }
+            1 = { country_event = { id = ue.103 } }
+            1 = { country_event = { id = ue.104 } }
+            1 = { country_event = { id = ue.105 } }
+            1 = { country_event = { id = ue.106 } }
+            1 = { country_event = { id = ue.107 } }
+            1 = { country_event = { id = ue.108 } }
+            1 = { country_event = { id = ue.109 } }
+            1 = { country_event = { id = ue.110 } }
+            1 = { country_event = { id = ue.111 } }
+            1 = { country_event = { id = ue.112 } }
+            1 = { country_event = { id = ue.113 } }
+            1 = { country_event = { id = ue.114 } }
+            1 = { country_event = { id = ue.115 } }
+            1 = { country_event = { id = ue.116 } }
+            1 = { country_event = { id = ue.117 } }
+            1 = { country_event = { id = ue.118 } }
+            1 = { country_event = { id = ue.119 } }
+            1 = { country_event = { id = ue.120 } }
+            1 = { country_event = { id = ue.121 } }
+            1 = { country_event = { id = ue.122 } }
+            1 = { country_event = { id = ue.123 } }
+            1 = { country_event = { id = ue.124 } }
+            1 = { country_event = { id = ue.125 } }
+            1 = { country_event = { id = ue.126 } }
+            1 = { country_event = { id = ue.127 } }
+            1 = { country_event = { id = ue.128 } }
+            1 = { country_event = { id = ue.129 } }
+            1 = { country_event = { id = ue.130 } }
+            1 = { country_event = { id = ue.131 } }
+            1 = { country_event = { id = ue.132 } }
+            1 = { country_event = { id = ue.133 } }
+            1 = { country_event = { id = ue.134 } }
+            1 = { country_event = { id = ue.135 } }
+            1 = { country_event = { id = ue.136 } }
+            1 = { country_event = { id = ue.137 } }
+            1 = { country_event = { id = ue.138 } }
+            1 = { country_event = { id = ue.139 } }
+            1 = { country_event = { id = ue.140 } }
+            1 = { country_event = { id = ue.141 } }
+            1 = { country_event = { id = ue.142 } }
+            1 = { country_event = { id = ue.143 } }
+            1 = { country_event = { id = ue.144 } }
+            1 = { country_event = { id = ue.145 } }
+            1 = { country_event = { id = ue.146 } }
+            1 = { country_event = { id = ue.147 } }
+            1 = { country_event = { id = ue.148 } }
+            1 = { country_event = { id = ue.149 } }
+            1 = { country_event = { id = ue.150 } }
+            1 = { country_event = { id = ue.151 } }
+            1 = { country_event = { id = ue.152 } }
+            1 = { country_event = { id = ue.153 } }
+            1 = { country_event = { id = ue.154 } }
+            1 = { country_event = { id = ue.155 } }
+            1 = { country_event = { id = ue.156 } }
+            1 = { country_event = { id = ue.157 } }
+            1 = { country_event = { id = ue.158 } }
+            1 = { country_event = { id = ue.159 } }
+            1 = { country_event = { id = ue.160 } }
+            1 = { country_event = { id = ue.161 } }
+            1 = { country_event = { id = ue.162 } }
+            1 = { country_event = { id = ue.163 } }
+            1 = { country_event = { id = ue.164 } }
+            1 = { country_event = { id = ue.165 } }
+            1 = { country_event = { id = ue.166 } }
+            1 = { country_event = { id = ue.167 } }
+            1 = { country_event = { id = ue.168 } }
+            1 = { country_event = { id = ue.169 } }
+            1 = { country_event = { id = ue.170 } }
+            1 = { country_event = { id = ue.171 } }
+            1 = { country_event = { id = ue.172 } }
+            1 = { country_event = { id = ue.173 } }
+            1 = { country_event = { id = ue.174 } }
+            1 = { country_event = { id = ue.175 } }
+            1 = { country_event = { id = ue.176 } }
+            1 = { country_event = { id = ue.177 } }
+            1 = { country_event = { id = ue.178 } }
+            1 = { country_event = { id = ue.179 } }
+            1 = { country_event = { id = ue.180 } }
+            1 = { country_event = { id = ue.181 } }
+            1 = { country_event = { id = ue.182 } }
+            1 = { country_event = { id = ue.183 } }
+            1 = { country_event = { id = ue.184 } }
+            1 = { country_event = { id = ue.185 } }
+            1 = { country_event = { id = ue.186 } }
+            1 = { country_event = { id = ue.187 } }
+            1 = { country_event = { id = ue.188 } }
+            1 = { country_event = { id = ue.189 } }
+            1 = { country_event = { id = ue.190 } }
+            1 = { country_event = { id = ue.191 } }
+            1 = { country_event = { id = ue.192 } }
+            1 = { country_event = { id = ue.193 } }
+            1 = { country_event = { id = ue.194 } }
+            1 = { country_event = { id = ue.195 } }
+            1 = { country_event = { id = ue.196 } }
+            1 = { country_event = { id = ue.197 } }
+            1 = { country_event = { id = ue.198 } }
+            1 = { country_event = { id = ue.199 } }
+        }
+    }
+}
+
+country_event = {
+    id = ue.100
+
+    title = ue.100.title
+
+    desc = ue.100.desc
+
+    picture = GFX_evt_unfortunate_events_01
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.101
+
+    title = ue.101.title
+
+    desc = ue.101.desc
+
+    picture = GFX_evt_unfortunate_events_02
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.102
+
+    title = ue.102.title
+
+    desc = ue.102.desc
+
+    picture = GFX_evt_unfortunate_events_03
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.103
+
+    title = ue.103.title
+
+    desc = ue.103.desc
+
+    picture = GFX_evt_unfortunate_events_04
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.104
+
+    title = ue.104.title
+
+    desc = ue.104.desc
+
+    picture = GFX_evt_unfortunate_events_05
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.105
+
+    title = ue.105.title
+
+    desc = ue.105.desc
+
+    picture = GFX_evt_unfortunate_events_06
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.106
+
+    title = ue.106.title
+
+    desc = ue.106.desc
+
+    picture = GFX_evt_unfortunate_events_07
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.107
+
+    title = ue.107.title
+
+    desc = ue.107.desc
+
+    picture = GFX_evt_unfortunate_events_08
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.108
+
+    title = ue.108.title
+
+    desc = ue.108.desc
+
+    picture = GFX_evt_unfortunate_events_09
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.109
+
+    title = ue.109.title
+
+    desc = ue.109.desc
+
+    picture = GFX_evt_unfortunate_events_10
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.110
+
+    title = ue.110.title
+
+    desc = ue.110.desc
+
+    picture = GFX_evt_unfortunate_events_11
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.111
+
+    title = ue.111.title
+
+    desc = ue.111.desc
+
+    picture = GFX_evt_unfortunate_events_12
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.112
+
+    title = ue.112.title
+
+    desc = ue.112.desc
+
+    picture = GFX_evt_unfortunate_events_13
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.113
+
+    title = ue.113.title
+
+    desc = ue.113.desc
+
+    picture = GFX_evt_unfortunate_events_14
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.114
+
+    title = ue.114.title
+
+    desc = ue.114.desc
+
+    picture = GFX_evt_unfortunate_events_15
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.115
+
+    title = ue.115.title
+
+    desc = ue.115.desc
+
+    picture = GFX_evt_unfortunate_events_16
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.116
+
+    title = ue.116.title
+
+    desc = ue.116.desc
+
+    picture = GFX_evt_unfortunate_events_17
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.117
+
+    title = ue.117.title
+
+    desc = ue.117.desc
+
+    picture = GFX_evt_unfortunate_events_18
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.118
+
+    title = ue.118.title
+
+    desc = ue.118.desc
+
+    picture = GFX_evt_unfortunate_events_19
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.119
+
+    title = ue.119.title
+
+    desc = ue.119.desc
+
+    picture = GFX_evt_unfortunate_events_20
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = energy
+            AMOUNT = 1200
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.120
+
+    title = ue.120.title
+
+    desc = ue.120.desc
+
+    picture = GFX_evt_unfortunate_events_01
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.121
+
+    title = ue.121.title
+
+    desc = ue.121.desc
+
+    picture = GFX_evt_unfortunate_events_02
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.122
+
+    title = ue.122.title
+
+    desc = ue.122.desc
+
+    picture = GFX_evt_unfortunate_events_03
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.123
+
+    title = ue.123.title
+
+    desc = ue.123.desc
+
+    picture = GFX_evt_unfortunate_events_04
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.124
+
+    title = ue.124.title
+
+    desc = ue.124.desc
+
+    picture = GFX_evt_unfortunate_events_05
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.125
+
+    title = ue.125.title
+
+    desc = ue.125.desc
+
+    picture = GFX_evt_unfortunate_events_06
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.126
+
+    title = ue.126.title
+
+    desc = ue.126.desc
+
+    picture = GFX_evt_unfortunate_events_07
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.127
+
+    title = ue.127.title
+
+    desc = ue.127.desc
+
+    picture = GFX_evt_unfortunate_events_08
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.128
+
+    title = ue.128.title
+
+    desc = ue.128.desc
+
+    picture = GFX_evt_unfortunate_events_09
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.129
+
+    title = ue.129.title
+
+    desc = ue.129.desc
+
+    picture = GFX_evt_unfortunate_events_10
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.130
+
+    title = ue.130.title
+
+    desc = ue.130.desc
+
+    picture = GFX_evt_unfortunate_events_11
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.131
+
+    title = ue.131.title
+
+    desc = ue.131.desc
+
+    picture = GFX_evt_unfortunate_events_12
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.132
+
+    title = ue.132.title
+
+    desc = ue.132.desc
+
+    picture = GFX_evt_unfortunate_events_13
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.133
+
+    title = ue.133.title
+
+    desc = ue.133.desc
+
+    picture = GFX_evt_unfortunate_events_14
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.134
+
+    title = ue.134.title
+
+    desc = ue.134.desc
+
+    picture = GFX_evt_unfortunate_events_15
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.135
+
+    title = ue.135.title
+
+    desc = ue.135.desc
+
+    picture = GFX_evt_unfortunate_events_16
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.136
+
+    title = ue.136.title
+
+    desc = ue.136.desc
+
+    picture = GFX_evt_unfortunate_events_17
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.137
+
+    title = ue.137.title
+
+    desc = ue.137.desc
+
+    picture = GFX_evt_unfortunate_events_18
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.138
+
+    title = ue.138.title
+
+    desc = ue.138.desc
+
+    picture = GFX_evt_unfortunate_events_19
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.139
+
+    title = ue.139.title
+
+    desc = ue.139.desc
+
+    picture = GFX_evt_unfortunate_events_20
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = minerals
+            AMOUNT = 1000
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.140
+
+    title = ue.140.title
+
+    desc = ue.140.desc
+
+    picture = GFX_evt_unfortunate_events_01
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.141
+
+    title = ue.141.title
+
+    desc = ue.141.desc
+
+    picture = GFX_evt_unfortunate_events_02
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.142
+
+    title = ue.142.title
+
+    desc = ue.142.desc
+
+    picture = GFX_evt_unfortunate_events_03
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.143
+
+    title = ue.143.title
+
+    desc = ue.143.desc
+
+    picture = GFX_evt_unfortunate_events_04
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.144
+
+    title = ue.144.title
+
+    desc = ue.144.desc
+
+    picture = GFX_evt_unfortunate_events_05
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.145
+
+    title = ue.145.title
+
+    desc = ue.145.desc
+
+    picture = GFX_evt_unfortunate_events_06
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.146
+
+    title = ue.146.title
+
+    desc = ue.146.desc
+
+    picture = GFX_evt_unfortunate_events_07
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.147
+
+    title = ue.147.title
+
+    desc = ue.147.desc
+
+    picture = GFX_evt_unfortunate_events_08
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.148
+
+    title = ue.148.title
+
+    desc = ue.148.desc
+
+    picture = GFX_evt_unfortunate_events_09
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.149
+
+    title = ue.149.title
+
+    desc = ue.149.desc
+
+    picture = GFX_evt_unfortunate_events_10
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.150
+
+    title = ue.150.title
+
+    desc = ue.150.desc
+
+    picture = GFX_evt_unfortunate_events_11
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.151
+
+    title = ue.151.title
+
+    desc = ue.151.desc
+
+    picture = GFX_evt_unfortunate_events_12
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.152
+
+    title = ue.152.title
+
+    desc = ue.152.desc
+
+    picture = GFX_evt_unfortunate_events_13
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.153
+
+    title = ue.153.title
+
+    desc = ue.153.desc
+
+    picture = GFX_evt_unfortunate_events_14
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.154
+
+    title = ue.154.title
+
+    desc = ue.154.desc
+
+    picture = GFX_evt_unfortunate_events_15
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.155
+
+    title = ue.155.title
+
+    desc = ue.155.desc
+
+    picture = GFX_evt_unfortunate_events_16
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.156
+
+    title = ue.156.title
+
+    desc = ue.156.desc
+
+    picture = GFX_evt_unfortunate_events_17
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.157
+
+    title = ue.157.title
+
+    desc = ue.157.desc
+
+    picture = GFX_evt_unfortunate_events_18
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.158
+
+    title = ue.158.title
+
+    desc = ue.158.desc
+
+    picture = GFX_evt_unfortunate_events_19
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.159
+
+    title = ue.159.title
+
+    desc = ue.159.desc
+
+    picture = GFX_evt_unfortunate_events_20
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = food
+            AMOUNT = 800
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.160
+
+    title = ue.160.title
+
+    desc = ue.160.desc
+
+    picture = GFX_evt_unfortunate_events_01
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.161
+
+    title = ue.161.title
+
+    desc = ue.161.desc
+
+    picture = GFX_evt_unfortunate_events_02
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.162
+
+    title = ue.162.title
+
+    desc = ue.162.desc
+
+    picture = GFX_evt_unfortunate_events_03
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.163
+
+    title = ue.163.title
+
+    desc = ue.163.desc
+
+    picture = GFX_evt_unfortunate_events_04
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.164
+
+    title = ue.164.title
+
+    desc = ue.164.desc
+
+    picture = GFX_evt_unfortunate_events_05
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.165
+
+    title = ue.165.title
+
+    desc = ue.165.desc
+
+    picture = GFX_evt_unfortunate_events_06
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.166
+
+    title = ue.166.title
+
+    desc = ue.166.desc
+
+    picture = GFX_evt_unfortunate_events_07
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.167
+
+    title = ue.167.title
+
+    desc = ue.167.desc
+
+    picture = GFX_evt_unfortunate_events_08
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.168
+
+    title = ue.168.title
+
+    desc = ue.168.desc
+
+    picture = GFX_evt_unfortunate_events_09
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.169
+
+    title = ue.169.title
+
+    desc = ue.169.desc
+
+    picture = GFX_evt_unfortunate_events_10
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.170
+
+    title = ue.170.title
+
+    desc = ue.170.desc
+
+    picture = GFX_evt_unfortunate_events_11
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.171
+
+    title = ue.171.title
+
+    desc = ue.171.desc
+
+    picture = GFX_evt_unfortunate_events_12
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.172
+
+    title = ue.172.title
+
+    desc = ue.172.desc
+
+    picture = GFX_evt_unfortunate_events_13
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.173
+
+    title = ue.173.title
+
+    desc = ue.173.desc
+
+    picture = GFX_evt_unfortunate_events_14
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.174
+
+    title = ue.174.title
+
+    desc = ue.174.desc
+
+    picture = GFX_evt_unfortunate_events_15
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.175
+
+    title = ue.175.title
+
+    desc = ue.175.desc
+
+    picture = GFX_evt_unfortunate_events_16
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.176
+
+    title = ue.176.title
+
+    desc = ue.176.desc
+
+    picture = GFX_evt_unfortunate_events_17
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.177
+
+    title = ue.177.title
+
+    desc = ue.177.desc
+
+    picture = GFX_evt_unfortunate_events_18
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.178
+
+    title = ue.178.title
+
+    desc = ue.178.desc
+
+    picture = GFX_evt_unfortunate_events_19
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.179
+
+    title = ue.179.title
+
+    desc = ue.179.desc
+
+    picture = GFX_evt_unfortunate_events_20
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = alloys
+            AMOUNT = 500
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.180
+
+    title = ue.180.title
+
+    desc = ue.180.desc
+
+    picture = GFX_evt_unfortunate_events_01
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.181
+
+    title = ue.181.title
+
+    desc = ue.181.desc
+
+    picture = GFX_evt_unfortunate_events_02
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.182
+
+    title = ue.182.title
+
+    desc = ue.182.desc
+
+    picture = GFX_evt_unfortunate_events_03
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.183
+
+    title = ue.183.title
+
+    desc = ue.183.desc
+
+    picture = GFX_evt_unfortunate_events_04
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.184
+
+    title = ue.184.title
+
+    desc = ue.184.desc
+
+    picture = GFX_evt_unfortunate_events_05
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.185
+
+    title = ue.185.title
+
+    desc = ue.185.desc
+
+    picture = GFX_evt_unfortunate_events_06
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.186
+
+    title = ue.186.title
+
+    desc = ue.186.desc
+
+    picture = GFX_evt_unfortunate_events_07
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.187
+
+    title = ue.187.title
+
+    desc = ue.187.desc
+
+    picture = GFX_evt_unfortunate_events_08
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.188
+
+    title = ue.188.title
+
+    desc = ue.188.desc
+
+    picture = GFX_evt_unfortunate_events_09
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.189
+
+    title = ue.189.title
+
+    desc = ue.189.desc
+
+    picture = GFX_evt_unfortunate_events_10
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.190
+
+    title = ue.190.title
+
+    desc = ue.190.desc
+
+    picture = GFX_evt_unfortunate_events_11
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.191
+
+    title = ue.191.title
+
+    desc = ue.191.desc
+
+    picture = GFX_evt_unfortunate_events_12
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.192
+
+    title = ue.192.title
+
+    desc = ue.192.desc
+
+    picture = GFX_evt_unfortunate_events_13
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.193
+
+    title = ue.193.title
+
+    desc = ue.193.desc
+
+    picture = GFX_evt_unfortunate_events_14
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.194
+
+    title = ue.194.title
+
+    desc = ue.194.desc
+
+    picture = GFX_evt_unfortunate_events_15
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.195
+
+    title = ue.195.title
+
+    desc = ue.195.desc
+
+    picture = GFX_evt_unfortunate_events_16
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.196
+
+    title = ue.196.title
+
+    desc = ue.196.desc
+
+    picture = GFX_evt_unfortunate_events_17
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.197
+
+    title = ue.197.title
+
+    desc = ue.197.desc
+
+    picture = GFX_evt_unfortunate_events_18
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.198
+
+    title = ue.198.title
+
+    desc = ue.198.desc
+
+    picture = GFX_evt_unfortunate_events_19
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+
+country_event = {
+    id = ue.199
+
+    title = ue.199.title
+
+    desc = ue.199.desc
+
+    picture = GFX_evt_unfortunate_events_20
+    show_sound = ue_popup
+
+    is_triggered_only = yes
+
+    immediate = {
+        ue_take_resource_loss = {
+            RESOURCE = consumer_goods
+            AMOUNT = 400
+        }
+    }
+
+    option = {
+        name = OK
+    }
+}
+

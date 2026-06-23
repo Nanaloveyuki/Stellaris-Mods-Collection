@@ -1,0 +1,21 @@
+category = {
+    name = "Effects"
+    soundeffects = {
+        ue_popup
+    }
+}
+
+sound = {
+    name = "ue_popup"
+    file = "event/popup_ue.wav"
+    volume = 0.70
+}
+
+soundeffect = {
+    name = ue_popup
+    sounds = {
+        sound = ue_popup
+    }
+    max_audible = 1
+    max_audible_behaviour = fail
+}

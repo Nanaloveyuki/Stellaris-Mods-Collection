@@ -1,0 +1,41 @@
+ue_take_resource_loss = {
+    if = {
+        limit = {
+            resource_stockpile_compare = {
+                resource = $RESOURCE$
+                value > 0
+            }
+        }
+
+        export_resource_stockpile_to_variable = {
+            resource = $RESOURCE$
+            variable = ue_resource_taken
+        }
+
+        if = {
+            limit = {
+                check_variable = {
+                    which = ue_resource_taken
+                    value > $AMOUNT$
+                }
+            }
+            set_variable = {
+                which = ue_resource_taken
+                value = $AMOUNT$
+            }
+        }
+
+        floor_variable = ue_resource_taken
+
+        add_resource = {
+            $RESOURCE$ = -1
+            mult = ue_resource_taken
+        }
+    }
+    else = {
+        set_variable = {
+            which = ue_resource_taken
+            value = 0
+        }
+    }
+}

@@ -1,0 +1,22 @@
+spriteTypes = {
+	spriteType = { name = "GFX_evt_unfortunate_events_01" texturefile = "gfx/event_pictures/unfortunate_events_01.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_02" texturefile = "gfx/event_pictures/unfortunate_events_02.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_03" texturefile = "gfx/event_pictures/unfortunate_events_03.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_04" texturefile = "gfx/event_pictures/unfortunate_events_04.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_05" texturefile = "gfx/event_pictures/unfortunate_events_05.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_06" texturefile = "gfx/event_pictures/unfortunate_events_06.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_07" texturefile = "gfx/event_pictures/unfortunate_events_07.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_08" texturefile = "gfx/event_pictures/unfortunate_events_08.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_09" texturefile = "gfx/event_pictures/unfortunate_events_09.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_10" texturefile = "gfx/event_pictures/unfortunate_events_10.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_11" texturefile = "gfx/event_pictures/unfortunate_events_11.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_12" texturefile = "gfx/event_pictures/unfortunate_events_12.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_13" texturefile = "gfx/event_pictures/unfortunate_events_13.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_14" texturefile = "gfx/event_pictures/unfortunate_events_14.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_15" texturefile = "gfx/event_pictures/unfortunate_events_15.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_16" texturefile = "gfx/event_pictures/unfortunate_events_16.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_17" texturefile = "gfx/event_pictures/unfortunate_events_17.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_18" texturefile = "gfx/event_pictures/unfortunate_events_18.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_19" texturefile = "gfx/event_pictures/unfortunate_events_19.dds" }
+	spriteType = { name = "GFX_evt_unfortunate_events_20" texturefile = "gfx/event_pictures/unfortunate_events_20.dds" }
+}
