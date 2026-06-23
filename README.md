@@ -4,6 +4,9 @@ A collection of Stellaris mods I developed and maintain.
 
 Mods are kept up to date with the current game version.
 
+You can find the mods for Stellaris on Steam and Paradox:
+https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
+
 ## Open Source
 
 All of my Stellaris mods are open source.
