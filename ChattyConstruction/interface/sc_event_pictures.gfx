@@ -1,0 +1,6 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_evt_sc_construction_ship"
+		texturefile = "gfx/event_pictures/sc_construction_ship.dds"
+	}
+}

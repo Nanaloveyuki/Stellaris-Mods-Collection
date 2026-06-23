@@ -1,0 +1,7332 @@
+namespace = sc
+
+# Finds and assigns the player's first available construction ship.
+# This is called on game start and monthly until a valid ship exists.
+country_event = {
+	id = sc.1
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = no
+		NOT = { has_country_flag = sc_companion_assigned }
+		NOT = { has_country_flag = sc_companion_greeting_seen }
+		any_owned_ship = { is_ship_size = constructor }
+	}
+	immediate = {
+		random_owned_ship = {
+			limit = { is_ship_size = constructor }
+			set_ship_flag = sc_sarcastic_companion
+			save_event_target_as = sc_companion_ship
+		}
+		set_country_flag = sc_companion_assigned
+		remove_country_flag = sc_waiting_for_companion
+		set_country_flag = sc_companion_greeting_seen
+		country_event = { id = sc.5 }
+		if = {
+			limit = { NOT = { has_country_flag = sc_transmission_scheduled } }
+			set_country_flag = sc_transmission_scheduled
+			country_event = { id = sc.10 days = 730 random = 365 }
+		}
+	}
+}
+
+# Reassigns the companion after the original ship is disbanded, destroyed, or otherwise removed.
+country_event = {
+	id = sc.2
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = no
+		has_country_flag = sc_companion_greeting_seen
+		NOT = { has_country_flag = sc_companion_assigned }
+		any_owned_ship = { is_ship_size = constructor }
+	}
+	immediate = {
+		random_owned_ship = {
+			limit = { is_ship_size = constructor }
+			set_ship_flag = sc_sarcastic_companion
+			save_event_target_as = sc_companion_ship
+		}
+		set_country_flag = sc_companion_assigned
+		remove_country_flag = sc_waiting_for_companion
+		country_event = { id = sc.6 }
+		if = {
+			limit = { NOT = { has_country_flag = sc_transmission_scheduled } }
+			set_country_flag = sc_transmission_scheduled
+			country_event = { id = sc.10 days = 730 random = 365 }
+		}
+	}
+}
+
+# Monthly safety check. If the companion ship was removed, clear the assignment so a replacement can be found.
+country_event = {
+	id = sc.3
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = no
+		has_country_flag = sc_companion_assigned
+		NOT = { any_owned_ship = { has_ship_flag = sc_sarcastic_companion } }
+	}
+	immediate = {
+		remove_country_flag = sc_companion_assigned
+		remove_country_flag = sc_transmission_scheduled
+		if = {
+			limit = { any_owned_ship = { is_ship_size = constructor } }
+			country_event = { id = sc.2 days = 30 }
+		}
+		else = {
+			set_country_flag = sc_waiting_for_companion
+		}
+	}
+}
+
+# Dormant waiting state. Used when the empire has no active companion and no construction ship exists yet.
+country_event = {
+	id = sc.4
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = no
+		NOT = { has_country_flag = sc_companion_assigned }
+		NOT = { any_owned_ship = { is_ship_size = constructor } }
+	}
+	immediate = {
+		remove_country_flag = sc_transmission_scheduled
+		set_country_flag = sc_waiting_for_companion
+	}
+}
+
+
+# One-time greeting shown immediately after the companion ship is assigned.
+country_event = {
+	id = sc.5
+	title = sc_transmission_title
+	desc = sc.5.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+# Short greeting used when a replacement construction ship becomes the new companion.
+country_event = {
+	id = sc.6
+	title = sc_transmission_title
+	desc = sc.6.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+
+# Random follow-up scheduler. Most transmissions arrive 2-3 years later, with a rare short follow-up.
+# This is called after each visible transmission so there is no predictable calendar date.
+country_event = {
+	id = sc.20
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = no
+		has_country_flag = sc_companion_assigned
+		NOT = { has_country_flag = sc_transmission_scheduled }
+		any_owned_ship = { has_ship_flag = sc_sarcastic_companion }
+	}
+	immediate = {
+		set_country_flag = sc_transmission_scheduled
+		random_list = {
+			95 = { country_event = { id = sc.10 days = 730 random = 365 } }
+			5 = { country_event = { id = sc.10 days = 90 random = 90 } }
+		}
+	}
+}
+
+# Visible transmission picker. The scheduled flag is cleared here, then the next random date is scheduled.
+country_event = {
+	id = sc.10
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = no
+		has_country_flag = sc_companion_assigned
+	}
+	immediate = {
+		remove_country_flag = sc_transmission_scheduled
+		if = {
+			limit = { any_owned_ship = { has_ship_flag = sc_sarcastic_companion } }
+			random_owned_ship = {
+				limit = { has_ship_flag = sc_sarcastic_companion }
+				save_event_target_as = sc_companion_ship
+			}
+			random_list = {
+				1 = { country_event = { id = sc.100 } }
+				1 = { country_event = { id = sc.101 } }
+				1 = { country_event = { id = sc.102 } }
+				1 = { country_event = { id = sc.103 } }
+				1 = { country_event = { id = sc.104 } }
+				1 = { country_event = { id = sc.105 } }
+				1 = { country_event = { id = sc.106 } }
+				1 = { country_event = { id = sc.107 } }
+				1 = { country_event = { id = sc.108 } }
+				1 = { country_event = { id = sc.109 } }
+				1 = { country_event = { id = sc.110 } }
+				1 = { country_event = { id = sc.111 } }
+				1 = { country_event = { id = sc.112 } }
+				1 = { country_event = { id = sc.113 } }
+				1 = { country_event = { id = sc.114 } }
+				1 = { country_event = { id = sc.115 } }
+				1 = { country_event = { id = sc.116 } }
+				1 = { country_event = { id = sc.117 } }
+				1 = { country_event = { id = sc.118 } }
+				1 = { country_event = { id = sc.119 } }
+				1 = { country_event = { id = sc.120 } }
+				1 = { country_event = { id = sc.121 } }
+				1 = { country_event = { id = sc.122 } }
+				1 = { country_event = { id = sc.123 } }
+				1 = { country_event = { id = sc.124 } }
+				1 = { country_event = { id = sc.125 } }
+				1 = { country_event = { id = sc.126 } }
+				1 = { country_event = { id = sc.127 } }
+				1 = { country_event = { id = sc.128 } }
+				1 = { country_event = { id = sc.129 } }
+				1 = { country_event = { id = sc.130 } }
+				1 = { country_event = { id = sc.131 } }
+				1 = { country_event = { id = sc.132 } }
+				1 = { country_event = { id = sc.133 } }
+				1 = { country_event = { id = sc.134 } }
+				1 = { country_event = { id = sc.135 } }
+				1 = { country_event = { id = sc.136 } }
+				1 = { country_event = { id = sc.137 } }
+				1 = { country_event = { id = sc.138 } }
+				1 = { country_event = { id = sc.139 } }
+				1 = { country_event = { id = sc.140 } }
+				1 = { country_event = { id = sc.141 } }
+				1 = { country_event = { id = sc.142 } }
+				1 = { country_event = { id = sc.143 } }
+				1 = { country_event = { id = sc.144 } }
+				1 = { country_event = { id = sc.145 } }
+				1 = { country_event = { id = sc.146 } }
+				1 = { country_event = { id = sc.147 } }
+				1 = { country_event = { id = sc.148 } }
+				1 = { country_event = { id = sc.149 } }
+				1 = { country_event = { id = sc.150 } }
+				1 = { country_event = { id = sc.151 } }
+				1 = { country_event = { id = sc.152 } }
+				1 = { country_event = { id = sc.153 } }
+				1 = { country_event = { id = sc.154 } }
+				1 = { country_event = { id = sc.155 } }
+				1 = { country_event = { id = sc.156 } }
+				1 = { country_event = { id = sc.157 } }
+				1 = { country_event = { id = sc.158 } }
+				1 = { country_event = { id = sc.159 } }
+				1 = { country_event = { id = sc.160 } }
+				1 = { country_event = { id = sc.161 } }
+				1 = { country_event = { id = sc.162 } }
+				1 = { country_event = { id = sc.163 } }
+				1 = { country_event = { id = sc.164 } }
+				1 = { country_event = { id = sc.165 } }
+				1 = { country_event = { id = sc.166 } }
+				1 = { country_event = { id = sc.167 } }
+				1 = { country_event = { id = sc.168 } }
+				1 = { country_event = { id = sc.169 } }
+				1 = { country_event = { id = sc.170 } }
+				1 = { country_event = { id = sc.171 } }
+				1 = { country_event = { id = sc.172 } }
+				1 = { country_event = { id = sc.173 } }
+				1 = { country_event = { id = sc.174 } }
+				1 = { country_event = { id = sc.175 } }
+				1 = { country_event = { id = sc.176 } }
+				1 = { country_event = { id = sc.177 } }
+				1 = { country_event = { id = sc.178 } }
+				1 = { country_event = { id = sc.179 } }
+				1 = { country_event = { id = sc.180 } }
+				1 = { country_event = { id = sc.181 } }
+				1 = { country_event = { id = sc.182 } }
+				1 = { country_event = { id = sc.183 } }
+				1 = { country_event = { id = sc.184 } }
+				1 = { country_event = { id = sc.185 } }
+				1 = { country_event = { id = sc.186 } }
+				1 = { country_event = { id = sc.187 } }
+				1 = { country_event = { id = sc.188 } }
+				1 = { country_event = { id = sc.189 } }
+				1 = { country_event = { id = sc.190 } }
+				1 = { country_event = { id = sc.191 } }
+				1 = { country_event = { id = sc.192 } }
+				1 = { country_event = { id = sc.193 } }
+				1 = { country_event = { id = sc.194 } }
+				1 = { country_event = { id = sc.195 } }
+				1 = { country_event = { id = sc.196 } }
+				1 = { country_event = { id = sc.197 } }
+				1 = { country_event = { id = sc.198 } }
+				1 = { country_event = { id = sc.199 } }
+				1 = { country_event = { id = sc.200 } }
+				1 = { country_event = { id = sc.201 } }
+				1 = { country_event = { id = sc.202 } }
+				1 = { country_event = { id = sc.203 } }
+				1 = { country_event = { id = sc.204 } }
+				1 = { country_event = { id = sc.205 } }
+				1 = { country_event = { id = sc.206 } }
+				1 = { country_event = { id = sc.207 } }
+				1 = { country_event = { id = sc.208 } }
+				1 = { country_event = { id = sc.209 } }
+				1 = { country_event = { id = sc.210 } }
+				1 = { country_event = { id = sc.211 } }
+				1 = { country_event = { id = sc.212 } }
+				1 = { country_event = { id = sc.213 } }
+				1 = { country_event = { id = sc.214 } }
+				1 = { country_event = { id = sc.215 } }
+				1 = { country_event = { id = sc.216 } }
+				1 = { country_event = { id = sc.217 } }
+				1 = { country_event = { id = sc.218 } }
+				1 = { country_event = { id = sc.219 } }
+				1 = { country_event = { id = sc.220 } }
+				1 = { country_event = { id = sc.221 } }
+				1 = { country_event = { id = sc.222 } }
+				1 = { country_event = { id = sc.223 } }
+				1 = { country_event = { id = sc.224 } }
+				1 = { country_event = { id = sc.225 } }
+				1 = { country_event = { id = sc.226 } }
+				1 = { country_event = { id = sc.227 } }
+				1 = { country_event = { id = sc.228 } }
+				1 = { country_event = { id = sc.229 } }
+				1 = { country_event = { id = sc.230 } }
+				1 = { country_event = { id = sc.231 } }
+				1 = { country_event = { id = sc.232 } }
+				1 = { country_event = { id = sc.233 } }
+				1 = { country_event = { id = sc.234 } }
+				1 = { country_event = { id = sc.235 } }
+				1 = { country_event = { id = sc.236 } }
+				1 = { country_event = { id = sc.237 } }
+				1 = { country_event = { id = sc.238 } }
+				1 = { country_event = { id = sc.239 } }
+				1 = { country_event = { id = sc.240 } }
+				1 = { country_event = { id = sc.241 } }
+				1 = { country_event = { id = sc.242 } }
+				1 = { country_event = { id = sc.243 } }
+				1 = { country_event = { id = sc.244 } }
+				1 = { country_event = { id = sc.245 } }
+				1 = { country_event = { id = sc.246 } }
+				1 = { country_event = { id = sc.247 } }
+				1 = { country_event = { id = sc.248 } }
+				1 = { country_event = { id = sc.249 } }
+				1 = { country_event = { id = sc.250 } }
+				1 = { country_event = { id = sc.251 } }
+				1 = { country_event = { id = sc.252 } }
+				1 = { country_event = { id = sc.253 } }
+				1 = { country_event = { id = sc.254 } }
+				1 = { country_event = { id = sc.255 } }
+				1 = { country_event = { id = sc.256 } }
+				1 = { country_event = { id = sc.257 } }
+				1 = { country_event = { id = sc.258 } }
+				1 = { country_event = { id = sc.259 } }
+				1 = { country_event = { id = sc.260 } }
+				1 = { country_event = { id = sc.261 } }
+				1 = { country_event = { id = sc.262 } }
+				1 = { country_event = { id = sc.263 } }
+				1 = { country_event = { id = sc.264 } }
+				1 = { country_event = { id = sc.265 } }
+				1 = { country_event = { id = sc.266 } }
+				1 = { country_event = { id = sc.267 } }
+				1 = { country_event = { id = sc.268 } }
+				1 = { country_event = { id = sc.269 } }
+				1 = { country_event = { id = sc.270 } }
+				1 = { country_event = { id = sc.271 } }
+				1 = { country_event = { id = sc.272 } }
+				1 = { country_event = { id = sc.273 } }
+				1 = { country_event = { id = sc.274 } }
+				1 = { country_event = { id = sc.275 } }
+				1 = { country_event = { id = sc.276 } }
+				1 = { country_event = { id = sc.277 } }
+				1 = { country_event = { id = sc.278 } }
+				1 = { country_event = { id = sc.279 } }
+				1 = { country_event = { id = sc.280 } }
+				1 = { country_event = { id = sc.281 } }
+				1 = { country_event = { id = sc.282 } }
+				1 = { country_event = { id = sc.283 } }
+				1 = { country_event = { id = sc.284 } }
+				1 = { country_event = { id = sc.285 } }
+				1 = { country_event = { id = sc.286 } }
+				1 = { country_event = { id = sc.287 } }
+				1 = { country_event = { id = sc.288 } }
+				1 = { country_event = { id = sc.289 } }
+				1 = { country_event = { id = sc.290 } }
+				1 = { country_event = { id = sc.291 } }
+				1 = { country_event = { id = sc.292 } }
+				1 = { country_event = { id = sc.293 } }
+				1 = { country_event = { id = sc.294 } }
+				1 = { country_event = { id = sc.295 } }
+				1 = { country_event = { id = sc.296 } }
+				1 = { country_event = { id = sc.297 } }
+				1 = { country_event = { id = sc.298 } }
+				1 = { country_event = { id = sc.299 } }
+				1 = { country_event = { id = sc.300 } }
+				1 = { country_event = { id = sc.301 } }
+				1 = { country_event = { id = sc.302 } }
+				1 = { country_event = { id = sc.303 } }
+				1 = { country_event = { id = sc.304 } }
+				1 = { country_event = { id = sc.305 } }
+				1 = { country_event = { id = sc.306 } }
+				1 = { country_event = { id = sc.307 } }
+				1 = { country_event = { id = sc.308 } }
+				1 = { country_event = { id = sc.309 } }
+				1 = { country_event = { id = sc.310 } }
+				1 = { country_event = { id = sc.311 } }
+				1 = { country_event = { id = sc.312 } }
+				1 = { country_event = { id = sc.313 } }
+				1 = { country_event = { id = sc.314 } }
+				1 = { country_event = { id = sc.315 } }
+				1 = { country_event = { id = sc.316 } }
+				1 = { country_event = { id = sc.317 } }
+				1 = { country_event = { id = sc.318 } }
+				1 = { country_event = { id = sc.319 } }
+				1 = { country_event = { id = sc.320 } }
+				1 = { country_event = { id = sc.321 } }
+				1 = { country_event = { id = sc.322 } }
+				1 = { country_event = { id = sc.323 } }
+				1 = { country_event = { id = sc.324 } }
+				1 = { country_event = { id = sc.325 } }
+				1 = { country_event = { id = sc.326 } }
+				1 = { country_event = { id = sc.327 } }
+				1 = { country_event = { id = sc.328 } }
+				1 = { country_event = { id = sc.329 } }
+				1 = { country_event = { id = sc.330 } }
+				1 = { country_event = { id = sc.331 } }
+				1 = { country_event = { id = sc.332 } }
+				1 = { country_event = { id = sc.333 } }
+				1 = { country_event = { id = sc.334 } }
+				1 = { country_event = { id = sc.335 } }
+				1 = { country_event = { id = sc.336 } }
+				1 = { country_event = { id = sc.337 } }
+				1 = { country_event = { id = sc.338 } }
+				1 = { country_event = { id = sc.339 } }
+				1 = { country_event = { id = sc.340 } }
+				1 = { country_event = { id = sc.341 } }
+				1 = { country_event = { id = sc.342 } }
+				1 = { country_event = { id = sc.343 } }
+				1 = { country_event = { id = sc.344 } }
+				1 = { country_event = { id = sc.345 } }
+				1 = { country_event = { id = sc.346 } }
+				1 = { country_event = { id = sc.347 } }
+				1 = { country_event = { id = sc.348 } }
+				1 = { country_event = { id = sc.349 } }
+				1 = { country_event = { id = sc.350 } }
+				1 = { country_event = { id = sc.351 } }
+				1 = { country_event = { id = sc.352 } }
+				1 = { country_event = { id = sc.353 } }
+				1 = { country_event = { id = sc.354 } }
+				1 = { country_event = { id = sc.355 } }
+				1 = { country_event = { id = sc.356 } }
+				1 = { country_event = { id = sc.357 } }
+				1 = { country_event = { id = sc.358 } }
+				1 = { country_event = { id = sc.359 } }
+				1 = { country_event = { id = sc.360 } }
+				1 = { country_event = { id = sc.361 } }
+				1 = { country_event = { id = sc.362 } }
+				1 = { country_event = { id = sc.363 } }
+				1 = { country_event = { id = sc.364 } }
+				1 = { country_event = { id = sc.365 } }
+				1 = { country_event = { id = sc.366 } }
+				1 = { country_event = { id = sc.367 } }
+				1 = { country_event = { id = sc.368 } }
+				1 = { country_event = { id = sc.369 } }
+				1 = { country_event = { id = sc.370 } }
+				1 = { country_event = { id = sc.371 } }
+				1 = { country_event = { id = sc.372 } }
+				1 = { country_event = { id = sc.373 } }
+				1 = { country_event = { id = sc.374 } }
+				1 = { country_event = { id = sc.375 } }
+				1 = { country_event = { id = sc.376 } }
+				1 = { country_event = { id = sc.377 } }
+				1 = { country_event = { id = sc.378 } }
+				1 = { country_event = { id = sc.379 } }
+				1 = { country_event = { id = sc.380 } }
+				1 = { country_event = { id = sc.381 } }
+				1 = { country_event = { id = sc.382 } }
+				1 = { country_event = { id = sc.383 } }
+				1 = { country_event = { id = sc.384 } }
+				1 = { country_event = { id = sc.385 } }
+				1 = { country_event = { id = sc.386 } }
+				1 = { country_event = { id = sc.387 } }
+				1 = { country_event = { id = sc.388 } }
+				1 = { country_event = { id = sc.389 } }
+				1 = { country_event = { id = sc.390 } }
+				1 = { country_event = { id = sc.391 } }
+				1 = { country_event = { id = sc.392 } }
+				1 = { country_event = { id = sc.393 } }
+				1 = { country_event = { id = sc.394 } }
+				1 = { country_event = { id = sc.395 } }
+				1 = { country_event = { id = sc.396 } }
+				1 = { country_event = { id = sc.397 } }
+				1 = { country_event = { id = sc.398 } }
+				1 = { country_event = { id = sc.399 } }
+				1 = { country_event = { id = sc.400 } }
+				1 = { country_event = { id = sc.401 } }
+				1 = { country_event = { id = sc.402 } }
+				1 = { country_event = { id = sc.403 } }
+				1 = { country_event = { id = sc.404 } }
+				1 = { country_event = { id = sc.405 } }
+				1 = { country_event = { id = sc.406 } }
+				1 = { country_event = { id = sc.407 } }
+				1 = { country_event = { id = sc.408 } }
+				1 = { country_event = { id = sc.409 } }
+				1 = { country_event = { id = sc.410 } }
+				1 = { country_event = { id = sc.411 } }
+				1 = { country_event = { id = sc.412 } }
+				1 = { country_event = { id = sc.413 } }
+				1 = { country_event = { id = sc.414 } }
+				1 = { country_event = { id = sc.415 } }
+				1 = { country_event = { id = sc.416 } }
+				1 = { country_event = { id = sc.417 } }
+				1 = { country_event = { id = sc.418 } }
+				1 = { country_event = { id = sc.419 } }
+				1 = { country_event = { id = sc.420 } }
+				1 = { country_event = { id = sc.421 } }
+				1 = { country_event = { id = sc.422 } }
+				1 = { country_event = { id = sc.423 } }
+				1 = { country_event = { id = sc.424 } }
+				1 = { country_event = { id = sc.425 } }
+				1 = { country_event = { id = sc.426 } }
+				1 = { country_event = { id = sc.427 } }
+				1 = { country_event = { id = sc.428 } }
+				1 = { country_event = { id = sc.429 } }
+				1 = { country_event = { id = sc.430 } }
+				1 = { country_event = { id = sc.431 } }
+				1 = { country_event = { id = sc.432 } }
+				1 = { country_event = { id = sc.433 } }
+				1 = { country_event = { id = sc.434 } }
+				1 = { country_event = { id = sc.435 } }
+				1 = { country_event = { id = sc.436 } }
+				1 = { country_event = { id = sc.437 } }
+				1 = { country_event = { id = sc.438 } }
+				1 = { country_event = { id = sc.439 } }
+				1 = { country_event = { id = sc.440 } }
+				1 = { country_event = { id = sc.441 } }
+				1 = { country_event = { id = sc.442 } }
+				1 = { country_event = { id = sc.443 } }
+				1 = { country_event = { id = sc.444 } }
+				1 = { country_event = { id = sc.445 } }
+				1 = { country_event = { id = sc.446 } }
+				1 = { country_event = { id = sc.447 } }
+				1 = { country_event = { id = sc.448 } }
+				1 = { country_event = { id = sc.449 } }
+				1 = { country_event = { id = sc.450 } }
+				1 = { country_event = { id = sc.451 } }
+				1 = { country_event = { id = sc.452 } }
+				1 = { country_event = { id = sc.453 } }
+				1 = { country_event = { id = sc.454 } }
+				1 = { country_event = { id = sc.455 } }
+				1 = { country_event = { id = sc.456 } }
+				1 = { country_event = { id = sc.457 } }
+				1 = { country_event = { id = sc.458 } }
+				1 = { country_event = { id = sc.459 } }
+				1 = { country_event = { id = sc.460 } }
+				1 = { country_event = { id = sc.461 } }
+				1 = { country_event = { id = sc.462 } }
+				1 = { country_event = { id = sc.463 } }
+				1 = { country_event = { id = sc.464 } }
+				1 = { country_event = { id = sc.465 } }
+				1 = { country_event = { id = sc.466 } }
+				1 = { country_event = { id = sc.467 } }
+				1 = { country_event = { id = sc.468 } }
+				1 = { country_event = { id = sc.469 } }
+				1 = { country_event = { id = sc.470 } }
+				1 = { country_event = { id = sc.471 } }
+				1 = { country_event = { id = sc.472 } }
+				1 = { country_event = { id = sc.473 } }
+				1 = { country_event = { id = sc.474 } }
+				1 = { country_event = { id = sc.475 } }
+				1 = { country_event = { id = sc.476 } }
+				1 = { country_event = { id = sc.477 } }
+				1 = { country_event = { id = sc.478 } }
+				1 = { country_event = { id = sc.479 } }
+				1 = { country_event = { id = sc.480 } }
+				1 = { country_event = { id = sc.481 } }
+				1 = { country_event = { id = sc.482 } }
+				1 = { country_event = { id = sc.483 } }
+				1 = { country_event = { id = sc.484 } }
+				1 = { country_event = { id = sc.485 } }
+				1 = { country_event = { id = sc.486 } }
+				1 = { country_event = { id = sc.487 } }
+				1 = { country_event = { id = sc.488 } }
+				1 = { country_event = { id = sc.489 } }
+				1 = { country_event = { id = sc.490 } }
+				1 = { country_event = { id = sc.491 } }
+				1 = { country_event = { id = sc.492 } }
+				1 = { country_event = { id = sc.493 } }
+				1 = { country_event = { id = sc.494 } }
+				1 = { country_event = { id = sc.495 } }
+				1 = { country_event = { id = sc.496 } }
+				1 = { country_event = { id = sc.497 } }
+				1 = { country_event = { id = sc.498 } }
+				1 = { country_event = { id = sc.499 } }
+				1 = { country_event = { id = sc.500 } }
+				1 = { country_event = { id = sc.501 } }
+				1 = { country_event = { id = sc.502 } }
+				1 = { country_event = { id = sc.503 } }
+				1 = { country_event = { id = sc.504 } }
+				1 = { country_event = { id = sc.505 } }
+				1 = { country_event = { id = sc.506 } }
+				1 = { country_event = { id = sc.507 } }
+				1 = { country_event = { id = sc.508 } }
+				1 = { country_event = { id = sc.509 } }
+				1 = { country_event = { id = sc.510 } }
+				1 = { country_event = { id = sc.511 } }
+				1 = { country_event = { id = sc.512 } }
+				1 = { country_event = { id = sc.513 } }
+				1 = { country_event = { id = sc.514 } }
+				1 = { country_event = { id = sc.515 } }
+				1 = { country_event = { id = sc.516 } }
+				1 = { country_event = { id = sc.517 } }
+				1 = { country_event = { id = sc.518 } }
+				1 = { country_event = { id = sc.519 } }
+			}
+			# Schedule the next random transmission after this picker runs.
+			country_event = { id = sc.20 }
+		}
+		else = {
+			remove_country_flag = sc_companion_assigned
+			remove_country_flag = sc_transmission_scheduled
+			if = {
+				limit = { any_owned_ship = { is_ship_size = constructor } }
+				country_event = { id = sc.2 days = 30 }
+			}
+			else = {
+				set_country_flag = sc_waiting_for_companion
+			}
+		}
+	}
+}
+
+country_event = {
+	id = sc.100
+	title = sc_transmission_title
+	desc = sc.100.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.101
+	title = sc_transmission_title
+	desc = sc.101.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.102
+	title = sc_transmission_title
+	desc = sc.102.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.103
+	title = sc_transmission_title
+	desc = sc.103.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.104
+	title = sc_transmission_title
+	desc = sc.104.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.105
+	title = sc_transmission_title
+	desc = sc.105.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.106
+	title = sc_transmission_title
+	desc = sc.106.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.107
+	title = sc_transmission_title
+	desc = sc.107.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.108
+	title = sc_transmission_title
+	desc = sc.108.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.109
+	title = sc_transmission_title
+	desc = sc.109.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.110
+	title = sc_transmission_title
+	desc = sc.110.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.111
+	title = sc_transmission_title
+	desc = sc.111.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.112
+	title = sc_transmission_title
+	desc = sc.112.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.113
+	title = sc_transmission_title
+	desc = sc.113.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.114
+	title = sc_transmission_title
+	desc = sc.114.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.115
+	title = sc_transmission_title
+	desc = sc.115.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.116
+	title = sc_transmission_title
+	desc = sc.116.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.117
+	title = sc_transmission_title
+	desc = sc.117.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.118
+	title = sc_transmission_title
+	desc = sc.118.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.119
+	title = sc_transmission_title
+	desc = sc.119.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.120
+	title = sc_transmission_title
+	desc = sc.120.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.121
+	title = sc_transmission_title
+	desc = sc.121.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.122
+	title = sc_transmission_title
+	desc = sc.122.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.123
+	title = sc_transmission_title
+	desc = sc.123.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.124
+	title = sc_transmission_title
+	desc = sc.124.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.125
+	title = sc_transmission_title
+	desc = sc.125.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.126
+	title = sc_transmission_title
+	desc = sc.126.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.127
+	title = sc_transmission_title
+	desc = sc.127.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.128
+	title = sc_transmission_title
+	desc = sc.128.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.129
+	title = sc_transmission_title
+	desc = sc.129.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.130
+	title = sc_transmission_title
+	desc = sc.130.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.131
+	title = sc_transmission_title
+	desc = sc.131.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.132
+	title = sc_transmission_title
+	desc = sc.132.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.133
+	title = sc_transmission_title
+	desc = sc.133.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.134
+	title = sc_transmission_title
+	desc = sc.134.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.135
+	title = sc_transmission_title
+	desc = sc.135.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.136
+	title = sc_transmission_title
+	desc = sc.136.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.137
+	title = sc_transmission_title
+	desc = sc.137.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.138
+	title = sc_transmission_title
+	desc = sc.138.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.139
+	title = sc_transmission_title
+	desc = sc.139.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.140
+	title = sc_transmission_title
+	desc = sc.140.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.141
+	title = sc_transmission_title
+	desc = sc.141.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.142
+	title = sc_transmission_title
+	desc = sc.142.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.143
+	title = sc_transmission_title
+	desc = sc.143.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.144
+	title = sc_transmission_title
+	desc = sc.144.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.145
+	title = sc_transmission_title
+	desc = sc.145.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.146
+	title = sc_transmission_title
+	desc = sc.146.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.147
+	title = sc_transmission_title
+	desc = sc.147.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.148
+	title = sc_transmission_title
+	desc = sc.148.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.149
+	title = sc_transmission_title
+	desc = sc.149.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.150
+	title = sc_transmission_title
+	desc = sc.150.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.151
+	title = sc_transmission_title
+	desc = sc.151.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.152
+	title = sc_transmission_title
+	desc = sc.152.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.153
+	title = sc_transmission_title
+	desc = sc.153.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.154
+	title = sc_transmission_title
+	desc = sc.154.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.155
+	title = sc_transmission_title
+	desc = sc.155.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.156
+	title = sc_transmission_title
+	desc = sc.156.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.157
+	title = sc_transmission_title
+	desc = sc.157.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.158
+	title = sc_transmission_title
+	desc = sc.158.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.159
+	title = sc_transmission_title
+	desc = sc.159.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.160
+	title = sc_transmission_title
+	desc = sc.160.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.161
+	title = sc_transmission_title
+	desc = sc.161.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.162
+	title = sc_transmission_title
+	desc = sc.162.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.163
+	title = sc_transmission_title
+	desc = sc.163.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.164
+	title = sc_transmission_title
+	desc = sc.164.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.165
+	title = sc_transmission_title
+	desc = sc.165.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.166
+	title = sc_transmission_title
+	desc = sc.166.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.167
+	title = sc_transmission_title
+	desc = sc.167.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.168
+	title = sc_transmission_title
+	desc = sc.168.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.169
+	title = sc_transmission_title
+	desc = sc.169.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.170
+	title = sc_transmission_title
+	desc = sc.170.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.171
+	title = sc_transmission_title
+	desc = sc.171.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.172
+	title = sc_transmission_title
+	desc = sc.172.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.173
+	title = sc_transmission_title
+	desc = sc.173.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.174
+	title = sc_transmission_title
+	desc = sc.174.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.175
+	title = sc_transmission_title
+	desc = sc.175.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.176
+	title = sc_transmission_title
+	desc = sc.176.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.177
+	title = sc_transmission_title
+	desc = sc.177.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.178
+	title = sc_transmission_title
+	desc = sc.178.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.179
+	title = sc_transmission_title
+	desc = sc.179.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.180
+	title = sc_transmission_title
+	desc = sc.180.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.181
+	title = sc_transmission_title
+	desc = sc.181.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.182
+	title = sc_transmission_title
+	desc = sc.182.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.183
+	title = sc_transmission_title
+	desc = sc.183.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.184
+	title = sc_transmission_title
+	desc = sc.184.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.185
+	title = sc_transmission_title
+	desc = sc.185.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.186
+	title = sc_transmission_title
+	desc = sc.186.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.187
+	title = sc_transmission_title
+	desc = sc.187.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.188
+	title = sc_transmission_title
+	desc = sc.188.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.189
+	title = sc_transmission_title
+	desc = sc.189.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.190
+	title = sc_transmission_title
+	desc = sc.190.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.191
+	title = sc_transmission_title
+	desc = sc.191.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.192
+	title = sc_transmission_title
+	desc = sc.192.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.193
+	title = sc_transmission_title
+	desc = sc.193.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.194
+	title = sc_transmission_title
+	desc = sc.194.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.195
+	title = sc_transmission_title
+	desc = sc.195.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.196
+	title = sc_transmission_title
+	desc = sc.196.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.197
+	title = sc_transmission_title
+	desc = sc.197.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.198
+	title = sc_transmission_title
+	desc = sc.198.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.199
+	title = sc_transmission_title
+	desc = sc.199.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.200
+	title = sc_transmission_title
+	desc = sc.200.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.201
+	title = sc_transmission_title
+	desc = sc.201.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.202
+	title = sc_transmission_title
+	desc = sc.202.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.203
+	title = sc_transmission_title
+	desc = sc.203.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.204
+	title = sc_transmission_title
+	desc = sc.204.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.205
+	title = sc_transmission_title
+	desc = sc.205.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.206
+	title = sc_transmission_title
+	desc = sc.206.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.207
+	title = sc_transmission_title
+	desc = sc.207.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.208
+	title = sc_transmission_title
+	desc = sc.208.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.209
+	title = sc_transmission_title
+	desc = sc.209.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.210
+	title = sc_transmission_title
+	desc = sc.210.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.211
+	title = sc_transmission_title
+	desc = sc.211.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.212
+	title = sc_transmission_title
+	desc = sc.212.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.213
+	title = sc_transmission_title
+	desc = sc.213.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.214
+	title = sc_transmission_title
+	desc = sc.214.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.215
+	title = sc_transmission_title
+	desc = sc.215.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.216
+	title = sc_transmission_title
+	desc = sc.216.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.217
+	title = sc_transmission_title
+	desc = sc.217.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.218
+	title = sc_transmission_title
+	desc = sc.218.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.219
+	title = sc_transmission_title
+	desc = sc.219.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.220
+	title = sc_transmission_title
+	desc = sc.220.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.221
+	title = sc_transmission_title
+	desc = sc.221.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.222
+	title = sc_transmission_title
+	desc = sc.222.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.223
+	title = sc_transmission_title
+	desc = sc.223.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.224
+	title = sc_transmission_title
+	desc = sc.224.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.225
+	title = sc_transmission_title
+	desc = sc.225.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.226
+	title = sc_transmission_title
+	desc = sc.226.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.227
+	title = sc_transmission_title
+	desc = sc.227.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.228
+	title = sc_transmission_title
+	desc = sc.228.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.229
+	title = sc_transmission_title
+	desc = sc.229.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.230
+	title = sc_transmission_title
+	desc = sc.230.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.231
+	title = sc_transmission_title
+	desc = sc.231.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.232
+	title = sc_transmission_title
+	desc = sc.232.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.233
+	title = sc_transmission_title
+	desc = sc.233.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.234
+	title = sc_transmission_title
+	desc = sc.234.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.235
+	title = sc_transmission_title
+	desc = sc.235.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.236
+	title = sc_transmission_title
+	desc = sc.236.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.237
+	title = sc_transmission_title
+	desc = sc.237.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.238
+	title = sc_transmission_title
+	desc = sc.238.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.239
+	title = sc_transmission_title
+	desc = sc.239.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.240
+	title = sc_transmission_title
+	desc = sc.240.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.241
+	title = sc_transmission_title
+	desc = sc.241.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.242
+	title = sc_transmission_title
+	desc = sc.242.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.243
+	title = sc_transmission_title
+	desc = sc.243.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.244
+	title = sc_transmission_title
+	desc = sc.244.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.245
+	title = sc_transmission_title
+	desc = sc.245.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.246
+	title = sc_transmission_title
+	desc = sc.246.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.247
+	title = sc_transmission_title
+	desc = sc.247.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.248
+	title = sc_transmission_title
+	desc = sc.248.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.249
+	title = sc_transmission_title
+	desc = sc.249.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.250
+	title = sc_transmission_title
+	desc = sc.250.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.251
+	title = sc_transmission_title
+	desc = sc.251.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.252
+	title = sc_transmission_title
+	desc = sc.252.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.253
+	title = sc_transmission_title
+	desc = sc.253.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.254
+	title = sc_transmission_title
+	desc = sc.254.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.255
+	title = sc_transmission_title
+	desc = sc.255.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.256
+	title = sc_transmission_title
+	desc = sc.256.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.257
+	title = sc_transmission_title
+	desc = sc.257.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.258
+	title = sc_transmission_title
+	desc = sc.258.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.259
+	title = sc_transmission_title
+	desc = sc.259.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.260
+	title = sc_transmission_title
+	desc = sc.260.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.261
+	title = sc_transmission_title
+	desc = sc.261.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.262
+	title = sc_transmission_title
+	desc = sc.262.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.263
+	title = sc_transmission_title
+	desc = sc.263.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.264
+	title = sc_transmission_title
+	desc = sc.264.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.265
+	title = sc_transmission_title
+	desc = sc.265.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.266
+	title = sc_transmission_title
+	desc = sc.266.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.267
+	title = sc_transmission_title
+	desc = sc.267.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.268
+	title = sc_transmission_title
+	desc = sc.268.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.269
+	title = sc_transmission_title
+	desc = sc.269.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.270
+	title = sc_transmission_title
+	desc = sc.270.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.271
+	title = sc_transmission_title
+	desc = sc.271.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.272
+	title = sc_transmission_title
+	desc = sc.272.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.273
+	title = sc_transmission_title
+	desc = sc.273.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.274
+	title = sc_transmission_title
+	desc = sc.274.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.275
+	title = sc_transmission_title
+	desc = sc.275.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.276
+	title = sc_transmission_title
+	desc = sc.276.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.277
+	title = sc_transmission_title
+	desc = sc.277.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.278
+	title = sc_transmission_title
+	desc = sc.278.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.279
+	title = sc_transmission_title
+	desc = sc.279.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.280
+	title = sc_transmission_title
+	desc = sc.280.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.281
+	title = sc_transmission_title
+	desc = sc.281.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.282
+	title = sc_transmission_title
+	desc = sc.282.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.283
+	title = sc_transmission_title
+	desc = sc.283.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.284
+	title = sc_transmission_title
+	desc = sc.284.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.285
+	title = sc_transmission_title
+	desc = sc.285.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.286
+	title = sc_transmission_title
+	desc = sc.286.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.287
+	title = sc_transmission_title
+	desc = sc.287.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.288
+	title = sc_transmission_title
+	desc = sc.288.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.289
+	title = sc_transmission_title
+	desc = sc.289.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.290
+	title = sc_transmission_title
+	desc = sc.290.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.291
+	title = sc_transmission_title
+	desc = sc.291.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.292
+	title = sc_transmission_title
+	desc = sc.292.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.293
+	title = sc_transmission_title
+	desc = sc.293.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.294
+	title = sc_transmission_title
+	desc = sc.294.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.295
+	title = sc_transmission_title
+	desc = sc.295.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.296
+	title = sc_transmission_title
+	desc = sc.296.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.297
+	title = sc_transmission_title
+	desc = sc.297.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.298
+	title = sc_transmission_title
+	desc = sc.298.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.299
+	title = sc_transmission_title
+	desc = sc.299.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.300
+	title = sc_transmission_title
+	desc = sc.300.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.301
+	title = sc_transmission_title
+	desc = sc.301.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.302
+	title = sc_transmission_title
+	desc = sc.302.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.303
+	title = sc_transmission_title
+	desc = sc.303.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.304
+	title = sc_transmission_title
+	desc = sc.304.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.305
+	title = sc_transmission_title
+	desc = sc.305.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.306
+	title = sc_transmission_title
+	desc = sc.306.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.307
+	title = sc_transmission_title
+	desc = sc.307.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.308
+	title = sc_transmission_title
+	desc = sc.308.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.309
+	title = sc_transmission_title
+	desc = sc.309.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.310
+	title = sc_transmission_title
+	desc = sc.310.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.311
+	title = sc_transmission_title
+	desc = sc.311.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.312
+	title = sc_transmission_title
+	desc = sc.312.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.313
+	title = sc_transmission_title
+	desc = sc.313.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.314
+	title = sc_transmission_title
+	desc = sc.314.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.315
+	title = sc_transmission_title
+	desc = sc.315.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.316
+	title = sc_transmission_title
+	desc = sc.316.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.317
+	title = sc_transmission_title
+	desc = sc.317.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.318
+	title = sc_transmission_title
+	desc = sc.318.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.319
+	title = sc_transmission_title
+	desc = sc.319.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.320
+	title = sc_transmission_title
+	desc = sc.320.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.321
+	title = sc_transmission_title
+	desc = sc.321.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.322
+	title = sc_transmission_title
+	desc = sc.322.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.323
+	title = sc_transmission_title
+	desc = sc.323.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.324
+	title = sc_transmission_title
+	desc = sc.324.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.325
+	title = sc_transmission_title
+	desc = sc.325.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.326
+	title = sc_transmission_title
+	desc = sc.326.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.327
+	title = sc_transmission_title
+	desc = sc.327.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.328
+	title = sc_transmission_title
+	desc = sc.328.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.329
+	title = sc_transmission_title
+	desc = sc.329.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.330
+	title = sc_transmission_title
+	desc = sc.330.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.331
+	title = sc_transmission_title
+	desc = sc.331.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.332
+	title = sc_transmission_title
+	desc = sc.332.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.333
+	title = sc_transmission_title
+	desc = sc.333.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.334
+	title = sc_transmission_title
+	desc = sc.334.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.335
+	title = sc_transmission_title
+	desc = sc.335.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.336
+	title = sc_transmission_title
+	desc = sc.336.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.337
+	title = sc_transmission_title
+	desc = sc.337.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.338
+	title = sc_transmission_title
+	desc = sc.338.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.339
+	title = sc_transmission_title
+	desc = sc.339.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.340
+	title = sc_transmission_title
+	desc = sc.340.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.341
+	title = sc_transmission_title
+	desc = sc.341.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.342
+	title = sc_transmission_title
+	desc = sc.342.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.343
+	title = sc_transmission_title
+	desc = sc.343.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.344
+	title = sc_transmission_title
+	desc = sc.344.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.345
+	title = sc_transmission_title
+	desc = sc.345.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.346
+	title = sc_transmission_title
+	desc = sc.346.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.347
+	title = sc_transmission_title
+	desc = sc.347.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.348
+	title = sc_transmission_title
+	desc = sc.348.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.349
+	title = sc_transmission_title
+	desc = sc.349.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.350
+	title = sc_transmission_title
+	desc = sc.350.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.351
+	title = sc_transmission_title
+	desc = sc.351.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.352
+	title = sc_transmission_title
+	desc = sc.352.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.353
+	title = sc_transmission_title
+	desc = sc.353.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.354
+	title = sc_transmission_title
+	desc = sc.354.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.355
+	title = sc_transmission_title
+	desc = sc.355.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.356
+	title = sc_transmission_title
+	desc = sc.356.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.357
+	title = sc_transmission_title
+	desc = sc.357.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.358
+	title = sc_transmission_title
+	desc = sc.358.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.359
+	title = sc_transmission_title
+	desc = sc.359.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.360
+	title = sc_transmission_title
+	desc = sc.360.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.361
+	title = sc_transmission_title
+	desc = sc.361.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.362
+	title = sc_transmission_title
+	desc = sc.362.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.363
+	title = sc_transmission_title
+	desc = sc.363.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.364
+	title = sc_transmission_title
+	desc = sc.364.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.365
+	title = sc_transmission_title
+	desc = sc.365.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.366
+	title = sc_transmission_title
+	desc = sc.366.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.367
+	title = sc_transmission_title
+	desc = sc.367.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.368
+	title = sc_transmission_title
+	desc = sc.368.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.369
+	title = sc_transmission_title
+	desc = sc.369.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.370
+	title = sc_transmission_title
+	desc = sc.370.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.371
+	title = sc_transmission_title
+	desc = sc.371.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.372
+	title = sc_transmission_title
+	desc = sc.372.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.373
+	title = sc_transmission_title
+	desc = sc.373.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.374
+	title = sc_transmission_title
+	desc = sc.374.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.375
+	title = sc_transmission_title
+	desc = sc.375.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.376
+	title = sc_transmission_title
+	desc = sc.376.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.377
+	title = sc_transmission_title
+	desc = sc.377.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.378
+	title = sc_transmission_title
+	desc = sc.378.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.379
+	title = sc_transmission_title
+	desc = sc.379.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.380
+	title = sc_transmission_title
+	desc = sc.380.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.381
+	title = sc_transmission_title
+	desc = sc.381.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.382
+	title = sc_transmission_title
+	desc = sc.382.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.383
+	title = sc_transmission_title
+	desc = sc.383.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.384
+	title = sc_transmission_title
+	desc = sc.384.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.385
+	title = sc_transmission_title
+	desc = sc.385.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.386
+	title = sc_transmission_title
+	desc = sc.386.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.387
+	title = sc_transmission_title
+	desc = sc.387.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.388
+	title = sc_transmission_title
+	desc = sc.388.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.389
+	title = sc_transmission_title
+	desc = sc.389.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.390
+	title = sc_transmission_title
+	desc = sc.390.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.391
+	title = sc_transmission_title
+	desc = sc.391.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.392
+	title = sc_transmission_title
+	desc = sc.392.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.393
+	title = sc_transmission_title
+	desc = sc.393.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.394
+	title = sc_transmission_title
+	desc = sc.394.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.395
+	title = sc_transmission_title
+	desc = sc.395.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.396
+	title = sc_transmission_title
+	desc = sc.396.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.397
+	title = sc_transmission_title
+	desc = sc.397.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.398
+	title = sc_transmission_title
+	desc = sc.398.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.399
+	title = sc_transmission_title
+	desc = sc.399.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.400
+	title = sc_transmission_title
+	desc = sc.400.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.401
+	title = sc_transmission_title
+	desc = sc.401.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.402
+	title = sc_transmission_title
+	desc = sc.402.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.403
+	title = sc_transmission_title
+	desc = sc.403.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.404
+	title = sc_transmission_title
+	desc = sc.404.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.405
+	title = sc_transmission_title
+	desc = sc.405.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.406
+	title = sc_transmission_title
+	desc = sc.406.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.407
+	title = sc_transmission_title
+	desc = sc.407.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.408
+	title = sc_transmission_title
+	desc = sc.408.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.409
+	title = sc_transmission_title
+	desc = sc.409.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.410
+	title = sc_transmission_title
+	desc = sc.410.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.411
+	title = sc_transmission_title
+	desc = sc.411.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.412
+	title = sc_transmission_title
+	desc = sc.412.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.413
+	title = sc_transmission_title
+	desc = sc.413.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.414
+	title = sc_transmission_title
+	desc = sc.414.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.415
+	title = sc_transmission_title
+	desc = sc.415.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.416
+	title = sc_transmission_title
+	desc = sc.416.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.417
+	title = sc_transmission_title
+	desc = sc.417.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.418
+	title = sc_transmission_title
+	desc = sc.418.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.419
+	title = sc_transmission_title
+	desc = sc.419.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.420
+	title = sc_transmission_title
+	desc = sc.420.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.421
+	title = sc_transmission_title
+	desc = sc.421.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.422
+	title = sc_transmission_title
+	desc = sc.422.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.423
+	title = sc_transmission_title
+	desc = sc.423.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.424
+	title = sc_transmission_title
+	desc = sc.424.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.425
+	title = sc_transmission_title
+	desc = sc.425.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.426
+	title = sc_transmission_title
+	desc = sc.426.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.427
+	title = sc_transmission_title
+	desc = sc.427.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.428
+	title = sc_transmission_title
+	desc = sc.428.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.429
+	title = sc_transmission_title
+	desc = sc.429.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.430
+	title = sc_transmission_title
+	desc = sc.430.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.431
+	title = sc_transmission_title
+	desc = sc.431.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.432
+	title = sc_transmission_title
+	desc = sc.432.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.433
+	title = sc_transmission_title
+	desc = sc.433.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.434
+	title = sc_transmission_title
+	desc = sc.434.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.435
+	title = sc_transmission_title
+	desc = sc.435.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.436
+	title = sc_transmission_title
+	desc = sc.436.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.437
+	title = sc_transmission_title
+	desc = sc.437.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.438
+	title = sc_transmission_title
+	desc = sc.438.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.439
+	title = sc_transmission_title
+	desc = sc.439.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.440
+	title = sc_transmission_title
+	desc = sc.440.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.441
+	title = sc_transmission_title
+	desc = sc.441.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.442
+	title = sc_transmission_title
+	desc = sc.442.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.443
+	title = sc_transmission_title
+	desc = sc.443.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.444
+	title = sc_transmission_title
+	desc = sc.444.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.445
+	title = sc_transmission_title
+	desc = sc.445.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.446
+	title = sc_transmission_title
+	desc = sc.446.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.447
+	title = sc_transmission_title
+	desc = sc.447.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.448
+	title = sc_transmission_title
+	desc = sc.448.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.449
+	title = sc_transmission_title
+	desc = sc.449.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.450
+	title = sc_transmission_title
+	desc = sc.450.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.451
+	title = sc_transmission_title
+	desc = sc.451.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.452
+	title = sc_transmission_title
+	desc = sc.452.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.453
+	title = sc_transmission_title
+	desc = sc.453.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.454
+	title = sc_transmission_title
+	desc = sc.454.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.455
+	title = sc_transmission_title
+	desc = sc.455.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.456
+	title = sc_transmission_title
+	desc = sc.456.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.457
+	title = sc_transmission_title
+	desc = sc.457.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.458
+	title = sc_transmission_title
+	desc = sc.458.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.459
+	title = sc_transmission_title
+	desc = sc.459.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.460
+	title = sc_transmission_title
+	desc = sc.460.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.461
+	title = sc_transmission_title
+	desc = sc.461.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.462
+	title = sc_transmission_title
+	desc = sc.462.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.463
+	title = sc_transmission_title
+	desc = sc.463.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.464
+	title = sc_transmission_title
+	desc = sc.464.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.465
+	title = sc_transmission_title
+	desc = sc.465.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.466
+	title = sc_transmission_title
+	desc = sc.466.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.467
+	title = sc_transmission_title
+	desc = sc.467.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.468
+	title = sc_transmission_title
+	desc = sc.468.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.469
+	title = sc_transmission_title
+	desc = sc.469.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.470
+	title = sc_transmission_title
+	desc = sc.470.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.471
+	title = sc_transmission_title
+	desc = sc.471.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.472
+	title = sc_transmission_title
+	desc = sc.472.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.473
+	title = sc_transmission_title
+	desc = sc.473.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.474
+	title = sc_transmission_title
+	desc = sc.474.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.475
+	title = sc_transmission_title
+	desc = sc.475.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.476
+	title = sc_transmission_title
+	desc = sc.476.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.477
+	title = sc_transmission_title
+	desc = sc.477.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.478
+	title = sc_transmission_title
+	desc = sc.478.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.479
+	title = sc_transmission_title
+	desc = sc.479.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.480
+	title = sc_transmission_title
+	desc = sc.480.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.481
+	title = sc_transmission_title
+	desc = sc.481.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.482
+	title = sc_transmission_title
+	desc = sc.482.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.483
+	title = sc_transmission_title
+	desc = sc.483.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.484
+	title = sc_transmission_title
+	desc = sc.484.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.485
+	title = sc_transmission_title
+	desc = sc.485.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.486
+	title = sc_transmission_title
+	desc = sc.486.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.487
+	title = sc_transmission_title
+	desc = sc.487.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.488
+	title = sc_transmission_title
+	desc = sc.488.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.489
+	title = sc_transmission_title
+	desc = sc.489.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.490
+	title = sc_transmission_title
+	desc = sc.490.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.491
+	title = sc_transmission_title
+	desc = sc.491.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.492
+	title = sc_transmission_title
+	desc = sc.492.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.493
+	title = sc_transmission_title
+	desc = sc.493.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.494
+	title = sc_transmission_title
+	desc = sc.494.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.495
+	title = sc_transmission_title
+	desc = sc.495.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.496
+	title = sc_transmission_title
+	desc = sc.496.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.497
+	title = sc_transmission_title
+	desc = sc.497.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.498
+	title = sc_transmission_title
+	desc = sc.498.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.499
+	title = sc_transmission_title
+	desc = sc.499.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.500
+	title = sc_transmission_title
+	desc = sc.500.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.501
+	title = sc_transmission_title
+	desc = sc.501.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.502
+	title = sc_transmission_title
+	desc = sc.502.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.503
+	title = sc_transmission_title
+	desc = sc.503.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.504
+	title = sc_transmission_title
+	desc = sc.504.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.505
+	title = sc_transmission_title
+	desc = sc.505.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.506
+	title = sc_transmission_title
+	desc = sc.506.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.507
+	title = sc_transmission_title
+	desc = sc.507.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.508
+	title = sc_transmission_title
+	desc = sc.508.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.509
+	title = sc_transmission_title
+	desc = sc.509.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.510
+	title = sc_transmission_title
+	desc = sc.510.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.511
+	title = sc_transmission_title
+	desc = sc.511.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.512
+	title = sc_transmission_title
+	desc = sc.512.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.513
+	title = sc_transmission_title
+	desc = sc.513.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.514
+	title = sc_transmission_title
+	desc = sc.514.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.515
+	title = sc_transmission_title
+	desc = sc.515.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.516
+	title = sc_transmission_title
+	desc = sc.516.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.517
+	title = sc_transmission_title
+	desc = sc.517.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.518
+	title = sc_transmission_title
+	desc = sc.518.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+
+country_event = {
+	id = sc.519
+	title = sc_transmission_title
+	desc = sc.519.desc
+	picture = GFX_evt_sc_construction_ship
+	show_sound = chatty_event
+	is_triggered_only = yes
+	trigger = { is_ai = no }
+	option = {
+		name = sc_interesting
+	}
+	option = {
+		name = sc_back_to_work
+	}
+}
+

@@ -1,0 +1,21 @@
+category = {
+    name = "Effects"
+    soundeffects = {
+        chatty_event
+    }
+}
+
+sound = {
+    name = "chatty_event"
+    file = "event/chatty_event.wav"
+    volume = 0.85
+}
+
+soundeffect = {
+    name = chatty_event
+    sounds = {
+        sound = chatty_event
+    }
+    max_audible = 1
+    max_audible_behaviour = fail
+}
