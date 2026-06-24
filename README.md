@@ -1,10 +1,10 @@
 ![Immersive Mods](immersivemods.jpg)
-# Stellaris Mods Collection
+<img src="https://img.shields.io/badge/Stellaris-4.4.*-orange">
+# Immersive Mods for Stellaris
 
 A collection of Stellaris mods I develop and maintain.
 
 Mods are kept up to date with the current game version.
-<img src="https://img.shields.io/badge/Stellaris-4.4.*-orange">
 
 **On Steam**
 https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
