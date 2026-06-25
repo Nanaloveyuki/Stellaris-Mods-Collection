@@ -9,6 +9,23 @@ Mods are kept up to date with the current game version.
 **On Steam**
 https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
 
+## Mods and Repo Links
+
+- [Ambient Civilization Lore Pack](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/AmbientCivilizationLorePack)
+- [Bad Diplomacy](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/BadDiplomacy)
+- [Battle Perks](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/BattlePerks)
+- [Chatty Construction](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ChattyConstruction)
+- [Civilian Employment](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/CivilianEmployment)
+- [Cosmic Casino](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/CosmicCasino)
+- [Department of Strange Incidents](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/DSI)
+- [Elemental Warfare](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ElementalWarfare)
+- [Fateweaving](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/Fateweaving)
+- [Galactic Rumors Lore Pack](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/GalacticRumorsLorePack)
+- [Lucky Events](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/LuckyEvents)
+- [Planetary Festivals](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/PlanetaryFestivals)
+- [Unfortunate Events](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/UnfortunateEvents)
+- [Viral News](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ViralNews)
+
 ## Open Source
 
 All of my Stellaris mods are open source.
