@@ -1,0 +1,4152 @@
+namespace = ghg
+
+# Hidden startup scheduler. Runs once at game start for player empires.
+country_event = {
+    id = ghg.10
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_ai = no
+        NOT = { has_country_flag = ghg_started }
+    }
+
+    immediate = {
+        set_country_flag = ghg_started
+
+        random_list = {
+            1 = { set_timed_country_flag = { flag = ghg_startup_block days = 89 } }
+            1 = { set_timed_country_flag = { flag = ghg_startup_block days = 179 } }
+            1 = { set_timed_country_flag = { flag = ghg_startup_block days = 359 } }
+        }
+    }
+}
+
+# Hidden entry selector. Scheduled after each visible Guide entry.
+country_event = {
+    id = ghg.1
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_ai = no
+        has_country_flag = ghg_welcome_read
+        NOT = { has_country_flag = ghg_recent_guide_event }
+    }
+
+    immediate = {
+        random_list = {
+            1 = { set_timed_country_flag = { flag = ghg_recent_guide_event days = 720 } }
+            1 = { set_timed_country_flag = { flag = ghg_recent_guide_event days = 1095 } }
+            1 = { set_timed_country_flag = { flag = ghg_recent_guide_event days = 1450 } }
+        }
+
+        random_list = {
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_001 }
+                country_event = { id = ghg.100 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_002 }
+                country_event = { id = ghg.101 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_003 }
+                country_event = { id = ghg.102 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_004 }
+                country_event = { id = ghg.103 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_005 }
+                country_event = { id = ghg.104 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_006 }
+                country_event = { id = ghg.105 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_007 }
+                country_event = { id = ghg.106 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_008 }
+                country_event = { id = ghg.107 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_009 }
+                country_event = { id = ghg.108 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_010 }
+                country_event = { id = ghg.109 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_011 }
+                country_event = { id = ghg.110 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_012 }
+                country_event = { id = ghg.111 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_013 }
+                country_event = { id = ghg.112 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_014 }
+                country_event = { id = ghg.113 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_015 }
+                country_event = { id = ghg.114 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_016 }
+                country_event = { id = ghg.115 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_017 }
+                country_event = { id = ghg.116 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_018 }
+                country_event = { id = ghg.117 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_019 }
+                country_event = { id = ghg.118 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_020 }
+                country_event = { id = ghg.119 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_021 }
+                country_event = { id = ghg.120 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_022 }
+                country_event = { id = ghg.121 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_023 }
+                country_event = { id = ghg.122 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_024 }
+                country_event = { id = ghg.123 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_025 }
+                country_event = { id = ghg.124 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_026 }
+                country_event = { id = ghg.125 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_027 }
+                country_event = { id = ghg.126 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_028 }
+                country_event = { id = ghg.127 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_029 }
+                country_event = { id = ghg.128 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_030 }
+                country_event = { id = ghg.129 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_031 }
+                country_event = { id = ghg.130 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_032 }
+                country_event = { id = ghg.131 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_033 }
+                country_event = { id = ghg.132 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_034 }
+                country_event = { id = ghg.133 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_035 }
+                country_event = { id = ghg.134 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_036 }
+                country_event = { id = ghg.135 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_037 }
+                country_event = { id = ghg.136 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_038 }
+                country_event = { id = ghg.137 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_039 }
+                country_event = { id = ghg.138 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_040 }
+                country_event = { id = ghg.139 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_041 }
+                country_event = { id = ghg.140 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_042 }
+                country_event = { id = ghg.141 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_043 }
+                country_event = { id = ghg.142 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_044 }
+                country_event = { id = ghg.143 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_045 }
+                country_event = { id = ghg.144 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_046 }
+                country_event = { id = ghg.145 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_047 }
+                country_event = { id = ghg.146 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_048 }
+                country_event = { id = ghg.147 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_049 }
+                country_event = { id = ghg.148 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_050 }
+                country_event = { id = ghg.149 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_051 }
+                country_event = { id = ghg.150 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_052 }
+                country_event = { id = ghg.151 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_053 }
+                country_event = { id = ghg.152 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_054 }
+                country_event = { id = ghg.153 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_055 }
+                country_event = { id = ghg.154 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_056 }
+                country_event = { id = ghg.155 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_057 }
+                country_event = { id = ghg.156 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_058 }
+                country_event = { id = ghg.157 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_059 }
+                country_event = { id = ghg.158 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_060 }
+                country_event = { id = ghg.159 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_061 }
+                country_event = { id = ghg.160 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_062 }
+                country_event = { id = ghg.161 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_063 }
+                country_event = { id = ghg.162 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_064 }
+                country_event = { id = ghg.163 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_065 }
+                country_event = { id = ghg.164 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_066 }
+                country_event = { id = ghg.165 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_067 }
+                country_event = { id = ghg.166 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_068 }
+                country_event = { id = ghg.167 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_069 }
+                country_event = { id = ghg.168 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_070 }
+                country_event = { id = ghg.169 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_071 }
+                country_event = { id = ghg.170 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_072 }
+                country_event = { id = ghg.171 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_073 }
+                country_event = { id = ghg.172 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_074 }
+                country_event = { id = ghg.173 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_075 }
+                country_event = { id = ghg.174 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_076 }
+                country_event = { id = ghg.175 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_077 }
+                country_event = { id = ghg.176 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_078 }
+                country_event = { id = ghg.177 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_079 }
+                country_event = { id = ghg.178 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_080 }
+                country_event = { id = ghg.179 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_081 }
+                country_event = { id = ghg.180 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_082 }
+                country_event = { id = ghg.181 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_083 }
+                country_event = { id = ghg.182 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_084 }
+                country_event = { id = ghg.183 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_085 }
+                country_event = { id = ghg.184 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_086 }
+                country_event = { id = ghg.185 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_087 }
+                country_event = { id = ghg.186 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_088 }
+                country_event = { id = ghg.187 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_089 }
+                country_event = { id = ghg.188 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_090 }
+                country_event = { id = ghg.189 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_091 }
+                country_event = { id = ghg.190 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_092 }
+                country_event = { id = ghg.191 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_093 }
+                country_event = { id = ghg.192 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_094 }
+                country_event = { id = ghg.193 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_095 }
+                country_event = { id = ghg.194 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_096 }
+                country_event = { id = ghg.195 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_097 }
+                country_event = { id = ghg.196 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_098 }
+                country_event = { id = ghg.197 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_099 }
+                country_event = { id = ghg.198 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_100 }
+                country_event = { id = ghg.199 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_101 }
+                country_event = { id = ghg.200 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_102 }
+                country_event = { id = ghg.201 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_103 }
+                country_event = { id = ghg.202 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_104 }
+                country_event = { id = ghg.203 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_105 }
+                country_event = { id = ghg.204 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_106 }
+                country_event = { id = ghg.205 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_107 }
+                country_event = { id = ghg.206 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_108 }
+                country_event = { id = ghg.207 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_109 }
+                country_event = { id = ghg.208 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_110 }
+                country_event = { id = ghg.209 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_111 }
+                country_event = { id = ghg.210 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_112 }
+                country_event = { id = ghg.211 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_113 }
+                country_event = { id = ghg.212 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_114 }
+                country_event = { id = ghg.213 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_115 }
+                country_event = { id = ghg.214 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_116 }
+                country_event = { id = ghg.215 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_117 }
+                country_event = { id = ghg.216 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_118 }
+                country_event = { id = ghg.217 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_119 }
+                country_event = { id = ghg.218 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_120 }
+                country_event = { id = ghg.219 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_121 }
+                country_event = { id = ghg.220 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_122 }
+                country_event = { id = ghg.221 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_123 }
+                country_event = { id = ghg.222 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_124 }
+                country_event = { id = ghg.223 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_125 }
+                country_event = { id = ghg.224 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_126 }
+                country_event = { id = ghg.225 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_127 }
+                country_event = { id = ghg.226 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_128 }
+                country_event = { id = ghg.227 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_129 }
+                country_event = { id = ghg.228 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_130 }
+                country_event = { id = ghg.229 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_131 }
+                country_event = { id = ghg.230 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_132 }
+                country_event = { id = ghg.231 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_133 }
+                country_event = { id = ghg.232 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_134 }
+                country_event = { id = ghg.233 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_135 }
+                country_event = { id = ghg.234 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_136 }
+                country_event = { id = ghg.235 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_137 }
+                country_event = { id = ghg.236 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_138 }
+                country_event = { id = ghg.237 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_139 }
+                country_event = { id = ghg.238 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_140 }
+                country_event = { id = ghg.239 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_141 }
+                country_event = { id = ghg.240 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_142 }
+                country_event = { id = ghg.241 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_143 }
+                country_event = { id = ghg.242 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_144 }
+                country_event = { id = ghg.243 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_145 }
+                country_event = { id = ghg.244 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_146 }
+                country_event = { id = ghg.245 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_147 }
+                country_event = { id = ghg.246 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_148 }
+                country_event = { id = ghg.247 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_149 }
+                country_event = { id = ghg.248 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_150 }
+                country_event = { id = ghg.249 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_151 }
+                country_event = { id = ghg.250 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_152 }
+                country_event = { id = ghg.251 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_153 }
+                country_event = { id = ghg.252 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_154 }
+                country_event = { id = ghg.253 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_155 }
+                country_event = { id = ghg.254 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_156 }
+                country_event = { id = ghg.255 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_157 }
+                country_event = { id = ghg.256 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_158 }
+                country_event = { id = ghg.257 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_159 }
+                country_event = { id = ghg.258 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_160 }
+                country_event = { id = ghg.259 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_161 }
+                country_event = { id = ghg.260 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_162 }
+                country_event = { id = ghg.261 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_163 }
+                country_event = { id = ghg.262 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_164 }
+                country_event = { id = ghg.263 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_165 }
+                country_event = { id = ghg.264 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_166 }
+                country_event = { id = ghg.265 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_167 }
+                country_event = { id = ghg.266 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_168 }
+                country_event = { id = ghg.267 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_169 }
+                country_event = { id = ghg.268 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_170 }
+                country_event = { id = ghg.269 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_171 }
+                country_event = { id = ghg.270 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_172 }
+                country_event = { id = ghg.271 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_173 }
+                country_event = { id = ghg.272 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_174 }
+                country_event = { id = ghg.273 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_175 }
+                country_event = { id = ghg.274 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_176 }
+                country_event = { id = ghg.275 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_177 }
+                country_event = { id = ghg.276 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_178 }
+                country_event = { id = ghg.277 }
+            }
+            100 = {
+                modifier = { factor = 0 has_country_flag = ghg_read_179 }
+                country_event = { id = ghg.278 }
+            }
+        }
+    }
+}
+
+# Guaranteed first visible Guide entry.
+country_event = {
+    id = ghg.2
+    title = ghg.2.name
+    desc = ghg.2.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    trigger = {
+        is_ai = no
+        NOT = { has_country_flag = ghg_startup_block }
+        NOT = { has_country_flag = ghg_recent_guide_event }
+        NOT = { has_country_flag = ghg_welcome_read }
+    }
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_welcome_read
+        set_timed_country_flag = { flag = ghg_recent_guide_event days = 720 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.100
+    title = ghg.100.name
+    desc = ghg.100.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_001
+        add_resource = { unity = 42 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.101
+    title = ghg.101.name
+    desc = ghg.101.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_002
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.102
+    title = ghg.102.name
+    desc = ghg.102.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_003
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.103
+    title = ghg.103.name
+    desc = ghg.103.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_004
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.104
+    title = ghg.104.name
+    desc = ghg.104.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_005
+        add_resource = { unity = 25 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.105
+    title = ghg.105.name
+    desc = ghg.105.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_006
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.106
+    title = ghg.106.name
+    desc = ghg.106.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_007
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.107
+    title = ghg.107.name
+    desc = ghg.107.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_008
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.108
+    title = ghg.108.name
+    desc = ghg.108.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_009
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.109
+    title = ghg.109.name
+    desc = ghg.109.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_010
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.110
+    title = ghg.110.name
+    desc = ghg.110.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_011
+        add_resource = { unity = 50 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.111
+    title = ghg.111.name
+    desc = ghg.111.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_012
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.112
+    title = ghg.112.name
+    desc = ghg.112.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_013
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.113
+    title = ghg.113.name
+    desc = ghg.113.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_014
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.114
+    title = ghg.114.name
+    desc = ghg.114.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_015
+        add_resource = { energy = 100 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.115
+    title = ghg.115.name
+    desc = ghg.115.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_016
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.116
+    title = ghg.116.name
+    desc = ghg.116.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_017
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.117
+    title = ghg.117.name
+    desc = ghg.117.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_018
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.118
+    title = ghg.118.name
+    desc = ghg.118.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_019
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.119
+    title = ghg.119.name
+    desc = ghg.119.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_020
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.120
+    title = ghg.120.name
+    desc = ghg.120.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_021
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.121
+    title = ghg.121.name
+    desc = ghg.121.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_022
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.122
+    title = ghg.122.name
+    desc = ghg.122.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_023
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.123
+    title = ghg.123.name
+    desc = ghg.123.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_024
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.124
+    title = ghg.124.name
+    desc = ghg.124.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_025
+        add_resource = { minerals = 100 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.125
+    title = ghg.125.name
+    desc = ghg.125.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_026
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.126
+    title = ghg.126.name
+    desc = ghg.126.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_027
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.127
+    title = ghg.127.name
+    desc = ghg.127.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_028
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.128
+    title = ghg.128.name
+    desc = ghg.128.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_029
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.129
+    title = ghg.129.name
+    desc = ghg.129.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_030
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.130
+    title = ghg.130.name
+    desc = ghg.130.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_031
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.131
+    title = ghg.131.name
+    desc = ghg.131.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_032
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.132
+    title = ghg.132.name
+    desc = ghg.132.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_033
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.133
+    title = ghg.133.name
+    desc = ghg.133.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_034
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.134
+    title = ghg.134.name
+    desc = ghg.134.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_035
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.135
+    title = ghg.135.name
+    desc = ghg.135.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_036
+        add_resource = { unity = 25 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.136
+    title = ghg.136.name
+    desc = ghg.136.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_037
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.137
+    title = ghg.137.name
+    desc = ghg.137.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_038
+        add_resource = { unity = 30 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.138
+    title = ghg.138.name
+    desc = ghg.138.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_039
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.139
+    title = ghg.139.name
+    desc = ghg.139.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_040
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.140
+    title = ghg.140.name
+    desc = ghg.140.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_041
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.141
+    title = ghg.141.name
+    desc = ghg.141.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_042
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.142
+    title = ghg.142.name
+    desc = ghg.142.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_043
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.143
+    title = ghg.143.name
+    desc = ghg.143.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_044
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.144
+    title = ghg.144.name
+    desc = ghg.144.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_045
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.145
+    title = ghg.145.name
+    desc = ghg.145.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_046
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.146
+    title = ghg.146.name
+    desc = ghg.146.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_047
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.147
+    title = ghg.147.name
+    desc = ghg.147.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_048
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.148
+    title = ghg.148.name
+    desc = ghg.148.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_049
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.149
+    title = ghg.149.name
+    desc = ghg.149.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_050
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.150
+    title = ghg.150.name
+    desc = ghg.150.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_051
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.151
+    title = ghg.151.name
+    desc = ghg.151.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_052
+        add_resource = { energy = 75 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.152
+    title = ghg.152.name
+    desc = ghg.152.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_053
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.153
+    title = ghg.153.name
+    desc = ghg.153.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_054
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.154
+    title = ghg.154.name
+    desc = ghg.154.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_055
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.155
+    title = ghg.155.name
+    desc = ghg.155.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_056
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.156
+    title = ghg.156.name
+    desc = ghg.156.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_057
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.157
+    title = ghg.157.name
+    desc = ghg.157.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_058
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.158
+    title = ghg.158.name
+    desc = ghg.158.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_059
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.159
+    title = ghg.159.name
+    desc = ghg.159.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_060
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.160
+    title = ghg.160.name
+    desc = ghg.160.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_061
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.161
+    title = ghg.161.name
+    desc = ghg.161.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_062
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.162
+    title = ghg.162.name
+    desc = ghg.162.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_063
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.163
+    title = ghg.163.name
+    desc = ghg.163.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_064
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.164
+    title = ghg.164.name
+    desc = ghg.164.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_065
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.165
+    title = ghg.165.name
+    desc = ghg.165.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_066
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.166
+    title = ghg.166.name
+    desc = ghg.166.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_067
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.167
+    title = ghg.167.name
+    desc = ghg.167.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_068
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.168
+    title = ghg.168.name
+    desc = ghg.168.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_069
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.169
+    title = ghg.169.name
+    desc = ghg.169.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_070
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.170
+    title = ghg.170.name
+    desc = ghg.170.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_071
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.171
+    title = ghg.171.name
+    desc = ghg.171.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_072
+        add_resource = { minerals = 100 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.172
+    title = ghg.172.name
+    desc = ghg.172.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_073
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.173
+    title = ghg.173.name
+    desc = ghg.173.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_074
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.174
+    title = ghg.174.name
+    desc = ghg.174.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_075
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.175
+    title = ghg.175.name
+    desc = ghg.175.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_076
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.176
+    title = ghg.176.name
+    desc = ghg.176.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_077
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.177
+    title = ghg.177.name
+    desc = ghg.177.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_078
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.178
+    title = ghg.178.name
+    desc = ghg.178.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_079
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.179
+    title = ghg.179.name
+    desc = ghg.179.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_080
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.180
+    title = ghg.180.name
+    desc = ghg.180.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_081
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.181
+    title = ghg.181.name
+    desc = ghg.181.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_082
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.182
+    title = ghg.182.name
+    desc = ghg.182.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_083
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.183
+    title = ghg.183.name
+    desc = ghg.183.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_084
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.184
+    title = ghg.184.name
+    desc = ghg.184.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_085
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.185
+    title = ghg.185.name
+    desc = ghg.185.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_086
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.186
+    title = ghg.186.name
+    desc = ghg.186.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_087
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.187
+    title = ghg.187.name
+    desc = ghg.187.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_088
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.188
+    title = ghg.188.name
+    desc = ghg.188.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_089
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.189
+    title = ghg.189.name
+    desc = ghg.189.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_090
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.190
+    title = ghg.190.name
+    desc = ghg.190.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_091
+        add_resource = { unity = 35 }
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.191
+    title = ghg.191.name
+    desc = ghg.191.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_092
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.192
+    title = ghg.192.name
+    desc = ghg.192.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_093
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.193
+    title = ghg.193.name
+    desc = ghg.193.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_094
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.194
+    title = ghg.194.name
+    desc = ghg.194.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_095
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.195
+    title = ghg.195.name
+    desc = ghg.195.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_096
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.196
+    title = ghg.196.name
+    desc = ghg.196.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_097
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.197
+    title = ghg.197.name
+    desc = ghg.197.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_098
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.198
+    title = ghg.198.name
+    desc = ghg.198.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_099
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.199
+    title = ghg.199.name
+    desc = ghg.199.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_100
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.200
+    title = ghg.200.name
+    desc = ghg.200.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_101
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.201
+    title = ghg.201.name
+    desc = ghg.201.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_102
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.202
+    title = ghg.202.name
+    desc = ghg.202.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_103
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.203
+    title = ghg.203.name
+    desc = ghg.203.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_104
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.204
+    title = ghg.204.name
+    desc = ghg.204.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_105
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.205
+    title = ghg.205.name
+    desc = ghg.205.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_106
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.206
+    title = ghg.206.name
+    desc = ghg.206.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_107
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.207
+    title = ghg.207.name
+    desc = ghg.207.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_108
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.208
+    title = ghg.208.name
+    desc = ghg.208.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_109
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.209
+    title = ghg.209.name
+    desc = ghg.209.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_110
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.210
+    title = ghg.210.name
+    desc = ghg.210.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_111
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.211
+    title = ghg.211.name
+    desc = ghg.211.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_112
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.212
+    title = ghg.212.name
+    desc = ghg.212.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_113
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.213
+    title = ghg.213.name
+    desc = ghg.213.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_114
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.214
+    title = ghg.214.name
+    desc = ghg.214.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_115
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.215
+    title = ghg.215.name
+    desc = ghg.215.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_116
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.216
+    title = ghg.216.name
+    desc = ghg.216.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_117
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.217
+    title = ghg.217.name
+    desc = ghg.217.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_118
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.218
+    title = ghg.218.name
+    desc = ghg.218.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_119
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.219
+    title = ghg.219.name
+    desc = ghg.219.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_120
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.220
+    title = ghg.220.name
+    desc = ghg.220.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_121
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.221
+    title = ghg.221.name
+    desc = ghg.221.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_122
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.222
+    title = ghg.222.name
+    desc = ghg.222.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_123
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.223
+    title = ghg.223.name
+    desc = ghg.223.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_124
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.224
+    title = ghg.224.name
+    desc = ghg.224.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_125
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.225
+    title = ghg.225.name
+    desc = ghg.225.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_126
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.226
+    title = ghg.226.name
+    desc = ghg.226.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_127
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.227
+    title = ghg.227.name
+    desc = ghg.227.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_128
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.228
+    title = ghg.228.name
+    desc = ghg.228.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_129
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.229
+    title = ghg.229.name
+    desc = ghg.229.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_130
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.230
+    title = ghg.230.name
+    desc = ghg.230.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_131
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.231
+    title = ghg.231.name
+    desc = ghg.231.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_132
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.232
+    title = ghg.232.name
+    desc = ghg.232.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_133
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.233
+    title = ghg.233.name
+    desc = ghg.233.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_134
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.234
+    title = ghg.234.name
+    desc = ghg.234.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_135
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.235
+    title = ghg.235.name
+    desc = ghg.235.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_136
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.236
+    title = ghg.236.name
+    desc = ghg.236.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_137
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.237
+    title = ghg.237.name
+    desc = ghg.237.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_138
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.238
+    title = ghg.238.name
+    desc = ghg.238.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_139
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.239
+    title = ghg.239.name
+    desc = ghg.239.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_140
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.240
+    title = ghg.240.name
+    desc = ghg.240.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_141
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.241
+    title = ghg.241.name
+    desc = ghg.241.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_142
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.242
+    title = ghg.242.name
+    desc = ghg.242.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_143
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.243
+    title = ghg.243.name
+    desc = ghg.243.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_144
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.244
+    title = ghg.244.name
+    desc = ghg.244.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_145
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.245
+    title = ghg.245.name
+    desc = ghg.245.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_146
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.246
+    title = ghg.246.name
+    desc = ghg.246.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_147
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.247
+    title = ghg.247.name
+    desc = ghg.247.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_148
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.248
+    title = ghg.248.name
+    desc = ghg.248.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_149
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.249
+    title = ghg.249.name
+    desc = ghg.249.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_150
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.250
+    title = ghg.250.name
+    desc = ghg.250.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_151
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.251
+    title = ghg.251.name
+    desc = ghg.251.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_152
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.252
+    title = ghg.252.name
+    desc = ghg.252.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_153
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.253
+    title = ghg.253.name
+    desc = ghg.253.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_154
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.254
+    title = ghg.254.name
+    desc = ghg.254.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_155
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.255
+    title = ghg.255.name
+    desc = ghg.255.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_156
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.256
+    title = ghg.256.name
+    desc = ghg.256.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_157
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.257
+    title = ghg.257.name
+    desc = ghg.257.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_158
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.258
+    title = ghg.258.name
+    desc = ghg.258.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_159
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.259
+    title = ghg.259.name
+    desc = ghg.259.desc
+    picture = GFX_evt_ghg_01
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_160
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.260
+    title = ghg.260.name
+    desc = ghg.260.desc
+    picture = GFX_evt_ghg_02
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_161
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.261
+    title = ghg.261.name
+    desc = ghg.261.desc
+    picture = GFX_evt_ghg_03
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_162
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.262
+    title = ghg.262.name
+    desc = ghg.262.desc
+    picture = GFX_evt_ghg_04
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_163
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.263
+    title = ghg.263.name
+    desc = ghg.263.desc
+    picture = GFX_evt_ghg_05
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_164
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.264
+    title = ghg.264.name
+    desc = ghg.264.desc
+    picture = GFX_evt_ghg_06
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_165
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.265
+    title = ghg.265.name
+    desc = ghg.265.desc
+    picture = GFX_evt_ghg_07
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_166
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.266
+    title = ghg.266.name
+    desc = ghg.266.desc
+    picture = GFX_evt_ghg_08
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_167
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.267
+    title = ghg.267.name
+    desc = ghg.267.desc
+    picture = GFX_evt_ghg_09
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_168
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.268
+    title = ghg.268.name
+    desc = ghg.268.desc
+    picture = GFX_evt_ghg_10
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_169
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.269
+    title = ghg.269.name
+    desc = ghg.269.desc
+    picture = GFX_evt_ghg_11
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_170
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.270
+    title = ghg.270.name
+    desc = ghg.270.desc
+    picture = GFX_evt_ghg_12
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_171
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.271
+    title = ghg.271.name
+    desc = ghg.271.desc
+    picture = GFX_evt_ghg_13
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_172
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.272
+    title = ghg.272.name
+    desc = ghg.272.desc
+    picture = GFX_evt_ghg_14
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_173
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.273
+    title = ghg.273.name
+    desc = ghg.273.desc
+    picture = GFX_evt_ghg_15
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_174
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.274
+    title = ghg.274.name
+    desc = ghg.274.desc
+    picture = GFX_evt_ghg_16
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_175
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.275
+    title = ghg.275.name
+    desc = ghg.275.desc
+    picture = GFX_evt_ghg_17
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_176
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.276
+    title = ghg.276.name
+    desc = ghg.276.desc
+    picture = GFX_evt_ghg_18
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_177
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.277
+    title = ghg.277.name
+    desc = ghg.277.desc
+    picture = GFX_evt_ghg_19
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_178
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}
+
+country_event = {
+    id = ghg.278
+    title = ghg.278.name
+    desc = ghg.278.desc
+    picture = GFX_evt_ghg_20
+    show_sound = ghg_guide
+    is_triggered_only = yes
+
+    immediate = {
+        random_owned_colony = { save_event_target_as = ghg_location }
+        set_country_flag = ghg_read_179
+    }
+
+    option = {
+        name = ghg.option.close
+    }
+}

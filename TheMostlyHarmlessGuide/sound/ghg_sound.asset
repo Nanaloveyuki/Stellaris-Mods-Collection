@@ -1,0 +1,21 @@
+category = {
+    name = "Effects"
+    soundeffects = {
+        ghg_guide
+    }
+}
+
+sound = {
+    name = "ghg_guide"
+    file = "event/ghg_guide.wav"
+    volume = 0.70
+}
+
+soundeffect = {
+    name = ghg_guide
+    sounds = {
+        sound = ghg_guide
+    }
+    max_audible = 1
+    max_audible_behaviour = fail
+}

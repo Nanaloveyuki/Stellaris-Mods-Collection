@@ -1,0 +1,102 @@
+spriteTypes = {
+    spriteType = {
+        name = "GFX_evt_ghg_01"
+        texturefile = "gfx/event_pictures/ghg_evt_01.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_02"
+        texturefile = "gfx/event_pictures/ghg_evt_02.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_03"
+        texturefile = "gfx/event_pictures/ghg_evt_03.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_04"
+        texturefile = "gfx/event_pictures/ghg_evt_04.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_05"
+        texturefile = "gfx/event_pictures/ghg_evt_05.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_06"
+        texturefile = "gfx/event_pictures/ghg_evt_06.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_07"
+        texturefile = "gfx/event_pictures/ghg_evt_07.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_08"
+        texturefile = "gfx/event_pictures/ghg_evt_08.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_09"
+        texturefile = "gfx/event_pictures/ghg_evt_09.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_10"
+        texturefile = "gfx/event_pictures/ghg_evt_10.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_11"
+        texturefile = "gfx/event_pictures/ghg_evt_11.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_12"
+        texturefile = "gfx/event_pictures/ghg_evt_12.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_13"
+        texturefile = "gfx/event_pictures/ghg_evt_13.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_14"
+        texturefile = "gfx/event_pictures/ghg_evt_14.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_15"
+        texturefile = "gfx/event_pictures/ghg_evt_15.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_16"
+        texturefile = "gfx/event_pictures/ghg_evt_16.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_17"
+        texturefile = "gfx/event_pictures/ghg_evt_17.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_18"
+        texturefile = "gfx/event_pictures/ghg_evt_18.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_19"
+        texturefile = "gfx/event_pictures/ghg_evt_19.dds"
+    }
+
+    spriteType = {
+        name = "GFX_evt_ghg_20"
+        texturefile = "gfx/event_pictures/ghg_evt_20.dds"
+    }
+
+}
