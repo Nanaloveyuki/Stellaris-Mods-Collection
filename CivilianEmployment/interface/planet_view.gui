@@ -364,7 +364,7 @@ guiTypes = {
 
 			iconType = {
 				name = "arkship_header_background"
-				spriteType = "GFX_arkship_header_default"
+				spriteType = "GFX_arkship_planetview_header_civilian"
 				position = { x = -14 y = -37 }
 				alwaysTransparent = yes
 			}
@@ -741,7 +741,7 @@ guiTypes = {
 				}
 
 				instantTextBoxType = {
-					name = "arkship_controls"
+					name = "ARKSHIP_CONTROLS"
 					font = "malgun_goth_24"
 					position = { x = 10 y = 1 }
 					text = "ARKSHIP_CONTROLS_CONTROLS"
@@ -3545,7 +3545,7 @@ guiTypes = {
 			clicksound = "tab_click"
 			shortcut = "v"
 			oversound = no_sound
-			pdx_tooltip = "ARKSHIP_BUTTON"
+			pdx_tooltip = "ARKSHIP_CONTROLS_BUTTON"
 		}
 
 		buttonType = {

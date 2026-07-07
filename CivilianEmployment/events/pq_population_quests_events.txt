@@ -1,6 +1,6 @@
 namespace = pq_civilian_employment
 
-planet_event = {
+colony_event = {
 	id = pq_civilian_employment.1
 	title = pq_civilian_employment.1.name
 	desc = pq_civilian_employment.1.desc

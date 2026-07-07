@@ -22,7 +22,7 @@ pq_arkship_civilian_employment_button_effect = {
 
 	effect = {
 		colony = {
-			planet_event = { id = pq_civilian_employment.1 }
+			colony_event = { id = pq_civilian_employment.1 }
 		}
 	}
 }
