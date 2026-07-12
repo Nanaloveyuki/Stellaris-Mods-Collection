@@ -1,0 +1,239 @@
+VIRAL WEAPONS DAMAGE GUIDE
+==========================
+
+PURPOSE
+-------
+This guide compares the current Viral Weapons statistics with their closest
+vanilla equivalents. It is intended to help players decide whether a Viral or
+vanilla component is more appropriate for a ship design.
+
+The values below describe the mod as currently configured. They are not a
+statement of intended balance.
+
+
+HOW THE NUMBERS ARE CALCULATED
+------------------------------
+Average damage per shot = (minimum damage + maximum damage) / 2
+Raw DPS                 = average damage / cooldown
+Listed-hit DPS          = raw DPS x listed accuracy
+
+Listed-hit DPS does not account for the target's evasion. Tracking counters
+target evasion, so high-tracking weapons perform better than the table implies
+against corvettes, destroyers, missiles, and strike craft.
+
+Damage multipliers are applied only when damage reaches the relevant defensive
+layer. Unless otherwise stated, these weapons do not bypass shields or armor.
+
+
+VIRAL CORROSION
+---------------
+Successful hits from the S, M, L, X, and T Viral weapons apply Viral Corrosion.
+Point defense and Viral Interceptors do not currently apply it.
+
+  Duration:                 15 days
+  Maximum stacks:           10
+  Shield capacity penalty:  -2% per stack
+  Armor capacity penalty:   -2% per stack
+  Maximum penalty:          -20% shield and armor capacity
+
+Each additional successful hit advances the effect by one tier and refreshes
+the 15-day duration. Stellaris 4.4.5 does not expose shield/armor hardness as a
+valid ship modifier, so the implemented mechanic reduces capacity instead.
+
+Corrosion is most valuable in sustained fleet combat where several Viral
+weapons can repeatedly hit the same large target. It is less valuable when a
+target dies before multiple stacks accumulate.
+
+
+S/M/L VIRAL WEAPONS VS PLASMA CANNON III
+----------------------------------------
+Plasma Cannon III is used as the vanilla late-game, anti-armor benchmark.
+
+Weapon                 Avg hit  Cooldown  Raw DPS  Accuracy  Tracking  Range
+---------------------  -------  --------  -------  --------  --------  -----
+Small Viral Weapon       25.50      4.50     5.67       80%       65%     45
+Small Plasma Cannon III  38.50     35.00     1.10       80%       40%     40
+
+Medium Viral Weapon      62.00      5.00    12.40       80%       45%     70
+Medium Plasma Cannon III 96.50     40.00     2.41       80%       20%     60
+
+Large Viral Weapon      153.00      5.50    27.82       80%       25%    100
+Large Plasma Cannon III 231.00     45.00     5.13       80%        5%     80
+
+Damage multipliers:
+
+Weapon family       Shields  Armor  Hull
+------------------  -------  -----  ----
+Viral S/M/L            1.25   1.65  1.10
+Plasma Cannon III      0.25   2.00  1.50
+
+Expected DPS at listed accuracy, before target evasion:
+
+Weapon                 Shield DPS  Armor DPS  Hull DPS
+---------------------  ----------  ---------  --------
+Small Viral Weapon           5.67       7.48      4.99
+Small Plasma Cannon III      0.22       1.76      1.32
+
+Medium Viral Weapon         12.40      16.37     10.91
+Medium Plasma Cannon III     0.48       3.86      2.90
+
+Large Viral Weapon          27.82      36.72     24.48
+Large Plasma Cannon III      1.03       8.21      6.16
+
+Practical choice:
+
+* Choose Viral weapons for substantially higher sustained damage, longer range,
+  higher tracking, good shield damage, and Corrosion.
+* Choose Plasma when individual high-damage volleys matter or when using a
+  strictly vanilla-balanced fleet.
+* Plasma remains more specialized against armor per point of base damage, but
+  the current Viral fire rate overwhelms that advantage in total DPS.
+* Under the current values, Viral S/M/L weapons are not sidegrades. They are
+  considerably stronger than Plasma Cannon III in most ordinary engagements.
+
+
+VIRAL POINT DEFENSE VS GUARDIAN POINT-DEFENSE III
+--------------------------------------------------
+
+Weapon                         Avg hit  Cooldown  Raw DPS  Accuracy  Tracking  Range
+-----------------------------  -------  --------  -------  --------  --------  -----
+Viral Point Defense               5.50      0.80     6.88       80%       80%     35
+Guardian Point-Defense III         6.00      5.00     1.20       75%       30%     30
+
+Listed-hit DPS:
+
+  Viral Point Defense:             5.50
+  Guardian Point-Defense III:      0.90
+
+Both can target missiles and strike craft. Viral Point Defense has much higher
+fire rate, tracking, range, and expected DPS. It is the stronger general P-slot
+choice under the current configuration. It does not apply Viral Corrosion.
+
+
+VIRAL INTERCEPTORS VS ADVANCED STRIKE CRAFT III
+------------------------------------------------
+Both components launch eight craft.
+
+Stat                         Viral Interceptors  Strike Craft III
+---------------------------  ------------------  ----------------
+Damage per craft                  5-13                6-17
+Cooldown                          2.60                2.30
+Accuracy                           95%                100%
+Tracking                           85%                100%
+Full-wing listed-hit DPS          26.31               40.00
+Health per craft                  30                  12
+Armor per craft                   15                   0
+Shield per craft                   0                  25
+Evasion                           75%                 80%
+Regeneration per day              0.15                0.50
+Engagement range                 150                 125
+Configured speed                   9                 700
+
+Damage behavior:
+
+  Viral Interceptors:  1.20x shields, 1.50x armor, 1.10x hull
+  Strike Craft III:    bypasses shields and deals 1.50x armor damage
+
+Practical choice:
+
+* Choose vanilla Strike Craft III for higher wing DPS, perfect tracking, shield
+  bypass, much faster replacement, and vastly higher configured craft speed.
+* Choose Viral Interceptors for longer engagement range and a tougher individual
+  health/armor profile.
+* The Viral craft speed value of 9 is dramatically below vanilla's 700. Until
+  rebalanced, this may cause poor travel and interception performance.
+* Viral Interceptors do not apply Viral Corrosion.
+
+
+VIRAL LANCE VS TACHYON LANCE
+-----------------------------
+
+Weapon          Avg hit  Cooldown  Raw DPS  Accuracy  Tracking  Range  Min range
+--------------  -------  --------  -------  --------  --------  -----  ---------
+Viral Lance      475.00      9.00    52.78       85%       15%    150         50
+Tachyon Lance   1365.00     70.00    19.50       85%        0%    150          0
+
+Damage multipliers:
+
+Weapon          Shields  Armor  Hull
+--------------  -------  -----  ----
+Viral Lance        1.20   1.75  1.10
+Tachyon Lance      0.50   2.00  1.50
+
+Expected DPS at listed accuracy:
+
+Weapon          Shield DPS  Armor DPS  Hull DPS
+--------------  ----------  ---------  --------
+Viral Lance          53.83      78.51     49.35
+Tachyon Lance         8.29      33.15     24.86
+
+Practical choice:
+
+* Choose the Viral Lance for sustained capital-ship damage, tracking, shield
+  effectiveness, and Corrosion.
+* Choose the Tachyon Lance for much larger individual volleys and no minimum
+  range. Its high alpha strike can destroy or cripple targets before they fire.
+* The current Viral Lance has substantially higher sustained DPS against every
+  layer, so it is generally stronger once combat continues beyond the opening
+  volley.
+
+
+TITAN VIRAL CANNON VS PERDITION BEAM
+------------------------------------
+
+Weapon               Avg hit  Cooldown  Raw DPS  Accuracy  Tracking  Range  Min range
+-------------------  --------  --------  -------  --------  --------  -----  ---------
+Titan Viral Cannon    1350.00     14.00    96.43       85%       10%    250         75
+Perdition Beam        7500.00    180.00    41.67       85%        0%    250          0
+
+Damage multipliers:
+
+Weapon               Shields  Armor  Hull
+-------------------  -------  -----  ----
+Titan Viral Cannon      1.20    1.75  1.10
+Perdition Beam          0.75    1.50  1.25
+
+Expected DPS at listed accuracy:
+
+Weapon               Shield DPS  Armor DPS  Hull DPS
+-------------------  ----------  ---------  --------
+Titan Viral Cannon         98.36     143.44     90.16
+Perdition Beam             26.56      53.13     44.27
+
+Practical choice:
+
+* Choose the Titan Viral Cannon for sustained damage, some tracking, strong
+  anti-defense performance, and repeated Corrosion application.
+* Choose the Perdition Beam for an enormous opening strike, no minimum range,
+  and the ability to remove a capital ship in one shot.
+* The current Viral cannon fires nearly thirteen times as often and has much
+  higher sustained DPS, while the Perdition Beam deals over five times as much
+  damage in one volley.
+
+
+QUICK RECOMMENDATIONS
+---------------------
+
+Against corvettes/destroyers:
+  Viral S and M weapons benefit from their high tracking. Viral Point Defense
+  is also unusually effective against missiles and strike craft.
+
+Against cruisers/battleships/titans:
+  Viral L, X, and T weapons combine high sustained DPS with rapidly accumulating
+  Corrosion. Focused fire gives the best result.
+
+For opening-volley artillery:
+  Tachyon Lances and Perdition Beams retain much higher alpha damage. Vanilla
+  weapons may destroy a target before Viral weapons realize their sustained-DPS
+  advantage.
+
+For carrier fleets:
+  Vanilla Strike Craft III is currently the safer damage choice. Viral
+  Interceptors are durable and engage farther away, but their very low configured
+  speed and slow regeneration are serious disadvantages.
+
+For a vanilla-like balance level:
+  Prefer vanilla weapons. Current Viral direct-fire and point-defense values are
+  significantly above their closest vanilla equivalents.
+
+

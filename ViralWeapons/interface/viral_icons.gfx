@@ -1,0 +1,16 @@
+spriteTypes = {
+	spriteType = { name = "GFX_tech_viral_weapons" texturefile = "gfx/interface/icons/technologies/tech_viral_weapons.dds" }
+	spriteType = { name = "GFX_tech_viral_weapons_improved" texturefile = "gfx/interface/icons/technologies/tech_viral_weapons_improved.dds" }
+	spriteType = { name = "GFX_tech_viral_weapons_advanced" texturefile = "gfx/interface/icons/technologies/tech_viral_weapons_advanced.dds" }
+	spriteType = { name = "GFX_tech_viral_defense_organisms" texturefile = "gfx/interface/icons/technologies/tech_viral_defense_organisms.dds" }
+	spriteType = { name = "GFX_tech_viral_hangars" texturefile = "gfx/interface/icons/technologies/tech_viral_hangars.dds" }
+	spriteType = { name = "GFX_tech_viral_lance" texturefile = "gfx/interface/icons/technologies/tech_viral_lance.dds" }
+	spriteType = { name = "GFX_tech_viral_titan_organisms" texturefile = "gfx/interface/icons/technologies/tech_viral_titan_organisms.dds" }
+	spriteType = { name = "GFX_viral_weapon_s" texturefile = "gfx/interface/icons/components/viral_weapon_s.dds" }
+	spriteType = { name = "GFX_viral_weapon_m" texturefile = "gfx/interface/icons/components/viral_weapon_m.dds" }
+	spriteType = { name = "GFX_viral_weapon_l" texturefile = "gfx/interface/icons/components/viral_weapon_l.dds" }
+	spriteType = { name = "GFX_viral_point_defense" texturefile = "gfx/interface/icons/components/viral_point_defense.dds" }
+	spriteType = { name = "GFX_viral_strike_craft" texturefile = "gfx/interface/icons/components/viral_strike_craft.dds" }
+	spriteType = { name = "GFX_viral_lance" texturefile = "gfx/interface/icons/components/viral_lance.dds" }
+	spriteType = { name = "GFX_viral_titan_cannon" texturefile = "gfx/interface/icons/components/viral_titan_cannon.dds" }
+}

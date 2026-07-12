@@ -1,0 +1,15 @@
+category = {
+	name = "Effects"
+	soundeffects = {
+		viral_weapon_fire
+		viral_weapon_impact
+		viral_weapon_critical
+	}
+}
+
+sound = { name = "viral_weapon_fire" file = "weapon/viral_weapon_fire.wav" volume = 0.85 }
+sound = { name = "viral_weapon_impact" file = "weapon/viral_weapon_impact.wav" volume = 0.80 }
+sound = { name = "viral_weapon_critical" file = "weapon/viral_weapon_critical.wav" volume = 0.95 }
+soundeffect = { name = "viral_weapon_fire" sounds = { sound = "viral_weapon_fire" } volume = 0.85 max_audible = 12 max_audible_behaviour = fail }
+soundeffect = { name = "viral_weapon_impact" sounds = { sound = "viral_weapon_impact" } volume = 0.80 max_audible = 12 max_audible_behaviour = fail }
+soundeffect = { name = "viral_weapon_critical" sounds = { sound = "viral_weapon_critical" } volume = 0.95 max_audible = 6 max_audible_behaviour = fail }

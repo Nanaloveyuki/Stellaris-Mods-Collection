@@ -1,0 +1,4 @@
+namespace = viral
+
+# Reserved for future viral missiles, relics, origins, archaeology, and crisis content.
+

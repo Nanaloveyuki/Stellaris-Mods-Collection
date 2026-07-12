@@ -83,3 +83,8 @@ concept_art/
 
 # Generated sprite sheets
 generated/
+
+# Other
+.agents/
+art_source/
+tools/

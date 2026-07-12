@@ -1,0 +1,10 @@
+# Component sets shown in the ship designer weapon picker.
+
+component_set = { key = "VIRAL_WEAPON_S" icon = "GFX_viral_weapon_s" icon_frame = 1 }
+component_set = { key = "VIRAL_WEAPON_M" icon = "GFX_viral_weapon_m" icon_frame = 1 }
+component_set = { key = "VIRAL_WEAPON_L" icon = "GFX_viral_weapon_l" icon_frame = 1 }
+component_set = { key = "VIRAL_POINT_DEFENSE" icon = "GFX_viral_point_defense" icon_frame = 1 }
+component_set = { key = "VIRAL_STRIKE_CRAFT" icon = "GFX_viral_strike_craft" icon_frame = 1 }
+component_set = { key = "VIRAL_LANCE" icon = "GFX_viral_lance" icon_frame = 1 }
+component_set = { key = "VIRAL_TITAN_CANNON" icon = "GFX_viral_titan_cannon" icon_frame = 1 }
+

@@ -1,0 +1,6 @@
+viral_valid_corrosion_target = {
+	exists = this
+	is_civilian = no
+	NOT = { is_ship_class = shipclass_starbase }
+}
+

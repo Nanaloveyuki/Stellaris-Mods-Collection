@@ -1,0 +1,23 @@
+@viral_t2_cost = 4000
+@viral_t3_cost = 8000
+@viral_t4_cost = 16000
+@viral_t5_cost = 32000
+
+tech_viral_weapons = {
+	area = society cost = @viral_t2_cost tier = 2 category = { biology } ai_update_type = military weight = @tier2weight2
+	prerequisites = { "tech_genome_mapping" "tech_hydroponics" }
+	potential = { is_ai = no }
+	weight_modifier = {
+		modifier = { factor = 1.5 has_authority = auth_hive_mind }
+		modifier = { factor = 1.5 has_tradition = tr_genetics_adopt }
+		modifier = { factor = 1.5 has_ascension_perk = ap_engineered_evolution }
+		modifier = { factor = 0.35 has_authority = auth_machine_intelligence }
+	}
+	ai_weight = { weight = 0 }
+}
+tech_viral_weapons_improved = { area = society cost = @viral_t3_cost tier = 3 category = { biology } ai_update_type = military weight = @tier3weight1 prerequisites = { "tech_viral_weapons" } potential = { is_ai = no } ai_weight = { weight = 0 } }
+tech_viral_weapons_advanced = { area = society cost = @viral_t4_cost tier = 4 category = { biology } ai_update_type = military weight = @tier4weight1 prerequisites = { "tech_viral_weapons_improved" } potential = { is_ai = no } ai_weight = { weight = 0 } }
+tech_viral_defense_organisms = { area = society cost = @viral_t3_cost tier = 3 category = { biology } ai_update_type = military weight = @tier3weight1 prerequisites = { "tech_viral_weapons_improved" } potential = { is_ai = no } ai_weight = { weight = 0 } }
+tech_viral_hangars = { area = society cost = @viral_t4_cost tier = 4 category = { biology } ai_update_type = military weight = @tier4weight1 prerequisites = { "tech_viral_weapons_advanced" "tech_strike_craft_1" } potential = { is_ai = no } ai_weight = { weight = 0 } }
+tech_viral_lance = { area = society cost = @viral_t5_cost tier = 5 category = { biology } ai_update_type = military weight = @tier5weight1 prerequisites = { "tech_viral_weapons_advanced" "tech_battleships" } potential = { is_ai = no } ai_weight = { weight = 0 } }
+tech_viral_titan_organisms = { area = society cost = @viral_t5_cost tier = 5 category = { biology } ai_update_type = military weight = @tier5weight2 is_rare = yes prerequisites = { "tech_viral_lance" "tech_titans" } potential = { is_ai = no } ai_weight = { weight = 0 } }

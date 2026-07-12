@@ -1,0 +1,15 @@
+# Target ship is current scope. Explicit tiers make the 10-stack cap deterministic.
+viral_apply_corrosion = {
+	if = { limit = { has_modifier = viral_corrosion_10 } remove_modifier = viral_corrosion_10 add_modifier = { modifier = viral_corrosion_10 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_9 } remove_modifier = viral_corrosion_9 add_modifier = { modifier = viral_corrosion_10 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_8 } remove_modifier = viral_corrosion_8 add_modifier = { modifier = viral_corrosion_9 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_7 } remove_modifier = viral_corrosion_7 add_modifier = { modifier = viral_corrosion_8 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_6 } remove_modifier = viral_corrosion_6 add_modifier = { modifier = viral_corrosion_7 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_5 } remove_modifier = viral_corrosion_5 add_modifier = { modifier = viral_corrosion_6 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_4 } remove_modifier = viral_corrosion_4 add_modifier = { modifier = viral_corrosion_5 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_3 } remove_modifier = viral_corrosion_3 add_modifier = { modifier = viral_corrosion_4 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_2 } remove_modifier = viral_corrosion_2 add_modifier = { modifier = viral_corrosion_3 days = 15 } }
+	else_if = { limit = { has_modifier = viral_corrosion_1 } remove_modifier = viral_corrosion_1 add_modifier = { modifier = viral_corrosion_2 days = 15 } }
+	else = { add_modifier = { modifier = viral_corrosion_1 days = 15 } }
+}
+
