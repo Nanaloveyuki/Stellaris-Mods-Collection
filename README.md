@@ -26,6 +26,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
 - [The Mostly Harmless Guide to the Galaxy](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/TheMostlyHarmlessGuide)
 - [Unfortunate Events](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/UnfortunateEvents)
 - [Viral News](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ViralNews)
+- [Viral Weapons](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ViralWeapons)
 
 ## Open Source
 
