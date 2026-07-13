@@ -123,7 +123,5 @@ Extreme outliers by vanilla slot efficiency:
   Black Arrow Missile, Excalibur Psionic Blade.
 
 The four G-slot weapons deserve particular attention in playtesting. Their raw DPS is approximately 13 to 23 times
-their selected vanilla references before Cyclonic/Black Arrow size scaling is applied. If the intended design is
-"powerful but still near vanilla," these should be the first components reduced. If the intended design is a heroic
-power-fantasy collection, the current numbers communicate that identity very clearly.
+their selected vanilla references before Cyclonic/Black Arrow size scaling is applied.
 
