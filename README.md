@@ -19,6 +19,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
 - [Cosmic Casino](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/CosmicCasino)
 - [Department of Strange Incidents](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/DSI)
 - [Elemental Warfare](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ElementalWarfare)
+- [Exotic Weapons](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ExoticWeapons)
 - [Fateweaving](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/Fateweaving)
 - [Galactic Rumors Lore Pack](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/GalacticRumorsLorePack)
 - [Lucky Events](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/LuckyEvents)

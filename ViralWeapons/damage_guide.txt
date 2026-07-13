@@ -37,7 +37,7 @@ Point defense and Viral Interceptors do not currently apply it.
   Maximum penalty:          -20% shield and armor capacity
 
 Each additional successful hit advances the effect by one tier and refreshes
-the 15-day duration. Stellaris 4.4.5 does not expose shield/armor hardness as a
+the 15-day duration. Stellaris 4.4.x does not expose shield/armor hardness as a
 valid ship modifier, so the implemented mechanic reduces capacity instead.
 
 Corrosion is most valuable in sustained fleet combat where several Viral

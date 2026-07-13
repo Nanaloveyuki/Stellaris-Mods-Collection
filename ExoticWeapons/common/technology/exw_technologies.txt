@@ -1,0 +1,343 @@
+@exw_tier3cost = 6000
+@exw_tier4cost = 12000
+@exw_tier5cost = 20000
+
+# Every Exotic Weapons technology is a conventional research card with only
+# vanilla technology prerequisites. AI is excluded for the initial release so
+# the new components remain a player-facing collection and do not distort AI designs.
+
+tech_exw_thanix_cannon = {
+	area = physics
+	category = { particles }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_thanix_cannon
+	prerequisites = { "tech_plasma_3" "tech_kinetic_artillery_2" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_mac_accelerator = {
+	area = engineering
+	category = { voidcraft }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_mac_accelerator
+	prerequisites = { "tech_mass_accelerator_2" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_asgard_beam = {
+	area = physics
+	category = { particles }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight2
+	icon = tech_exw_asgard_beam
+	prerequisites = { "tech_energy_lance_2" "tech_disruptors_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_phaser_array = {
+	area = physics
+	category = { particles }
+	tier = 3
+	cost = @exw_tier3cost
+	weight = @tier3weight2
+	icon = tech_exw_phaser_array
+	prerequisites = { "tech_lasers_4" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_wave_motion_gun = {
+	area = physics
+	category = { particles }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight2
+	icon = tech_exw_wave_motion_gun
+	prerequisites = { "tech_energy_lance_2" "tech_zero_point_power" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_cyclonic_torpedo = {
+	area = engineering
+	category = { propulsion }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_cyclonic_torpedo
+	prerequisites = { "tech_torpedoes_3" "tech_antimatter_power" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_necron_gauss = {
+	area = engineering
+	category = { materials }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_necron_gauss
+	prerequisites = { "tech_mass_drivers_5" "tech_disruptors_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_gridfire = {
+	area = physics
+	category = { field_manipulation }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight3
+	icon = tech_exw_gridfire
+	prerequisites = { "tech_arc_emitter_2" "tech_mega_engineering" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_molecular_disruptor = {
+	area = physics
+	category = { particles }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight1
+	icon = tech_exw_molecular_disruptor
+	prerequisites = { "tech_disruptors_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_superlaser = {
+	area = physics
+	category = { particles }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight2
+	icon = tech_exw_superlaser
+	prerequisites = { "tech_energy_lance_2" "tech_zero_point_power" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_pdc_network = {
+	area = engineering
+	category = { voidcraft }
+	tier = 3
+	cost = @exw_tier3cost
+	weight = @tier3weight2
+	icon = tech_exw_pdc_network
+	prerequisites = { "tech_pd_tracking_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_epstein_torpedo = {
+	area = engineering
+	category = { propulsion }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_epstein_torpedo
+	prerequisites = { "tech_torpedoes_3" "tech_hyper_drive_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_molecular_device = {
+	area = physics
+	category = { particles }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight2
+	icon = tech_exw_molecular_device
+	prerequisites = { "tech_energy_torpedoes_2" "tech_synthetic_thought_patterns" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_bolo_hellbore = {
+	area = physics
+	category = { particles }
+	tier = 3
+	cost = @exw_tier3cost
+	weight = @tier3weight2
+	icon = tech_exw_bolo_hellbore
+	prerequisites = { "tech_plasma_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_langston_field = {
+	area = physics
+	category = { field_manipulation }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_langston_field
+	prerequisites = { "tech_shields_5" "tech_zero_point_power" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_sonic_disruptor = {
+	area = physics
+	category = { particles }
+	tier = 3
+	cost = @exw_tier3cost
+	weight = @tier3weight2
+	icon = tech_exw_sonic_disruptor
+	prerequisites = { "tech_disruptors_2" "tech_synthetic_thought_patterns" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_dalek_ray = {
+	area = physics
+	category = { particles }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_dalek_ray
+	prerequisites = { "tech_lasers_5" "tech_synthetic_thought_patterns" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_bifrost_lance = {
+	area = physics
+	category = { field_manipulation }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight2
+	icon = tech_exw_bifrost_lance
+	prerequisites = { "tech_energy_lance_1" "tech_hyper_drive_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_emerald_construct = {
+	area = society
+	category = { psionics }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_emerald_construct
+	prerequisites = { "tech_psionic_theory" "tech_disruptors_2" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_omega_beam = {
+	area = physics
+	category = { particles }
+	tier = 5
+	cost = @exw_tier5cost
+	weight = @tier5weight2
+	icon = tech_exw_omega_beam
+	prerequisites = { "tech_lasers_5" "tech_sensors_4" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_stormbringer = {
+	area = society
+	category = { psionics }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_stormbringer
+	prerequisites = { "tech_psionic_theory" "tech_disruptors_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_shardblade = {
+	area = society
+	category = { psionics }
+	tier = 3
+	cost = @exw_tier3cost
+	weight = @tier3weight2
+	icon = tech_exw_shardblade
+	prerequisites = { "tech_psionic_theory" "tech_lasers_4" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_dragonfire = {
+	area = society
+	category = { biology }
+	tier = 3
+	cost = @exw_tier3cost
+	weight = @tier3weight2
+	icon = tech_exw_dragonfire
+	prerequisites = { "tech_plasma_2" "tech_gene_tailoring" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_black_arrow = {
+	area = engineering
+	category = { propulsion }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_black_arrow
+	prerequisites = { "tech_torpedoes_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_gungnir = {
+	area = engineering
+	category = { materials }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_gungnir
+	prerequisites = { "tech_kinetic_artillery_2" "tech_sensors_4" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_excalibur = {
+	area = society
+	category = { psionics }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_excalibur
+	prerequisites = { "tech_psionic_theory" "tech_strike_craft_3" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_mjolnir = {
+	area = physics
+	category = { field_manipulation }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_mjolnir
+	prerequisites = { "tech_arc_emitter_1" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}
+
+tech_exw_medusa_gaze = {
+	area = physics
+	category = { particles }
+	tier = 4
+	cost = @exw_tier4cost
+	weight = @tier4weight2
+	icon = tech_exw_medusa_gaze
+	prerequisites = { "tech_disruptors_3" "tech_sensors_4" }
+	potential = { is_ai = no }
+	ai_weight = { factor = 0 }
+}

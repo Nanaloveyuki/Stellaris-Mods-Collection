@@ -1,0 +1,129 @@
+EXOTIC WEAPONS 1.0 - DAMAGE AND VANILLA COMPARISON GUIDE
+
+========================================================
+
+PURPOSE
+-------
+
+This guide compares the Exotic Weapons components with broadly similar vanilla components. It is intended
+to show their approximate power, not to predict exact fleet-combat results.
+
+
+HOW THE NUMBERS ARE CALCULATED
+------------------------------
+
+Average hit damage = (minimum damage + maximum damage) / 2
+Raw DPS            = average hit damage / cooldown
+Accuracy DPS       = raw DPS x accuracy
+
+The main comparison table uses raw DPS so that weapon accuracy remains visible as a separate balancing factor. It does
+not apply shield, armor, or hull multipliers. It also does not include tracking versus evasion, missile interception,
+range advantage, firing arcs, minimum range, overkill, target selection, or repeatable technologies.
+
+Important interpretation notes:
+
+  * Penetration can be worth far more than raw DPS because penetrated defense layers are skipped.
+  * Shield/armor/hull multipliers change DPS only while that defense layer is being attacked.
+  * Torpedo size_damage_factor is not included in raw DPS. Cyclonic Torpedo has 1.50 and Black Arrow has 1.00, compared
+    with 0.20 on vanilla Devastator Torpedoes, so their anti-large-target advantage is even greater than the table shows.
+  * Missile DPS assumes the projectile reaches its target. Point defense can reduce real missile damage substantially.
+  * Mjolnir damage ranges from 1 to 800. Its average is high, but individual shots are extremely inconsistent.
+  * Langston Field Projector is a defensive auxiliary component and therefore has no weapon DPS.
+
+
+VANILLA REFERENCE VALUES
+------------------------
+
+Weapon                         Slot   Damage       Cooldown   Raw DPS   Range   Accuracy   Important traits
+-----------------------------  -----  -----------  ---------  --------  ------  ---------  ---------------------------------
+Gamma Laser                    L      102-276      40         4.72      80      90%        +25% hull, -50% shields
+Gamma Laser                    M      43-115       35         2.26      60      90%        +25% hull, -50% shields
+Plasma Cannon III              L      126-336      45         5.13      80      80%        +50% hull/armor, -75% shields
+Gauss Cannon                   L      96-276       30         6.20      100     75%        +50% shields, -25% armor
+Kinetic Artillery II           L      195-585      50         7.80      120     75%        +100% shields, -25% armor
+Disruptor III                  M      1-48         24         1.02      40      100%       70% shield and armor penetration
+Tachyon Lance                  X      780-1950     70         19.50     150     85%        +50% hull/armor, -50% shields
+Focused Arc Emitter            X      2-1690       71         11.92     150     100%       100% shield and armor penetration
+Mega Cannon                    X      910-2600     80         21.94     150     75%        +50% shields, -25% armor
+Titan Laser                    T      5000-10000   180        41.67     250     85%        +25% hull, -25% shields
+Point Defense III              P      4-8          5          1.20      30      75%        Missile/strike-craft defense
+Devastator Torpedo             G      169-254      200        1.06      30      100%       Shield bypass; size factor 0.20
+Neutron Launcher               G      61-131       150        0.64      120     75%        +75% hull, +50% armor
+Shield Booster                 Aux    --           --         --        --      --         +10% ship shields
+
+
+EXOTIC WEAPON COMPARISON
+------------------------
+
+The percentage column compares raw DPS only. "Pen" means shield/armor penetration.
+
+Exotic weapon                  Slot  Raw DPS  Vanilla reference       Vanilla DPS  Difference  Main reasons it plays differently
+-----------------------------  ----  -------  ----------------------  -----------  ----------  -----------------------------------------------
+Thanix Cannon                  L       6.50    Plasma Cannon III          5.13        +27%       120 range; 25% armor pen; strong armor damage
+MAC Accelerator               X      26.92    Mega Cannon                21.94        +23%       175 range; 80% accuracy; enormous opening hit
+Asgard Plasma Beam            X      23.64    Tachyon Lance              19.50        +21%       50% shield pen and 50% armor pen
+Phaser Array                  M       2.83    Gamma Laser M               2.26        +25%       95% accuracy, 40% tracking, 90 range
+Wave-Motion Gun               X      29.00    Tachyon Lance              19.50        +49%       200 range and much larger hits; 100 cooldown
+Cyclonic Torpedo              G      24.17    Devastator Torpedo          1.06      +2185%       1.50 size factor, shield bypass, armored missile
+Necron Gauss Flayer           L       6.67    Gauss Cannon                6.20         +8%       50% shield pen and 75% armor pen
+Gridfire Projector            T      43.75    Titan Laser                41.67         +5%       Full shield/armor bypass and 95% accuracy
+Molecular Disruptor           M       2.70    Disruptor III               1.02       +165%       Full shield/armor bypass; 70 range
+Superlaser Focusing Array     T      41.67    Titan Laser                41.67          0%       Same base damage/cooldown; stronger armor/hull role
+PDC Network                   P       3.33    Point Defense III           1.20       +178%       3-second cycle, 85% accuracy, 75% tracking
+Epstein-Drive Torpedo         G      17.78    Devastator Torpedo          1.06      +1581%       180 range, speed 40, 50% evasion, shield bypass
+Molecular Detachment Device   G      13.75    Neutron Launcher            0.64      +2048%       75% armor pen, shield bypass, high hull damage
+Bolo Hellbore                 L       6.44    Plasma Cannon III           5.13        +26%       Double armor damage and 100 range
+Langston Field Projector      Aux       --    Shield Booster                --          --       +500 shields, +25% shields, +10% armor vs +10%
+Sonic Disruption Array        M       2.67    Disruptor III               1.02       +161%       50% shield/armor pen, 80 range, 50% tracking
+Dalek Extermination Ray       L       6.86    Gamma Laser L               4.72        +45%       +75% hull, +50% armor, 110 range
+Bifrost Lance                 X      25.00    Tachyon Lance              19.50        +28%       75% shield penetration and 200 range
+Emerald Construct Cannon      L       7.00    Plasma Cannon III           5.13        +36%       95% accuracy and balanced damage multipliers
+Omega Beam                    L       7.20    Gamma Laser L               4.72        +52%       Perfect accuracy/tracking and 120 range
+Stormbringer Soul Blade       L      12.14    Gamma Laser L               4.72       +157%       Shield bypass, 50% armor pen, double hull damage
+Shardblade Projector          M       6.20    Disruptor III               1.02       +508%       Shield bypass, 75% armor pen; only 35 range
+Dragonfire Cannon             L       7.86    Plasma Cannon III           5.13        +53%       +75% hull/armor; only 55 range
+Black Arrow Missile           G      19.29    Devastator Torpedo          1.06      +1724%       1.00 size factor, double armor damage, 80% tracking
+Gungnir Spear Launcher        L       7.78    Kinetic Artillery II        7.80       -0.3%       Perfect accuracy, 25% tracking, 160 range
+Excalibur Psionic Blade       M       6.79    Disruptor III               1.02       +565%       75% shield/armor pen; only 40 range
+Mjolnir Arc Projector         L      13.35    Focused Arc Emitter X       11.92       +12%        L-slot weapon with full bypass and extreme variance
+Medusa Gaze Array             M       3.33    Disruptor III               1.02       +227%       Shield bypass, 50% armor pen, 65% tracking, 100 range
+
+
+TARGET-LAYER EXAMPLES
+---------------------
+
+These examples apply damage multipliers but still ignore accuracy and tracking.
+
+Weapon                         Raw DPS   Shield DPS   Armor DPS   Hull DPS   Penetration
+-----------------------------  --------  -----------  ----------  ---------  -------------------------------
+Thanix Cannon                    6.50       4.88        11.38        8.13    25% armor
+Bolo Hellbore                    6.44       3.22        12.89        8.06    None
+Dalek Extermination Ray          6.86       5.14        10.29       12.00    None
+Dragonfire Cannon                7.86       3.93        13.75       13.75    None
+Gungnir Spear Launcher           7.78      11.67         5.83        9.72    None
+Gridfire Projector              43.75      bypass       bypass      43.75    100% shield and armor
+Stormbringer Soul Blade         12.14      bypass       mixed       24.29    100% shield, 50% armor
+Mjolnir Arc Projector           13.35      bypass       bypass      13.35    100% shield and armor
+
+
+QUICK BALANCE SUMMARY
+---------------------
+
+Relatively close to vanilla (+/- 30% raw DPS):
+  Thanix Cannon, MAC Accelerator, Asgard Plasma Beam, Phaser Array, Necron Gauss Flayer, Gridfire Projector,
+  Superlaser Focusing Array, Bolo Hellbore, Bifrost Lance, Gungnir Spear Launcher.
+
+Clearly stronger than comparable vanilla weapons (roughly +35% to +180% raw DPS):
+  Wave-Motion Gun, Molecular Disruptor, PDC Network, Sonic Disruption Array, Dalek Extermination Ray,
+  Emerald Construct Cannon, Omega Beam, Stormbringer Soul Blade, Dragonfire Cannon, Mjolnir Arc Projector,
+  Medusa Gaze Array.
+
+Extreme outliers by vanilla slot efficiency:
+  Cyclonic Torpedo, Epstein-Drive Torpedo, Molecular Detachment Device, Shardblade Projector,
+  Black Arrow Missile, Excalibur Psionic Blade.
+
+The four G-slot weapons deserve particular attention in playtesting. Their raw DPS is approximately 13 to 23 times
+their selected vanilla references before Cyclonic/Black Arrow size scaling is applied. If the intended design is
+"powerful but still near vanilla," these should be the first components reduced. If the intended design is a heroic
+power-fantasy collection, the current numbers communicate that identity very clearly.
+

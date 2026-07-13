@@ -1,0 +1,31 @@
+# One set per weapon keeps slot badges and ship-designer filtering correct.
+
+component_set = { key = "EXW_THANIX_CANNON" icon = "GFX_exw_thanix_cannon" icon_frame = 1 }
+component_set = { key = "EXW_MAC_ACCELERATOR" icon = "GFX_exw_mac_accelerator" icon_frame = 1 }
+component_set = { key = "EXW_ASGARD_BEAM" icon = "GFX_exw_asgard_beam" icon_frame = 1 }
+component_set = { key = "EXW_PHASER_ARRAY" icon = "GFX_exw_phaser_array" icon_frame = 1 }
+component_set = { key = "EXW_WAVE_MOTION_GUN" icon = "GFX_exw_wave_motion_gun" icon_frame = 1 }
+component_set = { key = "EXW_CYCLONIC_TORPEDO" icon = "GFX_exw_cyclonic_torpedo" icon_frame = 1 }
+component_set = { key = "EXW_NECRON_GAUSS" icon = "GFX_exw_necron_gauss" icon_frame = 1 }
+component_set = { key = "EXW_GRIDFIRE" icon = "GFX_exw_gridfire" icon_frame = 1 }
+component_set = { key = "EXW_MOLECULAR_DISRUPTOR" icon = "GFX_exw_molecular_disruptor" icon_frame = 1 }
+component_set = { key = "EXW_SUPERLASER" icon = "GFX_exw_superlaser" icon_frame = 1 }
+component_set = { key = "EXW_PDC_NETWORK" icon = "GFX_exw_pdc_network" icon_frame = 1 }
+component_set = { key = "EXW_EPSTEIN_TORPEDO" icon = "GFX_exw_epstein_torpedo" icon_frame = 1 }
+component_set = { key = "EXW_MOLECULAR_DEVICE" icon = "GFX_exw_molecular_device" icon_frame = 1 }
+component_set = { key = "EXW_BOLO_HELLBORE" icon = "GFX_exw_bolo_hellbore" icon_frame = 1 }
+component_set = { key = "EXW_LANGSTON_FIELD" icon = "GFX_exw_langston_field" icon_frame = 1 }
+component_set = { key = "EXW_SONIC_DISRUPTOR" icon = "GFX_exw_sonic_disruptor" icon_frame = 1 }
+component_set = { key = "EXW_DALEK_RAY" icon = "GFX_exw_dalek_ray" icon_frame = 1 }
+component_set = { key = "EXW_BIFROST_LANCE" icon = "GFX_exw_bifrost_lance" icon_frame = 1 }
+component_set = { key = "EXW_EMERALD_CONSTRUCT" icon = "GFX_exw_emerald_construct" icon_frame = 1 }
+component_set = { key = "EXW_OMEGA_BEAM" icon = "GFX_exw_omega_beam" icon_frame = 1 }
+component_set = { key = "EXW_STORMBRINGER" icon = "GFX_exw_stormbringer" icon_frame = 1 }
+component_set = { key = "EXW_SHARDBLADE" icon = "GFX_exw_shardblade" icon_frame = 1 }
+component_set = { key = "EXW_DRAGONFIRE" icon = "GFX_exw_dragonfire" icon_frame = 1 }
+component_set = { key = "EXW_BLACK_ARROW" icon = "GFX_exw_black_arrow" icon_frame = 1 }
+component_set = { key = "EXW_GUNGNIR" icon = "GFX_exw_gungnir" icon_frame = 1 }
+component_set = { key = "EXW_EXCALIBUR" icon = "GFX_exw_excalibur" icon_frame = 1 }
+component_set = { key = "EXW_MJOLNIR" icon = "GFX_exw_mjolnir" icon_frame = 1 }
+component_set = { key = "EXW_MEDUSA_GAZE" icon = "GFX_exw_medusa_gaze" icon_frame = 1 }
+

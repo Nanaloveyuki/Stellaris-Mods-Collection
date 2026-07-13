@@ -1,0 +1,710 @@
+# Exotic Weapons 1.0 ship components.
+# Values are intentionally close to late-game vanilla weapons, with each item
+# distinguished by range, accuracy, penetration, or target specialization.
+
+weapon_component_template = {
+	key = "EXW_THANIX_CANNON"
+	size = large
+	type = instant
+	icon = "GFX_exw_thanix_cannon"
+	icon_frame = 1
+	prerequisites = { "tech_exw_thanix_cannon" }
+	component_set = "EXW_THANIX_CANNON"
+	projectile_gfx = "exw_vfx_thanix"
+	power = -90
+	damage = { min = 160 max = 360 }
+	windup = { min = 8 max = 28 }
+	total_fire_time = 40
+	range = 120
+	accuracy = 0.85
+	tracking = 0.10
+	hull_damage = 1.25
+	shield_damage = 0.75
+	armor_damage = 1.75
+	armor_penetration = 0.25
+	tags = { weapon_type_energy weapon_role_artillery l_slot }
+	ai_tags = { weapon_role_anti_armor artillery }
+	resources = { category = ship_components cost = { alloys = 175 rare_crystals = 2 volatile_motes = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_MAC_ACCELERATOR"
+	size = extra_large
+	type = instant
+	firing_arc = 25
+	min_range = 45
+	icon = "GFX_exw_mac_accelerator"
+	icon_frame = 1
+	prerequisites = { "tech_exw_mac_accelerator" }
+	component_set = "EXW_MAC_ACCELERATOR"
+	projectile_gfx = "exw_vfx_mac"
+	power = -275
+	damage = { min = 900 max = 2600 }
+	windup = { min = 15 max = 50 }
+	total_fire_time = 65
+	range = 175
+	accuracy = 0.80
+	tracking = 0
+	hull_damage = 1.25
+	shield_damage = 1.50
+	armor_damage = 0.75
+	tags = { weapon_type_kinetic weapon_role_artillery x_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 275 volatile_motes = 4 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_ASGARD_BEAM"
+	size = extra_large
+	type = instant
+	firing_arc = 35
+	min_range = 10
+	icon = "GFX_exw_asgard_beam"
+	icon_frame = 1
+	prerequisites = { "tech_exw_asgard_beam" }
+	component_set = "EXW_ASGARD_BEAM"
+	projectile_gfx = "exw_vfx_asgard"
+	power = -300
+	damage = { min = 700 max = 1900 }
+	windup = { min = 10 max = 40 }
+	total_fire_time = 55
+	range = 170
+	accuracy = 0.90
+	tracking = 0.05
+	shield_penetration = 0.50
+	armor_penetration = 0.50
+	tags = { weapon_type_energy weapon_role_artillery x_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 300 rare_crystals = 5 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_PHASER_ARRAY"
+	size = medium
+	type = instant
+	icon = "GFX_exw_phaser_array"
+	icon_frame = 1
+	prerequisites = { "tech_exw_phaser_array" }
+	component_set = "EXW_PHASER_ARRAY"
+	projectile_gfx = "exw_vfx_phaser"
+	power = -38
+	damage = { min = 45 max = 125 }
+	windup = { min = 4 max = 18 }
+	total_fire_time = 30
+	range = 90
+	accuracy = 0.95
+	tracking = 0.40
+	hull_damage = 1.25
+	shield_damage = 0.75
+	armor_damage = 1.25
+	tags = { weapon_type_energy m_slot }
+	ai_tags = { weapon_role_anti_armor brawler }
+	resources = { category = ship_components cost = { alloys = 70 rare_crystals = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_WAVE_MOTION_GUN"
+	size = extra_large
+	type = instant
+	firing_arc = 20
+	min_range = 30
+	icon = "GFX_exw_wave_motion_gun"
+	icon_frame = 1
+	prerequisites = { "tech_exw_wave_motion_gun" }
+	component_set = "EXW_WAVE_MOTION_GUN"
+	projectile_gfx = "exw_vfx_wave_motion"
+	power = -450
+	damage = { min = 1800 max = 4000 }
+	windup = { min = 30 max = 80 }
+	total_fire_time = 100
+	range = 200
+	accuracy = 0.85
+	tracking = 0
+	hull_damage = 1.50
+	shield_damage = 0.80
+	armor_damage = 1.50
+	tags = { weapon_type_energy weapon_role_artillery x_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 350 rare_crystals = 6 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_CYCLONIC_TORPEDO"
+	size = torpedo
+	type = missile
+	firing_arc = 25
+	icon = "GFX_exw_cyclonic_torpedo"
+	icon_frame = 1
+	prerequisites = { "tech_exw_cyclonic_torpedo" }
+	component_set = "EXW_CYCLONIC_TORPEDO"
+	projectile_gfx = "exw_vfx_cyclonic"
+	power = -35
+	damage = { min = 550 max = 900 }
+	total_fire_time = 30
+	range = 90
+	accuracy = 1.00
+	tracking = 0.25
+	shield_penetration = 1.00
+	hull_damage = 1.50
+	armor_damage = 1.50
+	size_damage_factor = 1.50
+	missile_speed = 18
+	missile_evasion = 0.10
+	missile_armor = 15
+	missile_health = 35
+	missile_retarget_range = 100
+	tags = { weapon_type_explosive g_slot }
+	ai_tags = { weapon_role_anti_armor explosive }
+	resources = { category = ship_components cost = { alloys = 100 volatile_motes = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_NECRON_GAUSS"
+	size = large
+	type = instant
+	icon = "GFX_exw_necron_gauss"
+	icon_frame = 1
+	prerequisites = { "tech_exw_necron_gauss" }
+	component_set = "EXW_NECRON_GAUSS"
+	projectile_gfx = "exw_vfx_necron_gauss"
+	power = -95
+	damage = { min = 120 max = 280 }
+	windup = { min = 5 max = 20 }
+	total_fire_time = 30
+	range = 100
+	accuracy = 0.90
+	tracking = 0.15
+	shield_penetration = 0.50
+	armor_penetration = 0.75
+	hull_damage = 1.25
+	tags = { weapon_type_kinetic l_slot }
+	ai_tags = { weapon_role_anti_hull artillery }
+	resources = { category = ship_components cost = { alloys = 180 volatile_motes = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_GRIDFIRE"
+	size = titanic
+	type = instant
+	icon = "GFX_exw_gridfire"
+	icon_frame = 1
+	prerequisites = { "tech_exw_gridfire" }
+	component_set = "EXW_GRIDFIRE"
+	projectile_gfx = "exw_vfx_gridfire"
+	power = -600
+	damage = { min = 3500 max = 7000 }
+	windup = { min = 25 max = 90 }
+	total_fire_time = 120
+	range = 250
+	accuracy = 0.95
+	tracking = 0
+	shield_penetration = 1.00
+	armor_penetration = 1.00
+	tags = { weapon_type_energy weapon_role_artillery t_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 650 rare_crystals = 10 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_MOLECULAR_DISRUPTOR"
+	size = medium
+	type = instant
+	icon = "GFX_exw_molecular_disruptor"
+	icon_frame = 1
+	prerequisites = { "tech_exw_molecular_disruptor" }
+	component_set = "EXW_MOLECULAR_DISRUPTOR"
+	projectile_gfx = "exw_vfx_molecular_disruptor"
+	power = -42
+	damage = { min = 35 max = 100 }
+	windup = { min = 2 max = 10 }
+	total_fire_time = 25
+	range = 70
+	accuracy = 0.90
+	tracking = 0.35
+	shield_penetration = 1.00
+	armor_penetration = 1.00
+	tags = { weapon_type_energy m_slot }
+	ai_tags = { weapon_role_anti_hull brawler }
+	resources = { category = ship_components cost = { alloys = 75 rare_crystals = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_SUPERLASER"
+	size = titanic
+	type = instant
+	icon = "GFX_exw_superlaser"
+	icon_frame = 1
+	prerequisites = { "tech_exw_superlaser" }
+	component_set = "EXW_SUPERLASER"
+	projectile_gfx = "exw_vfx_superlaser"
+	power = -550
+	damage = { min = 5000 max = 10000 }
+	windup = { min = 30 max = 120 }
+	total_fire_time = 180
+	range = 250
+	accuracy = 0.90
+	tracking = 0
+	hull_damage = 1.50
+	shield_damage = 0.75
+	armor_damage = 1.50
+	tags = { weapon_type_energy weapon_role_artillery t_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 600 rare_crystals = 8 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_PDC_NETWORK"
+	size = point_defence
+	type = point_defence
+	icon = "GFX_exw_pdc_network"
+	icon_frame = 1
+	prerequisites = { "tech_exw_pdc_network" }
+	component_set = "EXW_PDC_NETWORK"
+	projectile_gfx = "exw_vfx_pdc"
+	power = -15
+	damage = { min = 6 max = 14 }
+	total_fire_time = 3
+	range = 40
+	accuracy = 0.85
+	tracking = 0.75
+	point_defence_targets = { "missile" "strike_craft" }
+	tags = { weapon_type_point_defense weapon_type_kinetic }
+	ai_tags = { weapon_role_point_defense screen }
+	resources = { category = ship_components cost = { alloys = 22 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_EPSTEIN_TORPEDO"
+	size = torpedo
+	type = missile
+	firing_arc = 35
+	icon = "GFX_exw_epstein_torpedo"
+	icon_frame = 1
+	prerequisites = { "tech_exw_epstein_torpedo" }
+	component_set = "EXW_EPSTEIN_TORPEDO"
+	projectile_gfx = "exw_vfx_epstein"
+	power = -30
+	damage = { min = 240 max = 400 }
+	total_fire_time = 18
+	range = 180
+	accuracy = 1.00
+	tracking = 0.60
+	shield_penetration = 1.00
+	armor_damage = 1.25
+	missile_speed = 40
+	missile_evasion = 0.50
+	missile_armor = 5
+	missile_health = 15
+	missile_retarget_range = 200
+	tags = { weapon_type_explosive g_slot }
+	ai_tags = { weapon_role_artillery explosive }
+	resources = { category = ship_components cost = { alloys = 90 volatile_motes = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_MOLECULAR_DEVICE"
+	size = torpedo
+	type = missile
+	firing_arc = 35
+	icon = "GFX_exw_molecular_device"
+	icon_frame = 1
+	prerequisites = { "tech_exw_molecular_device" }
+	component_set = "EXW_MOLECULAR_DEVICE"
+	projectile_gfx = "exw_vfx_molecular_device"
+	power = -45
+	damage = { min = 300 max = 800 }
+	total_fire_time = 40
+	range = 120
+	accuracy = 1.00
+	tracking = 0.35
+	shield_penetration = 1.00
+	armor_penetration = 0.75
+	hull_damage = 1.50
+	missile_speed = 22
+	missile_evasion = 0.20
+	missile_shield = 15
+	missile_health = 25
+	missile_retarget_range = 140
+	tags = { weapon_type_explosive g_slot }
+	ai_tags = { weapon_role_anti_hull explosive }
+	resources = { category = ship_components cost = { alloys = 120 exotic_gases = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_BOLO_HELLBORE"
+	size = large
+	type = instant
+	icon = "GFX_exw_bolo_hellbore"
+	icon_frame = 1
+	prerequisites = { "tech_exw_bolo_hellbore" }
+	component_set = "EXW_BOLO_HELLBORE"
+	projectile_gfx = "exw_vfx_hellbore"
+	power = -100
+	damage = { min = 180 max = 400 }
+	windup = { min = 8 max = 32 }
+	total_fire_time = 45
+	range = 100
+	accuracy = 0.85
+	tracking = 0.10
+	hull_damage = 1.25
+	shield_damage = 0.50
+	armor_damage = 2.00
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_armor artillery }
+	resources = { category = ship_components cost = { alloys = 185 rare_crystals = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+utility_component_template = {
+	key = "EXW_LANGSTON_FIELD"
+	size = aux
+	icon = "GFX_exw_langston_field"
+	icon_frame = 1
+	prerequisites = { "tech_exw_langston_field" }
+	component_set = "EXW_LANGSTON_FIELD"
+	power = -80
+	modifier = { ship_shield_add = 500 ship_shield_mult = 0.25 ship_armor_mult = 0.10 }
+	resources = { category = ship_components cost = { alloys = 120 exotic_gases = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_SONIC_DISRUPTOR"
+	size = medium
+	type = instant
+	icon = "GFX_exw_sonic_disruptor"
+	icon_frame = 1
+	prerequisites = { "tech_exw_sonic_disruptor" }
+	component_set = "EXW_SONIC_DISRUPTOR"
+	projectile_gfx = "exw_vfx_sonic"
+	power = -35
+	damage = { min = 20 max = 60 }
+	windup = { min = 1 max = 6 }
+	total_fire_time = 15
+	range = 80
+	accuracy = 0.95
+	tracking = 0.50
+	shield_penetration = 0.50
+	armor_penetration = 0.50
+	tags = { weapon_type_energy m_slot }
+	ai_tags = { weapon_role_anti_hull brawler }
+	resources = { category = ship_components cost = { alloys = 65 rare_crystals = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_DALEK_RAY"
+	size = large
+	type = instant
+	icon = "GFX_exw_dalek_ray"
+	icon_frame = 1
+	prerequisites = { "tech_exw_dalek_ray" }
+	component_set = "EXW_DALEK_RAY"
+	projectile_gfx = "exw_vfx_dalek"
+	power = -95
+	damage = { min = 130 max = 350 }
+	windup = { min = 6 max = 24 }
+	total_fire_time = 35
+	range = 110
+	accuracy = 0.90
+	tracking = 0.15
+	hull_damage = 1.75
+	shield_damage = 0.75
+	armor_damage = 1.50
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_hull artillery }
+	resources = { category = ship_components cost = { alloys = 180 rare_crystals = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_BIFROST_LANCE"
+	size = extra_large
+	type = instant
+	firing_arc = 30
+	min_range = 20
+	icon = "GFX_exw_bifrost_lance"
+	icon_frame = 1
+	prerequisites = { "tech_exw_bifrost_lance" }
+	component_set = "EXW_BIFROST_LANCE"
+	projectile_gfx = "exw_vfx_bifrost"
+	power = -300
+	damage = { min = 800 max = 2200 }
+	windup = { min = 12 max = 45 }
+	total_fire_time = 60
+	range = 200
+	accuracy = 0.90
+	tracking = 0.05
+	shield_penetration = 0.75
+	armor_damage = 1.50
+	tags = { weapon_type_energy weapon_role_artillery x_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 300 rare_crystals = 4 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_EMERALD_CONSTRUCT"
+	size = large
+	type = instant
+	icon = "GFX_exw_emerald_construct"
+	icon_frame = 1
+	prerequisites = { "tech_exw_emerald_construct" }
+	component_set = "EXW_EMERALD_CONSTRUCT"
+	projectile_gfx = "exw_vfx_emerald"
+	power = -85
+	damage = { min = 120 max = 300 }
+	windup = { min = 4 max = 18 }
+	total_fire_time = 30
+	range = 100
+	accuracy = 0.95
+	tracking = 0.25
+	hull_damage = 1.25
+	shield_damage = 1.10
+	armor_damage = 1.25
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_armor artillery }
+	resources = { category = ship_components cost = { alloys = 170 sr_zro = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_OMEGA_BEAM"
+	size = large
+	type = instant
+	icon = "GFX_exw_omega_beam"
+	icon_frame = 1
+	prerequisites = { "tech_exw_omega_beam" }
+	component_set = "EXW_OMEGA_BEAM"
+	projectile_gfx = "exw_vfx_omega"
+	power = -110
+	damage = { min = 100 max = 260 }
+	windup = { min = 2 max = 12 }
+	total_fire_time = 25
+	range = 120
+	accuracy = 1.00
+	tracking = 1.00
+	hull_damage = 1.50
+	armor_damage = 1.25
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_hull artillery }
+	resources = { category = ship_components cost = { alloys = 190 rare_crystals = 3 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_STORMBRINGER"
+	size = large
+	type = instant
+	icon = "GFX_exw_stormbringer"
+	icon_frame = 1
+	prerequisites = { "tech_exw_stormbringer" }
+	component_set = "EXW_STORMBRINGER"
+	projectile_gfx = "exw_vfx_stormbringer"
+	power = -100
+	damage = { min = 250 max = 600 }
+	windup = { min = 4 max = 20 }
+	total_fire_time = 35
+	range = 45
+	accuracy = 0.90
+	tracking = 0.40
+	shield_penetration = 1.00
+	armor_penetration = 0.50
+	hull_damage = 2.00
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_hull brawler }
+	resources = { category = ship_components cost = { alloys = 180 sr_zro = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_SHARDBLADE"
+	size = medium
+	type = instant
+	icon = "GFX_exw_shardblade"
+	icon_frame = 1
+	prerequisites = { "tech_exw_shardblade" }
+	component_set = "EXW_SHARDBLADE"
+	projectile_gfx = "exw_vfx_shardblade"
+	power = -45
+	damage = { min = 90 max = 220 }
+	windup = { min = 3 max = 12 }
+	total_fire_time = 25
+	range = 35
+	accuracy = 0.90
+	tracking = 0.55
+	shield_penetration = 1.00
+	armor_penetration = 0.75
+	hull_damage = 1.50
+	tags = { weapon_type_energy m_slot }
+	ai_tags = { weapon_role_anti_hull brawler }
+	resources = { category = ship_components cost = { alloys = 80 sr_zro = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_DRAGONFIRE"
+	size = large
+	type = instant
+	icon = "GFX_exw_dragonfire"
+	icon_frame = 1
+	prerequisites = { "tech_exw_dragonfire" }
+	component_set = "EXW_DRAGONFIRE"
+	projectile_gfx = "exw_vfx_dragonfire"
+	power = -80
+	damage = { min = 170 max = 380 }
+	windup = { min = 5 max = 22 }
+	total_fire_time = 35
+	range = 55
+	accuracy = 0.85
+	tracking = 0.25
+	hull_damage = 1.75
+	shield_damage = 0.50
+	armor_damage = 1.75
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_armor brawler }
+	resources = { category = ship_components cost = { alloys = 160 exotic_gases = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_BLACK_ARROW"
+	size = torpedo
+	type = missile
+	firing_arc = 35
+	icon = "GFX_exw_black_arrow"
+	icon_frame = 1
+	prerequisites = { "tech_exw_black_arrow" }
+	component_set = "EXW_BLACK_ARROW"
+	projectile_gfx = "exw_vfx_black_arrow"
+	power = -30
+	damage = { min = 450 max = 900 }
+	total_fire_time = 35
+	range = 120
+	accuracy = 1.00
+	tracking = 0.80
+	shield_penetration = 1.00
+	armor_damage = 2.00
+	size_damage_factor = 1.00
+	missile_speed = 24
+	missile_evasion = 0.30
+	missile_armor = 10
+	missile_health = 25
+	missile_retarget_range = 140
+	tags = { weapon_type_explosive g_slot }
+	ai_tags = { weapon_role_anti_armor explosive }
+	resources = { category = ship_components cost = { alloys = 105 volatile_motes = 2 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_GUNGNIR"
+	size = large
+	type = instant
+	icon = "GFX_exw_gungnir"
+	icon_frame = 1
+	prerequisites = { "tech_exw_gungnir" }
+	component_set = "EXW_GUNGNIR"
+	projectile_gfx = "exw_vfx_gungnir"
+	power = -100
+	damage = { min = 200 max = 500 }
+	windup = { min = 8 max = 30 }
+	total_fire_time = 45
+	range = 160
+	accuracy = 1.00
+	tracking = 0.25
+	hull_damage = 1.25
+	shield_damage = 1.50
+	armor_damage = 0.75
+	tags = { weapon_type_kinetic weapon_role_artillery l_slot }
+	ai_tags = { weapon_role_artillery artillery }
+	resources = { category = ship_components cost = { alloys = 190 volatile_motes = 3 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_EXCALIBUR"
+	size = medium
+	type = instant
+	icon = "GFX_exw_excalibur"
+	icon_frame = 1
+	prerequisites = { "tech_exw_excalibur" }
+	component_set = "EXW_EXCALIBUR"
+	projectile_gfx = "exw_vfx_excalibur"
+	power = -50
+	damage = { min = 120 max = 260 }
+	windup = { min = 3 max = 14 }
+	total_fire_time = 28
+	range = 40
+	accuracy = 0.95
+	tracking = 0.60
+	shield_penetration = 0.75
+	armor_penetration = 0.75
+	hull_damage = 1.50
+	tags = { weapon_type_energy m_slot }
+	ai_tags = { weapon_role_anti_hull brawler }
+	resources = { category = ship_components cost = { alloys = 85 sr_zro = 1 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_MJOLNIR"
+	size = large
+	type = instant
+	icon = "GFX_exw_mjolnir"
+	icon_frame = 1
+	prerequisites = { "tech_exw_mjolnir" }
+	component_set = "EXW_MJOLNIR"
+	projectile_gfx = "exw_vfx_mjolnir"
+	power = -100
+	damage = { min = 1 max = 800 }
+	windup = { min = 3 max = 18 }
+	total_fire_time = 30
+	range = 110
+	accuracy = 1.00
+	tracking = 0.40
+	shield_penetration = 1.00
+	armor_penetration = 1.00
+	tags = { weapon_type_energy l_slot }
+	ai_tags = { weapon_role_anti_hull artillery }
+	resources = { category = ship_components cost = { alloys = 190 rare_crystals = 3 } }
+	ai_weight = { weight = 0 }
+}
+
+weapon_component_template = {
+	key = "EXW_MEDUSA_GAZE"
+	size = medium
+	type = instant
+	icon = "GFX_exw_medusa_gaze"
+	icon_frame = 1
+	prerequisites = { "tech_exw_medusa_gaze" }
+	component_set = "EXW_MEDUSA_GAZE"
+	projectile_gfx = "exw_vfx_medusa"
+	power = -48
+	damage = { min = 50 max = 150 }
+	windup = { min = 3 max = 15 }
+	total_fire_time = 30
+	range = 100
+	accuracy = 1.00
+	tracking = 0.65
+	shield_penetration = 1.00
+	armor_penetration = 0.50
+	hull_damage = 1.25
+	tags = { weapon_type_energy m_slot }
+	ai_tags = { weapon_role_anti_hull brawler }
+	resources = { category = ship_components cost = { alloys = 85 rare_crystals = 1 } }
+	ai_weight = { weight = 0 }
+}
