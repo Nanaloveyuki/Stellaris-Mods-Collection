@@ -1,0 +1,28 @@
+civspace_civilian_administration = {
+	# Fire the settings event, then expire so the menu can be opened again.
+	length = 1
+	icon = "GFX_edict_type_policy"
+
+	potential = {
+		civspace_is_eligible_player = yes
+	}
+
+	allow = {
+		always = yes
+	}
+
+	effect = {
+		if = {
+			limit = { has_country_flag = civspace_initialized }
+			country_event = { id = civspace.703 }
+			country_event = { id = civspace.100 days = 0 }
+		}
+		else = {
+			country_event = { id = civspace.2 days = 0 }
+		}
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}

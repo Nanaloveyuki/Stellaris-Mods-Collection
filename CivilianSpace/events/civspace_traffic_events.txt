@@ -1,0 +1,169 @@
+namespace = civspace
+
+# Annual traffic manager. It performs only a few bounded spawn attempts.
+country_event = {
+	id = civspace.200
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+		NOT = { has_country_flag = civspace_traffic_disabled }
+		is_at_war = no
+		civspace_has_valid_route = yes
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = {
+					any_country = {
+						has_country_flag = civspace_sector@root
+					}
+				}
+			}
+			country_event = { id = civspace.701 }
+		}
+
+		if = {
+			limit = { has_country_flag = civspace_traffic_minimal }
+			random_list = {
+				55 = { country_event = { id = civspace.201 } }
+				45 = {}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = civspace_traffic_standard }
+			country_event = { id = civspace.201 }
+			country_event = { id = civspace.201 days = 30 random = 60 }
+			random_list = {
+				50 = { country_event = { id = civspace.201 days = 90 random = 90 } }
+				50 = {}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = civspace_traffic_high }
+			country_event = { id = civspace.201 }
+			country_event = { id = civspace.201 days = 20 random = 30 }
+			country_event = { id = civspace.201 days = 60 random = 60 }
+			country_event = { id = civspace.201 days = 120 random = 90 }
+		}
+	}
+}
+
+# Selects two player colonies and creates a round-trip civilian route.
+country_event = {
+	id = civspace.201
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		NOT = { has_country_flag = civspace_traffic_disabled }
+		civspace_has_valid_route = yes
+	}
+
+	immediate = {
+		random_owned_planet = {
+			limit = { is_colony = yes }
+			save_event_target_as = civspace_route_origin
+		}
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				NOT = { is_same_value = event_target:civspace_route_origin }
+				solar_system = {
+					NOT = {
+						any_fleet_in_system = {
+							exists = owner
+							owner = { is_at_war_with = root }
+						}
+					}
+				}
+			}
+			save_event_target_as = civspace_route_destination
+		}
+		random_country = {
+			limit = { has_country_flag = civspace_sector@root }
+			save_event_target_as = civspace_route_sector
+		}
+
+		if = {
+			limit = {
+				exists = event_target:civspace_route_origin
+				exists = event_target:civspace_route_destination
+				exists = event_target:civspace_route_sector
+				event_target:civspace_route_sector = {
+					count_owned_fleet = {
+						count < root.civspace_ship_cap
+						limit = { has_fleet_flag = civspace_civilian_traffic }
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:civspace_route_sector
+					random_list = {
+						55 = {
+							create_ship = {
+								name = "civspace_Cargo_Freighter_NAME"
+								design = "civspace_Cargo_Freighter_NAME"
+								graphical_culture = root
+							}
+						}
+						45 = {
+							create_ship = {
+								name = "civspace_Passenger_Liner_NAME"
+								design = "civspace_Passenger_Liner_NAME"
+								graphical_culture = root
+							}
+						}
+					}
+				}
+			}
+			last_created_fleet = {
+				set_name = "civspace_civilian_route_fleet"
+				set_fleet_flag = civspace_civilian_traffic
+				set_fleet_stance = passive
+				set_location = {
+					target = event_target:civspace_route_origin
+					distance = 12
+					angle = random
+				}
+				queue_actions = {
+					wait = 15
+					move_to = event_target:civspace_route_destination
+					wait = 60
+					move_to = event_target:civspace_route_origin
+					wait = 15
+					effect = {
+						id = "civspace.201.route_complete"
+						destroy_fleet = this
+					}
+				}
+				fleet_event = {
+					id = civspace.202
+					days = 900
+					random = 180
+				}
+			}
+		}
+	}
+}
+
+# Hard timeout for any civilian route that becomes stranded.
+fleet_event = {
+	id = civspace.202
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_fleet_flag = civspace_civilian_traffic
+	}
+
+	immediate = {
+		destroy_fleet = this
+	}
+}
+

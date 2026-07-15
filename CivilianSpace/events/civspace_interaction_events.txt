@@ -1,0 +1,441 @@
+namespace = civspace
+
+# Bounded annual pulse for structure-driven civilian activity. These missions
+# are visual round trips; their purpose is communicated through the individual
+# ship design/name and the staged fleet name shown in the fleet details panel.
+country_event = {
+	id = civspace.600
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+		NOT = { has_country_flag = civspace_traffic_disabled }
+		NOT = { has_country_flag = civspace_interaction_cooldown }
+		is_at_war = no
+		count_owned_planet = { count >= 2 limit = { is_colony = yes } }
+		OR = {
+			any_owned_starbase = { has_starbase_building = fleet_academy }
+			any_owned_starbase = { has_starbase_module = shipyard }
+			any_owned_planet = {
+				is_colony = yes
+				OR = {
+					civspace_has_medical_destination = yes
+					civspace_has_tourism_destination = yes
+					civspace_has_research_destination = yes
+					civspace_has_diplomatic_destination = yes
+					civspace_has_commercial_destination = yes
+				}
+			}
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = { has_country_flag = civspace_traffic_minimal }
+			random_list = {
+				15 = { country_event = { id = civspace.601 } }
+				85 = {}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = civspace_traffic_standard }
+			random_list = {
+				35 = { country_event = { id = civspace.601 } }
+				65 = {}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = civspace_traffic_high }
+			random_list = {
+				60 = { country_event = { id = civspace.601 } }
+				40 = {}
+			}
+		}
+	}
+}
+
+# Select one currently valid interaction family.
+country_event = {
+	id = civspace.601
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		random_list = {
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = { any_owned_starbase = { has_starbase_building = fleet_academy } }
+				}
+				country_event = { id = civspace.610 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = { any_owned_starbase = { has_starbase_module = shipyard } }
+				}
+				country_event = { id = civspace.620 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_planet = {
+							is_colony = yes
+							civspace_has_medical_destination = yes
+						}
+					}
+				}
+				country_event = { id = civspace.630 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_planet = {
+							is_colony = yes
+							civspace_has_tourism_destination = yes
+						}
+					}
+				}
+				country_event = { id = civspace.640 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_planet = {
+							is_colony = yes
+							civspace_has_research_destination = yes
+						}
+					}
+				}
+				country_event = { id = civspace.650 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_planet = {
+							is_colony = yes
+							civspace_has_diplomatic_destination = yes
+						}
+					}
+				}
+				country_event = { id = civspace.660 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					NOT = {
+						any_owned_planet = {
+							is_colony = yes
+							civspace_has_commercial_destination = yes
+						}
+					}
+				}
+				country_event = { id = civspace.670 }
+			}
+		}
+	}
+}
+
+# Fleet Academy pilot certification.
+country_event = {
+	id = civspace.610
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_starbase = {
+			limit = { has_starbase_building = fleet_academy }
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_pilot_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Civilian shipyard maintenance.
+country_event = {
+	id = civspace.620
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_starbase = {
+			limit = { has_starbase_module = shipyard }
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_maintenance_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Medical transfer.
+country_event = {
+	id = civspace.630
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				civspace_has_medical_destination = yes
+			}
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_medical_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Tourism and entertainment visit.
+country_event = {
+	id = civspace.640
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				civspace_has_tourism_destination = yes
+			}
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_tourism_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Academic exchange.
+country_event = {
+	id = civspace.650
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				civspace_has_research_destination = yes
+			}
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_research_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Civilian diplomatic delegation.
+country_event = {
+	id = civspace.660
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				civspace_has_diplomatic_destination = yes
+			}
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_diplomatic_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Commercial freight exchange.
+country_event = {
+	id = civspace.670
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				civspace_has_commercial_destination = yes
+			}
+			save_event_target_as = civspace_interaction_target
+		}
+		set_country_flag = civspace_interaction_commercial_pending
+		country_event = { id = civspace.680 }
+	}
+}
+
+# Shared mission dispatcher.
+country_event = {
+	id = civspace.680
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = { exists = event_target:civspace_interaction_target }
+
+	immediate = {
+		save_event_target_as = civspace_interaction_owner
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				NOT = { is_same_value = event_target:civspace_interaction_target }
+			}
+			save_event_target_as = civspace_interaction_origin
+		}
+		random_country = {
+			limit = { has_country_flag = civspace_sector@root }
+			save_event_target_as = civspace_interaction_sector
+		}
+		if = {
+			limit = {
+				exists = event_target:civspace_interaction_origin
+				exists = event_target:civspace_interaction_sector
+			}
+			set_timed_country_flag = {
+				flag = civspace_interaction_cooldown
+				days = 360
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:civspace_interaction_sector
+					if = {
+						limit = { root = { has_country_flag = civspace_interaction_medical_pending } }
+						create_ship = { name = "civspace_Medical_Transport_NAME" design = "civspace_Medical_Transport_NAME" graphical_culture = root }
+					}
+					else_if = {
+						limit = { root = { has_country_flag = civspace_interaction_tourism_pending } }
+						create_ship = { name = "civspace_Tourist_Liner_NAME" design = "civspace_Tourist_Liner_NAME" graphical_culture = root }
+					}
+					else_if = {
+						limit = { root = { has_country_flag = civspace_interaction_research_pending } }
+						create_ship = { name = "civspace_Research_Transport_NAME" design = "civspace_Research_Transport_NAME" graphical_culture = root }
+					}
+					else_if = {
+						limit = { root = { has_country_flag = civspace_interaction_diplomatic_pending } }
+						create_ship = { name = "civspace_Diplomatic_Transport_NAME" design = "civspace_Diplomatic_Transport_NAME" graphical_culture = root }
+					}
+					else_if = {
+						limit = { root = { has_country_flag = civspace_interaction_pilot_pending } }
+						create_ship = { name = "civspace_Pilot_Training_Shuttle_NAME" design = "civspace_Pilot_Training_Shuttle_NAME" graphical_culture = root }
+					}
+					else_if = {
+						limit = { root = { has_country_flag = civspace_interaction_maintenance_pending } }
+						create_ship = { name = "civspace_Maintenance_Tender_NAME" design = "civspace_Maintenance_Tender_NAME" graphical_culture = root }
+					}
+					else_if = {
+						limit = { root = { has_country_flag = civspace_interaction_commercial_pending } }
+						create_ship = { name = "civspace_Commercial_Freighter_NAME" design = "civspace_Commercial_Freighter_NAME" graphical_culture = root }
+					}
+				}
+			}
+			last_created_fleet = {
+				set_fleet_flag = civspace_interaction_mission
+				set_fleet_stance = passive
+				set_location = {
+					target = event_target:civspace_interaction_origin
+					distance = 12
+					angle = random
+				}
+				if = {
+					limit = { root = { has_country_flag = civspace_interaction_medical_pending } }
+					set_fleet_flag = civspace_interaction_medical
+					set_name = "civspace_medical_mission_outbound"
+				}
+				else_if = {
+					limit = { root = { has_country_flag = civspace_interaction_tourism_pending } }
+					set_fleet_flag = civspace_interaction_tourism
+					set_name = "civspace_tourism_mission_outbound"
+				}
+				else_if = {
+					limit = { root = { has_country_flag = civspace_interaction_research_pending } }
+					set_fleet_flag = civspace_interaction_research
+					set_name = "civspace_research_mission_outbound"
+				}
+				else_if = {
+					limit = { root = { has_country_flag = civspace_interaction_diplomatic_pending } }
+					set_fleet_flag = civspace_interaction_diplomatic
+					set_name = "civspace_diplomatic_mission_outbound"
+				}
+				else_if = {
+					limit = { root = { has_country_flag = civspace_interaction_pilot_pending } }
+					set_fleet_flag = civspace_interaction_pilot
+					set_name = "civspace_pilot_mission_outbound"
+				}
+				else_if = {
+					limit = { root = { has_country_flag = civspace_interaction_maintenance_pending } }
+					set_fleet_flag = civspace_interaction_maintenance
+					set_name = "civspace_maintenance_mission_outbound"
+				}
+				else_if = {
+					limit = { root = { has_country_flag = civspace_interaction_commercial_pending } }
+					set_fleet_flag = civspace_interaction_commercial
+					set_name = "civspace_commercial_mission_outbound"
+				}
+				queue_actions = {
+					wait = 15
+					move_to = event_target:civspace_interaction_target
+					effect = {
+						id = "civspace.680.activity_started"
+						fleet_event = { id = civspace.681 }
+					}
+					wait = 120
+					effect = {
+						id = "civspace.680.returning"
+						fleet_event = { id = civspace.682 }
+					}
+					move_to = event_target:civspace_interaction_origin
+					wait = 15
+					effect = {
+						id = "civspace.680.mission_complete"
+						destroy_fleet = this
+					}
+				}
+				fleet_event = { id = civspace.690 days = 1080 random = 180 }
+			}
+		}
+		remove_country_flag = civspace_interaction_medical_pending
+		remove_country_flag = civspace_interaction_tourism_pending
+		remove_country_flag = civspace_interaction_research_pending
+		remove_country_flag = civspace_interaction_diplomatic_pending
+		remove_country_flag = civspace_interaction_pilot_pending
+		remove_country_flag = civspace_interaction_maintenance_pending
+		remove_country_flag = civspace_interaction_commercial_pending
+	}
+}
+
+# Rename the selected fleet while it is performing its structure interaction.
+fleet_event = {
+	id = civspace.681
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = { limit = { has_fleet_flag = civspace_interaction_medical } set_name = "civspace_medical_mission_active" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_tourism } set_name = "civspace_tourism_mission_active" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_research } set_name = "civspace_research_mission_active" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_diplomatic } set_name = "civspace_diplomatic_mission_active" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_pilot } set_name = "civspace_pilot_mission_active" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_maintenance } set_name = "civspace_maintenance_mission_active" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_commercial } set_name = "civspace_commercial_mission_active" }
+	}
+}
+
+# Rename the selected fleet for its return leg.
+fleet_event = {
+	id = civspace.682
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = { limit = { has_fleet_flag = civspace_interaction_medical } set_name = "civspace_medical_mission_returning" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_tourism } set_name = "civspace_tourism_mission_returning" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_research } set_name = "civspace_research_mission_returning" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_diplomatic } set_name = "civspace_diplomatic_mission_returning" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_pilot } set_name = "civspace_pilot_mission_returning" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_maintenance } set_name = "civspace_maintenance_mission_returning" }
+		else_if = { limit = { has_fleet_flag = civspace_interaction_commercial } set_name = "civspace_commercial_mission_returning" }
+	}
+}
+
+fleet_event = {
+	id = civspace.690
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { has_fleet_flag = civspace_interaction_mission }
+	immediate = { destroy_fleet = this }
+}

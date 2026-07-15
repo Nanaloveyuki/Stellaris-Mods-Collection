@@ -1,0 +1,98 @@
+namespace = civspace
+
+country_event = {
+	id = civspace.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		NOT = { has_country_flag = civspace_initialized }
+	}
+
+	immediate = {
+		country_event = {
+			id = civspace.2
+			days = 1
+		}
+	}
+}
+
+country_event = {
+	id = civspace.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		NOT = { has_country_flag = civspace_initialized }
+	}
+
+	immediate = {
+		save_event_target_as = civspace_creation_parent
+		set_country_flag = civspace_initialized
+		set_variable = { which = civspace_colony_count value = 0 }
+		set_variable = { which = civspace_station_count value = 0 }
+		civspace_apply_preset_vanilla_plus = yes
+
+		if = {
+			limit = {
+				NOT = { any_country = { has_country_flag = civspace_sector@root } }
+			}
+			create_country = {
+				name = "civspace_civilian_sector_name"
+				type = civspace_civilian_authority
+				flag = event_target:civspace_creation_parent
+				species = random
+				name_list = "Human1"
+				ethos = {
+					ethic = ethic_materialist
+					ethic = ethic_pacifist
+				}
+				authority = auth_oligarchic
+				civics = {
+					civic = civic_merchant_guilds
+					civic = civic_functional_architecture
+				}
+					auto_delete = no
+				effect = {
+					set_graphical_culture = root
+					set_country_flag = civspace_is_civilian_sector
+					set_country_flag = civspace_sector@root
+					save_event_target_as = civspace_created_sector
+					set_faction_hostility = {
+						target = root
+						set_hostile = no
+						set_neutral = no
+						set_friendly = yes
+					}
+				}
+			}
+			every_country = {
+				limit = { is_country_type = default }
+				establish_communications_no_message = last_created_country
+			}
+		}
+		set_country_flag = civspace_has_civilian_sector
+		country_event = { id = civspace.703 }
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.3
+	title = civspace.3.name
+	desc = civspace.3.desc
+	picture = GFX_evt_ship_travel
+	show_sound = event_default
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.3.a
+	}
+
+	option = {
+		name = civspace.3.b
+		country_event = { id = civspace.100 }
+	}
+}

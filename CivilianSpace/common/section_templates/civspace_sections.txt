@@ -1,0 +1,9 @@
+ship_section_template = {
+	key = "civspace_freight_terminal_section"
+	ship_size = civspace_freight_terminal
+	fits_on_slot = mid
+	# This ship size disables graphical-culture resolution, so it must use a
+	# concrete vanilla section entity rather than the generic culture alias.
+	entity = "mammalian_01_mining_station_section_entity"
+	icon = "GFX_ship_part_core_mid"
+}

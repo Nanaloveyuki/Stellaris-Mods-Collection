@@ -1,0 +1,8 @@
+civspace_privately_founded_colony = {
+	logistic_growth_mult = 0.05
+	planet_jobs_trade_produces_mult = 0.05
+}
+
+civspace_private_station_host = {
+	planet_jobs_trade_produces_mult = 0.02
+}

@@ -1,0 +1,141 @@
+ship_design = {
+	name = "civspace_Cargo_Freighter_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = {
+		template = "DEFAULT_TRANSPORT_SECTION"
+		slot = "mid"
+	}
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Passenger_Liner_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = {
+		template = "DEFAULT_TRANSPORT_SECTION"
+		slot = "mid"
+	}
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Medical_Transport_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Tourist_Liner_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Research_Transport_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Diplomatic_Transport_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Pilot_Training_Shuttle_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Maintenance_Tender_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Commercial_Freighter_NAME"
+	ship_size = transport
+	country_type = civspace_civilian_authority
+	section = { template = "DEFAULT_TRANSPORT_SECTION" slot = "mid" }
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Construction_Ship_NAME"
+	ship_size = constructor
+	country_type = civspace_civilian_authority
+	section = {
+		template = "DEFAULT_CONSTRUCTION_SECTION"
+		slot = "mid"
+	}
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Survey_Vessel_NAME"
+	ship_size = science
+	country_type = civspace_civilian_authority
+	section = {
+		template = "DEFAULT_SCIENCESHIP_SECTION"
+		slot = "mid"
+	}
+	required_component = "HYPER_DRIVE_1"
+	required_component = "SHIP_THRUSTER_1"
+	required_component = "SENSOR_1"
+}
+
+ship_design = {
+	name = "civspace_Colony_Convoy_NAME"
+	ship_size = colonizer
+	country_type = civspace_civilian_authority
+	section = {
+		template = "DEFAULT_COLONIZATION_SECTION"
+		slot = "mid"
+	}
+}
+
+ship_design = {
+	name = "civspace_Freight_Terminal_NAME"
+	ship_size = civspace_freight_terminal
+	country_type = civspace_civilian_authority
+	section = {
+		template = "civspace_freight_terminal_section"
+		slot = "mid"
+	}
+}

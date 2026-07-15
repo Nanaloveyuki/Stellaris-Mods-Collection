@@ -1,0 +1,248 @@
+namespace = civspace
+
+# Rare annual check for a nearby system that the player has not surveyed.
+country_event = {
+	id = civspace.500
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+		NOT = { has_country_flag = civspace_exploration_disabled }
+		OR = {
+			has_country_flag = civspace_exploration_approval
+			has_country_flag = civspace_exploration_automatic
+		}
+		NOT = { has_country_flag = civspace_exploration_cooldown }
+		is_at_war = no
+		any_system = {
+			is_surveyed = { who = root status = no }
+			NOT = { has_star_flag = civspace_exploration_reserved }
+			NOT = { has_star_flag = hostile_system }
+			distance = {
+				source = root.capital_scope
+				use_bypasses = no
+				min_jumps = 1
+				max_jumps = 8
+			}
+			OR = {
+				has_owner = no
+				owner = { is_same_value = root }
+			}
+			NOT = {
+				any_fleet_in_system = {
+					exists = owner
+					owner = { is_at_war_with = root }
+				}
+			}
+		}
+	}
+
+	immediate = {
+		random_list = {
+			25 = {
+				random_system = {
+					limit = {
+						is_surveyed = { who = root status = no }
+						NOT = { has_star_flag = civspace_exploration_reserved }
+						NOT = { has_star_flag = hostile_system }
+						distance = {
+							source = root.capital_scope
+							use_bypasses = no
+							min_jumps = 1
+							max_jumps = 8
+						}
+						OR = {
+							has_owner = no
+							owner = { is_same_value = root }
+						}
+						NOT = {
+							any_fleet_in_system = {
+								exists = owner
+								owner = { is_at_war_with = root }
+							}
+						}
+					}
+					save_event_target_as = civspace_exploration_target
+					set_timed_star_flag = {
+						flag = civspace_exploration_reserved
+						days = 1800
+					}
+				}
+				save_event_target_as = civspace_exploration_owner
+				capital_scope = { save_event_target_as = civspace_exploration_origin }
+				random_country = {
+					limit = { has_country_flag = civspace_sector@root }
+					save_event_target_as = civspace_exploration_sector
+				}
+				if = {
+					limit = {
+						exists = event_target:civspace_exploration_target
+						exists = event_target:civspace_exploration_origin
+						exists = event_target:civspace_exploration_sector
+					}
+					if = {
+						limit = { has_country_flag = civspace_exploration_approval }
+						country_event = { id = civspace.501 }
+					}
+					else_if = {
+						limit = { has_country_flag = civspace_exploration_automatic }
+						country_event = { id = civspace.502 }
+					}
+				}
+			}
+			75 = {}
+		}
+	}
+}
+
+country_event = {
+	id = civspace.501
+	title = civspace.501.name
+	desc = civspace.501.desc
+	picture = GFX_evt_ship_travel
+	location = event_target:civspace_exploration_target
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.501.approve
+		country_event = { id = civspace.502 }
+	}
+	option = {
+		name = civspace.501.deny
+		event_target:civspace_exploration_target = {
+			remove_star_flag = civspace_exploration_reserved
+		}
+		set_timed_country_flag = {
+			flag = civspace_exploration_cooldown
+			days = 360
+		}
+	}
+}
+
+# Dispatch a visible hidden-empire survey vessel.
+country_event = {
+	id = civspace.502
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		exists = event_target:civspace_exploration_target
+		exists = event_target:civspace_exploration_origin
+		exists = event_target:civspace_exploration_sector
+	}
+
+	immediate = {
+		set_timed_country_flag = {
+			flag = civspace_exploration_cooldown
+			days = 720
+		}
+		create_fleet = {
+			effect = {
+				set_owner = event_target:civspace_exploration_sector
+				create_ship = {
+					name = "civspace_Survey_Vessel_NAME"
+					design = "civspace_Survey_Vessel_NAME"
+					graphical_culture = root
+				}
+			}
+		}
+		last_created_fleet = {
+			set_name = "civspace_survey_expedition_fleet"
+			set_fleet_flag = civspace_exploration_project
+			set_fleet_stance = passive
+			set_location = {
+				target = event_target:civspace_exploration_origin
+				distance = 12
+				angle = random
+			}
+			queue_actions = {
+				wait = 15
+				move_to = event_target:civspace_exploration_target
+				effect = {
+					id = "civspace.502.survey_started"
+					fleet_event = { id = civspace.506 }
+				}
+				wait = 180
+				effect = {
+					id = "civspace.502.survey_complete"
+					event_target:civspace_exploration_target = {
+						system_event = { id = civspace.503 }
+					}
+					destroy_fleet = this
+				}
+			}
+			fleet_event = { id = civspace.505 days = 1080 random = 180 }
+		}
+	}
+}
+
+# Credit the completed survey directly to the player. Deliberately do not fire
+# on_survey_planet from the hidden empire: that could assign anomaly ownership
+# or first-contact side effects to the Civilian Sector.
+system_event = {
+	id = civspace.503
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		exists = event_target:civspace_exploration_owner
+		is_surveyed = {
+			who = event_target:civspace_exploration_owner
+			status = no
+		}
+		OR = {
+			has_owner = no
+			owner = { is_same_value = event_target:civspace_exploration_owner }
+		}
+	}
+
+	immediate = {
+		every_system_planet = {
+			limit = {
+				is_surveyed = {
+					who = event_target:civspace_exploration_owner
+					status = no
+				}
+			}
+			set_surveyed = {
+				surveyed = yes
+				surveyor = event_target:civspace_exploration_owner
+			}
+		}
+		remove_star_flag = civspace_exploration_reserved
+		event_target:civspace_exploration_owner = {
+			if = {
+				limit = { NOT = { has_country_flag = civspace_notifications_none } }
+				country_event = { id = civspace.504 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = civspace.504
+	title = civspace.504.name
+	desc = civspace.504.desc
+	picture = GFX_evt_ship_travel
+	location = event_target:civspace_exploration_target
+	is_triggered_only = yes
+	option = { name = civspace.504.a }
+}
+
+fleet_event = {
+	id = civspace.505
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { has_fleet_flag = civspace_exploration_project }
+	immediate = { destroy_fleet = this }
+}
+
+fleet_event = {
+	id = civspace.506
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { has_fleet_flag = civspace_exploration_project }
+	immediate = { set_name = "civspace_survey_expedition_active" }
+}

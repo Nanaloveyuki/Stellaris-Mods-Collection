@@ -1,0 +1,159 @@
+# Mutually exclusive settings helpers.
+civspace_clear_preset_flags = {
+	remove_country_flag = civspace_preset_minimal
+	remove_country_flag = civspace_preset_vanilla_plus
+	remove_country_flag = civspace_preset_living_empire
+	remove_country_flag = civspace_preset_performance
+	remove_country_flag = civspace_preset_custom
+}
+
+civspace_clear_traffic_flags = {
+	remove_country_flag = civspace_traffic_disabled
+	remove_country_flag = civspace_traffic_minimal
+	remove_country_flag = civspace_traffic_standard
+	remove_country_flag = civspace_traffic_high
+}
+
+civspace_clear_construction_flags = {
+	remove_country_flag = civspace_construction_disabled
+	remove_country_flag = civspace_construction_visual
+	remove_country_flag = civspace_construction_stations
+}
+
+civspace_clear_colonization_flags = {
+	remove_country_flag = civspace_colonization_disabled
+	remove_country_flag = civspace_colonization_approval
+	remove_country_flag = civspace_colonization_automatic
+}
+
+civspace_clear_notification_flags = {
+	remove_country_flag = civspace_notifications_all
+	remove_country_flag = civspace_notifications_important
+	remove_country_flag = civspace_notifications_none
+}
+
+civspace_clear_exploration_flags = {
+	remove_country_flag = civspace_exploration_disabled
+	remove_country_flag = civspace_exploration_approval
+	remove_country_flag = civspace_exploration_automatic
+}
+
+civspace_mark_custom_preset = {
+	civspace_clear_preset_flags = yes
+	set_country_flag = civspace_preset_custom
+}
+
+# Minimal: sparse visual traffic and no autonomous development.
+civspace_apply_preset_minimal = {
+	civspace_clear_preset_flags = yes
+	civspace_clear_traffic_flags = yes
+	civspace_clear_construction_flags = yes
+	civspace_clear_colonization_flags = yes
+	civspace_clear_notification_flags = yes
+	civspace_clear_exploration_flags = yes
+	set_country_flag = civspace_preset_minimal
+	set_country_flag = civspace_traffic_minimal
+	set_country_flag = civspace_construction_disabled
+	set_country_flag = civspace_colonization_disabled
+	set_country_flag = civspace_notifications_important
+	set_country_flag = civspace_exploration_disabled
+	set_variable = { which = civspace_ship_cap value = 5 }
+	set_variable = { which = civspace_station_cap value = 0 }
+	set_variable = { which = civspace_colony_cap value = 0 }
+}
+
+# Default: visible traffic, rare development, and player approval.
+civspace_apply_preset_vanilla_plus = {
+	civspace_clear_preset_flags = yes
+	civspace_clear_traffic_flags = yes
+	civspace_clear_construction_flags = yes
+	civspace_clear_colonization_flags = yes
+	civspace_clear_notification_flags = yes
+	civspace_clear_exploration_flags = yes
+	set_country_flag = civspace_preset_vanilla_plus
+	set_country_flag = civspace_traffic_standard
+	set_country_flag = civspace_construction_stations
+	set_country_flag = civspace_colonization_approval
+	set_country_flag = civspace_notifications_important
+	set_country_flag = civspace_exploration_approval
+	set_variable = { which = civspace_ship_cap value = 25 }
+	set_variable = { which = civspace_station_cap value = 3 }
+	set_variable = { which = civspace_colony_cap value = 5 }
+}
+
+# Living Empire: dense traffic and automatic civilian development.
+civspace_apply_preset_living_empire = {
+	civspace_clear_preset_flags = yes
+	civspace_clear_traffic_flags = yes
+	civspace_clear_construction_flags = yes
+	civspace_clear_colonization_flags = yes
+	civspace_clear_notification_flags = yes
+	civspace_clear_exploration_flags = yes
+	set_country_flag = civspace_preset_living_empire
+	set_country_flag = civspace_traffic_high
+	set_country_flag = civspace_construction_stations
+	set_country_flag = civspace_colonization_automatic
+	set_country_flag = civspace_notifications_all
+	set_country_flag = civspace_exploration_automatic
+	set_variable = { which = civspace_ship_cap value = 50 }
+	set_variable = { which = civspace_station_cap value = 8 }
+	set_variable = { which = civspace_colony_cap value = 10 }
+}
+
+# Performance: bounded low-frequency traffic without other project systems.
+civspace_apply_preset_performance = {
+	civspace_clear_preset_flags = yes
+	civspace_clear_traffic_flags = yes
+	civspace_clear_construction_flags = yes
+	civspace_clear_colonization_flags = yes
+	civspace_clear_notification_flags = yes
+	civspace_clear_exploration_flags = yes
+	set_country_flag = civspace_preset_performance
+	set_country_flag = civspace_traffic_minimal
+	set_country_flag = civspace_construction_disabled
+	set_country_flag = civspace_colonization_disabled
+	set_country_flag = civspace_notifications_none
+	set_country_flag = civspace_exploration_disabled
+	set_variable = { which = civspace_ship_cap value = 10 }
+	set_variable = { which = civspace_station_cap value = 0 }
+	set_variable = { which = civspace_colony_cap value = 0 }
+}
+
+# Civilian Space variant of the vanilla spawn_habitat_effect. The vanilla
+# effect surveys for FROM, but habitat completion is called by a civilian
+# fleet; this version explicitly surveys for the supplied player country.
+civspace_spawn_habitat_effect = {
+	spawn_planet = {
+		class = "pc_habitat"
+		location = $TARGET_PLANET$
+		orbit_location = yes
+		orbit_angle_offset = 135
+		orbit_distance_offset = $DISTANCE$
+		size = 6
+		has_ring = no
+
+		init_effect = {
+			set_name = {
+				key = civspace_HABITAT_PLANET_NAME
+				variable_string = "\\[prev.solar_system.GetName]"
+			}
+			set_planet_entity = {
+				entity = "habitat_phase_03_entity"
+				graphical_culture = $HABITAT_OWNER$
+			}
+			set_surveyed = {
+				surveyed = yes
+				surveyor = $HABITAT_OWNER$
+			}
+			set_all_comms_surveyed = yes
+			clear_blockers = yes
+			set_carrier_flag = megastructure
+			set_carrier_flag = habitat
+			set_carrier_flag = habitat_level_1
+			save_event_target_as = civspace_completed_habitat
+			$TARGET_PLANET$ = {
+				set_carrier_flag = habitat@PREV
+			}
+		}
+	}
+}

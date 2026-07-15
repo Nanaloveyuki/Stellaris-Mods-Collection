@@ -16,6 +16,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
 - [Battle Perks](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/BattlePerks)
 - [Chatty Construction](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ChattyConstruction)
 - [Civilian Employment](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/CivilianEmployment)
+- [Civilian Space](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/CivilianSpace)
 - [Cosmic Casino](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/CosmicCasino)
 - [Department of Strange Incidents](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/DSI)
 - [Elemental Warfare](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/ElementalWarfare)

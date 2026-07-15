@@ -1,0 +1,249 @@
+namespace = civspace
+
+# Lightweight annual validation and wartime traffic suspension.
+country_event = {
+	id = civspace.700
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+	}
+
+	immediate = {
+		# Repair games initialized while the preset scripted effects were absent.
+		# A valid traffic mode is always present after any preset or manual setup.
+		if = {
+			limit = {
+				NOR = {
+					has_country_flag = civspace_traffic_disabled
+					has_country_flag = civspace_traffic_minimal
+					has_country_flag = civspace_traffic_standard
+					has_country_flag = civspace_traffic_high
+				}
+			}
+			civspace_apply_preset_vanilla_plus = yes
+		}
+
+		set_variable = { which = civspace_colony_count value = 0 }
+		every_owned_planet = {
+			limit = {
+				planet = { has_planet_flag = civspace_civilian_founded_colony }
+			}
+			owner = {
+				change_variable = { which = civspace_colony_count value = 1 }
+			}
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					any_country = { has_country_flag = civspace_sector@root }
+				}
+			}
+			country_event = { id = civspace.701 }
+		}
+		country_event = { id = civspace.703 }
+
+		random_country = {
+			limit = { has_country_flag = civspace_sector@root }
+			save_event_target_as = civspace_validated_sector
+		}
+		if = {
+			limit = { exists = event_target:civspace_validated_sector }
+			event_target:civspace_validated_sector = {
+				every_owned_fleet = {
+					limit = {
+						has_fleet_flag = civspace_private_station
+						OR = {
+							NOT = { exists = solar_system }
+							solar_system = {
+								OR = {
+									NOT = { exists = owner }
+									owner = { NOT = { is_same_value = root } }
+								}
+							}
+						}
+					}
+					if = {
+						limit = { exists = solar_system }
+						solar_system = {
+							remove_star_flag = civspace_has_private_station
+							random_system_planet = {
+								limit = { has_modifier = civspace_private_station_host }
+								remove_modifier = civspace_private_station_host
+							}
+						}
+					}
+					destroy_fleet = this
+				}
+				if = {
+					limit = { root = { is_at_war = yes } }
+					every_owned_fleet = {
+						limit = { has_fleet_flag = civspace_civilian_traffic }
+						destroy_fleet = this
+					}
+				}
+			}
+		}
+	}
+}
+
+# Recreate a missing civilian authority for this player.
+country_event = {
+	id = civspace.701
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		NOT = { any_country = { has_country_flag = civspace_sector@root } }
+	}
+
+	immediate = {
+		save_event_target_as = civspace_recovery_parent
+		create_country = {
+			name = "civspace_civilian_sector_name"
+			type = civspace_civilian_authority
+			flag = event_target:civspace_recovery_parent
+			species = random
+			name_list = "Human1"
+			ethos = {
+				ethic = ethic_materialist
+				ethic = ethic_pacifist
+			}
+			authority = auth_oligarchic
+			civics = {
+				civic = civic_merchant_guilds
+				civic = civic_functional_architecture
+			}
+			auto_delete = no
+			effect = {
+				set_graphical_culture = root
+				set_country_flag = civspace_is_civilian_sector
+				set_country_flag = civspace_sector@root
+				set_faction_hostility = {
+					target = root
+					set_hostile = no
+					set_neutral = no
+					set_friendly = yes
+				}
+			}
+		}
+		every_country = {
+			limit = { is_country_type = default }
+			establish_communications_no_message = last_created_country
+		}
+		set_country_flag = civspace_has_civilian_sector
+	}
+}
+
+# Repair communications for an existing Civilian Sector. This mirrors the
+# Living Systems reference implementation and prevents first-contact projects.
+country_event = {
+	id = civspace.703
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+		any_country = { has_country_flag = civspace_sector@root }
+	}
+
+	immediate = {
+		# Save-game migration for versions created before exploration settings.
+		if = {
+			limit = {
+				NOR = {
+					has_country_flag = civspace_exploration_disabled
+					has_country_flag = civspace_exploration_approval
+					has_country_flag = civspace_exploration_automatic
+				}
+			}
+			set_country_flag = civspace_exploration_approval
+		}
+		every_country = {
+			limit = { has_country_flag = civspace_sector@root }
+			save_event_target_as = civspace_communications_sector
+			remove_country_flag = suppress_first_contact_comms
+			set_faction_hostility = {
+				target = root
+				set_hostile = no
+				set_neutral = no
+				set_friendly = yes
+			}
+			every_country = {
+				limit = { is_country_type = default }
+				establish_communications_no_message = event_target:civspace_communications_sector
+			}
+		}
+	}
+}
+
+# Player-requested traffic/project cleanup. Persistent stations are preserved.
+country_event = {
+	id = civspace.702
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		every_country = {
+			limit = { has_country_flag = civspace_sector@root }
+			every_owned_fleet = {
+				limit = {
+					OR = {
+						has_fleet_flag = civspace_civilian_traffic
+						has_fleet_flag = civspace_construction_project
+						has_fleet_flag = civspace_resource_station_project
+						has_fleet_flag = civspace_colony_project
+						has_fleet_flag = civspace_habitat_project
+						has_fleet_flag = civspace_exploration_project
+						has_fleet_flag = civspace_interaction_mission
+					}
+				}
+				destroy_fleet = this
+			}
+		}
+	}
+}
+
+# Console debug menu: event civspace.900
+country_event = {
+	id = civspace.900
+	title = civspace.900.name
+	desc = civspace.900.desc
+	picture = GFX_evt_ship_travel
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.900.spawn_traffic
+		country_event = { id = civspace.201 }
+	}
+	option = {
+		name = civspace.900.spawn_construction
+		country_event = { id = civspace.301 }
+	}
+	option = {
+		name = civspace.900.spawn_resource_station
+		country_event = { id = civspace.310 }
+	}
+	option = {
+		name = civspace.900.spawn_exploration
+		country_event = { id = civspace.500 }
+	}
+	option = {
+		name = civspace.900.spawn_interaction
+		country_event = { id = civspace.600 }
+	}
+	option = {
+		name = civspace.900.recover
+		country_event = { id = civspace.701 }
+	}
+	option = {
+		name = civspace.900.cleanup
+		country_event = { id = civspace.702 }
+	}
+	option = { name = civspace.close }
+}

@@ -1,0 +1,237 @@
+namespace = civspace
+
+# Rare annual proposal for a normal mining or research station inside the
+# player's borders. The visible constructor belongs to the Civilian Sector;
+# the completed station belongs to the player.
+country_event = {
+	id = civspace.310
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+		has_country_flag = civspace_construction_stations
+		NOT = { has_country_flag = civspace_resource_station_cooldown }
+		has_technology = tech_starbase_1
+		is_at_war = no
+		any_system_within_border = {
+			NOT = {
+				any_fleet_in_system = {
+					exists = owner
+					owner = { is_at_war_with = root }
+				}
+			}
+			any_system_planet = {
+				is_colony = no
+				civspace_can_host_resource_station = yes
+			}
+		}
+	}
+
+	immediate = {
+		random_list = {
+			20 = {
+				random_system_within_border = {
+					limit = {
+						NOT = {
+							any_fleet_in_system = {
+								exists = owner
+								owner = { is_at_war_with = root }
+							}
+						}
+						any_system_planet = {
+							is_colony = no
+							civspace_can_host_resource_station = yes
+						}
+					}
+					random_system_planet = {
+						limit = {
+							is_colony = no
+							civspace_can_host_resource_station = yes
+						}
+						save_event_target_as = civspace_resource_station_target
+						set_timed_planet_flag = {
+							flag = civspace_resource_station_reserved
+							days = 1800
+						}
+					}
+				}
+				save_event_target_as = civspace_resource_station_owner
+				capital_scope = { save_event_target_as = civspace_resource_station_origin }
+				random_country = {
+					limit = { has_country_flag = civspace_sector@root }
+					save_event_target_as = civspace_resource_station_sector
+				}
+				if = {
+					limit = {
+						exists = event_target:civspace_resource_station_target
+						exists = event_target:civspace_resource_station_origin
+						exists = event_target:civspace_resource_station_sector
+					}
+					country_event = { id = civspace.311 }
+				}
+			}
+			80 = {}
+		}
+	}
+}
+
+country_event = {
+	id = civspace.311
+	title = civspace.311.name
+	desc = civspace.311.desc
+	picture = GFX_evt_ship_in_orbit
+	location = event_target:civspace_resource_station_target
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.311.approve
+		country_event = { id = civspace.312 }
+	}
+	option = {
+		name = civspace.311.deny
+		event_target:civspace_resource_station_target = {
+			remove_planet_flag = civspace_resource_station_reserved
+		}
+		set_timed_country_flag = {
+			flag = civspace_resource_station_cooldown
+			days = 360
+		}
+	}
+}
+
+country_event = {
+	id = civspace.312
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		exists = event_target:civspace_resource_station_target
+		exists = event_target:civspace_resource_station_origin
+		exists = event_target:civspace_resource_station_sector
+	}
+
+	immediate = {
+		set_timed_country_flag = {
+			flag = civspace_resource_station_cooldown
+			days = 720
+		}
+		create_fleet = {
+			effect = {
+				set_owner = event_target:civspace_resource_station_sector
+				create_ship = {
+					name = "civspace_Construction_Ship_NAME"
+					design = "civspace_Construction_Ship_NAME"
+					graphical_culture = root
+				}
+			}
+		}
+		last_created_fleet = {
+			set_name = "civspace_resource_station_project_fleet"
+			set_fleet_flag = civspace_resource_station_project
+			set_fleet_stance = passive
+			set_location = {
+				target = event_target:civspace_resource_station_origin
+				distance = 12
+				angle = random
+			}
+			queue_actions = {
+				wait = 15
+				move_to = event_target:civspace_resource_station_target
+				wait = 180
+				effect = {
+					id = "civspace.312.station_complete"
+					event_target:civspace_resource_station_target = {
+						planet_event = { id = civspace.313 }
+					}
+					destroy_fleet = this
+				}
+			}
+			fleet_event = { id = civspace.315 days = 1080 random = 180 }
+		}
+	}
+}
+
+planet_event = {
+	id = civspace.313
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_colony = no
+		has_planet_flag = civspace_resource_station_reserved
+		exists = space_owner
+	}
+
+	immediate = {
+		# The planet's current space owner is authoritative when construction
+		# completes and remains valid even after a long queued journey.
+		space_owner = { save_event_target_as = civspace_resource_station_completion_owner }
+		if = {
+			limit = {
+				has_deposit_for = shipclass_mining_station
+				has_mining_station = no
+				has_research_station = no
+			}
+			create_mining_station = { owner = event_target:civspace_resource_station_completion_owner }
+			last_created_fleet = {
+				set_name = "civspace_Mining_Station_NAME"
+				set_fleet_flag = civspace_private_resource_station
+			}
+			event_target:civspace_resource_station_completion_owner = {
+				if = {
+					limit = { NOT = { has_country_flag = civspace_notifications_none } }
+					country_event = { id = civspace.314 }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				has_deposit_for = shipclass_research_station
+				has_mining_station = no
+				has_research_station = no
+			}
+			create_research_station = { owner = event_target:civspace_resource_station_completion_owner }
+			last_created_fleet = {
+				set_name = "civspace_Research_Station_NAME"
+				set_fleet_flag = civspace_private_resource_station
+			}
+			event_target:civspace_resource_station_completion_owner = {
+				if = {
+					limit = { NOT = { has_country_flag = civspace_notifications_none } }
+					country_event = { id = civspace.316 }
+				}
+			}
+		}
+		remove_planet_flag = civspace_resource_station_reserved
+	}
+}
+
+country_event = {
+	id = civspace.314
+	title = civspace.314.name
+	desc = civspace.314.desc
+	picture = GFX_evt_mining_station
+	location = event_target:civspace_resource_station_target
+	is_triggered_only = yes
+	option = { name = civspace.314.a }
+}
+
+fleet_event = {
+	id = civspace.315
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { has_fleet_flag = civspace_resource_station_project }
+	immediate = { destroy_fleet = this }
+}
+
+country_event = {
+	id = civspace.316
+	title = civspace.316.name
+	desc = civspace.316.desc
+	picture = GFX_evt_ship_in_orbit
+	location = event_target:civspace_resource_station_target
+	is_triggered_only = yes
+	option = { name = civspace.316.a }
+}

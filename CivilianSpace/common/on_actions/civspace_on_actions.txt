@@ -1,0 +1,18 @@
+on_game_start_country = {
+	events = {
+		civspace.1
+	}
+}
+
+on_yearly_pulse_country = {
+	events = {
+		# Validate and repair settings before any activity manager reads them.
+		civspace.700
+		civspace.200
+		civspace.300
+		civspace.310
+		civspace.400
+		civspace.500
+		civspace.600
+	}
+}

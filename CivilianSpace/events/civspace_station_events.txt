@@ -1,0 +1,194 @@
+namespace = civspace
+
+# Rare annual construction-project check.
+country_event = {
+	id = civspace.300
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+		NOT = { has_country_flag = civspace_construction_disabled }
+		NOT = { has_country_flag = civspace_construction_cooldown }
+		has_technology = tech_starbase_1
+		is_at_war = no
+		any_owned_planet = {
+			is_colony = yes
+			solar_system = { NOT = { has_star_flag = civspace_has_private_station } }
+		}
+	}
+
+	immediate = {
+		random_list = {
+			25 = { country_event = { id = civspace.301 } }
+			75 = {}
+		}
+	}
+}
+
+# Select a destination and dispatch a construction vessel.
+country_event = {
+	id = civspace.301
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		save_event_target_as = civspace_construction_owner
+		capital_scope = { save_event_target_as = civspace_construction_origin }
+		random_owned_planet = {
+			limit = {
+				is_colony = yes
+				solar_system = { NOT = { has_star_flag = civspace_has_private_station } }
+			}
+			save_event_target_as = civspace_construction_target
+		}
+		random_country = {
+			limit = { has_country_flag = civspace_sector@root }
+			save_event_target_as = civspace_construction_sector
+		}
+
+		if = {
+			limit = {
+				exists = event_target:civspace_construction_origin
+				exists = event_target:civspace_construction_target
+				exists = event_target:civspace_construction_sector
+				OR = {
+					has_country_flag = civspace_construction_visual
+					AND = {
+						has_country_flag = civspace_construction_stations
+						event_target:civspace_construction_sector = {
+							count_owned_fleet = {
+								count < root.civspace_station_cap
+								limit = { has_fleet_flag = civspace_private_station }
+							}
+						}
+					}
+				}
+			}
+			set_timed_country_flag = {
+				flag = civspace_construction_cooldown
+				days = 1800
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:civspace_construction_sector
+					create_ship = {
+						name = "civspace_Construction_Ship_NAME"
+						design = "civspace_Construction_Ship_NAME"
+						graphical_culture = root
+					}
+				}
+			}
+			last_created_fleet = {
+				set_name = "civspace_construction_project_fleet"
+				set_fleet_flag = civspace_construction_project
+				set_fleet_stance = passive
+				set_location = {
+					target = event_target:civspace_construction_origin
+					distance = 12
+					angle = random
+				}
+				queue_actions = {
+					wait = 15
+					move_to = event_target:civspace_construction_target
+					wait = 180
+					effect = {
+						id = "civspace.301.project_complete"
+						event_target:civspace_construction_target = {
+							carrier_event = { id = civspace.302 }
+						}
+						destroy_fleet = this
+					}
+				}
+				fleet_event = { id = civspace.305 days = 1080 random = 180 }
+			}
+		}
+	}
+}
+
+# Complete the project at the destination colony.
+carrier_event = {
+	id = civspace.302
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# Resolve ownership when the constructor arrives. Delayed fleet actions
+		# should not depend on country event targets saved months earlier.
+		solar_system = {
+			if = {
+				limit = { exists = owner }
+				owner = { save_event_target_as = civspace_construction_completion_owner }
+			}
+		}
+		random_country = {
+			limit = {
+				exists = event_target:civspace_construction_completion_owner
+				has_country_flag = civspace_sector@event_target:civspace_construction_completion_owner
+			}
+			save_event_target_as = civspace_construction_completion_sector
+		}
+		if = {
+			limit = {
+				exists = event_target:civspace_construction_completion_sector
+				exists = event_target:civspace_construction_completion_owner
+				event_target:civspace_construction_completion_owner = {
+					has_country_flag = civspace_construction_stations
+				}
+				solar_system = { NOT = { has_star_flag = civspace_has_private_station } }
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:civspace_construction_completion_sector
+					create_ship = {
+						name = "civspace_Freight_Terminal_NAME"
+						design = "civspace_Freight_Terminal_NAME"
+					}
+				}
+			}
+			last_created_fleet = {
+				set_name = "civspace_Freight_Terminal_NAME"
+				set_fleet_flag = civspace_private_station
+				set_fleet_stance = passive
+				set_location = {
+					target = root
+					distance = 25
+					angle = random
+				}
+			}
+			solar_system = { set_star_flag = civspace_has_private_station }
+			add_modifier = {
+				modifier = civspace_private_station_host
+				days = -1
+			}
+			if = {
+				limit = {
+					event_target:civspace_construction_completion_owner = {
+						NOT = { has_country_flag = civspace_notifications_none }
+					}
+				}
+				event_target:civspace_construction_completion_owner = {
+					country_event = { id = civspace.303 }
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = civspace.303
+	title = civspace.303.name
+	desc = civspace.303.desc
+	picture = GFX_evt_ship_in_orbit
+	is_triggered_only = yes
+	option = { name = civspace.303.a }
+}
+
+fleet_event = {
+	id = civspace.305
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { has_fleet_flag = civspace_construction_project }
+	immediate = { destroy_fleet = this }
+}

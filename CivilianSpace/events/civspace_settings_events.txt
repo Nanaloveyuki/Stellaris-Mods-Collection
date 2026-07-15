@@ -1,0 +1,286 @@
+namespace = civspace
+
+country_event = {
+	id = civspace.100
+	title = civspace.100.name
+	desc = civspace.100.desc
+	picture = GFX_evt_ship_travel
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.100.presets
+		country_event = { id = civspace.101 }
+	}
+	option = {
+		name = civspace.100.traffic
+		country_event = { id = civspace.102 }
+	}
+	option = {
+		name = civspace.100.construction
+		country_event = { id = civspace.103 }
+	}
+	option = {
+		name = civspace.100.colonization
+		country_event = { id = civspace.104 }
+	}
+	option = {
+		name = civspace.100.exploration
+		country_event = { id = civspace.107 }
+	}
+	option = {
+		name = civspace.100.notifications
+		country_event = { id = civspace.105 }
+	}
+	option = {
+		name = civspace.100.maintenance
+		country_event = { id = civspace.106 }
+	}
+	option = {
+		name = civspace.close
+	}
+}
+
+country_event = {
+	id = civspace.101
+	title = civspace.101.name
+	desc = civspace.101.desc
+	picture = GFX_evt_ship_travel
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.preset.minimal
+		civspace_apply_preset_minimal = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.preset.vanilla_plus
+		civspace_apply_preset_vanilla_plus = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.preset.living_empire
+		civspace_apply_preset_living_empire = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.preset.performance
+		civspace_apply_preset_performance = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.102
+	title = civspace.102.name
+	desc = civspace.102.desc
+	picture = GFX_evt_ship_travel
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.traffic.disabled
+		civspace_clear_traffic_flags = yes
+		set_country_flag = civspace_traffic_disabled
+		set_variable = { which = civspace_ship_cap value = 0 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.traffic.minimal
+		civspace_clear_traffic_flags = yes
+		set_country_flag = civspace_traffic_minimal
+		set_variable = { which = civspace_ship_cap value = 5 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.traffic.standard
+		civspace_clear_traffic_flags = yes
+		set_country_flag = civspace_traffic_standard
+		set_variable = { which = civspace_ship_cap value = 25 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.traffic.high
+		civspace_clear_traffic_flags = yes
+		set_country_flag = civspace_traffic_high
+		set_variable = { which = civspace_ship_cap value = 50 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.103
+	title = civspace.103.name
+	desc = civspace.103.desc
+	picture = GFX_evt_ship_in_orbit
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.construction.disabled
+		civspace_clear_construction_flags = yes
+		set_country_flag = civspace_construction_disabled
+		set_variable = { which = civspace_station_cap value = 0 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.construction.visual
+		civspace_clear_construction_flags = yes
+		set_country_flag = civspace_construction_visual
+		set_variable = { which = civspace_station_cap value = 0 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.construction.stations
+		civspace_clear_construction_flags = yes
+		set_country_flag = civspace_construction_stations
+		set_variable = { which = civspace_station_cap value = 3 }
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.104
+	title = civspace.104.name
+	desc = civspace.104.desc
+	picture = GFX_evt_colony_settlement
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.colonization.disabled
+		civspace_clear_colonization_flags = yes
+		set_country_flag = civspace_colonization_disabled
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.colonization.approval
+		civspace_clear_colonization_flags = yes
+		set_country_flag = civspace_colonization_approval
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.colonization.automatic
+		civspace_clear_colonization_flags = yes
+		set_country_flag = civspace_colonization_automatic
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.105
+	title = civspace.105.name
+	desc = civspace.105.desc
+	picture = GFX_evt_ship_travel
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.notifications.all
+		civspace_clear_notification_flags = yes
+		set_country_flag = civspace_notifications_all
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.notifications.important
+		civspace_clear_notification_flags = yes
+		set_country_flag = civspace_notifications_important
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.notifications.none
+		civspace_clear_notification_flags = yes
+		set_country_flag = civspace_notifications_none
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.106
+	title = civspace.106.name
+	desc = civspace.106.desc
+	picture = GFX_evt_space_debris
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.maintenance.remove_traffic
+		country_event = { id = civspace.702 }
+		country_event = { id = civspace.100 days = 1 }
+	}
+	option = {
+		name = civspace.maintenance.recover
+		country_event = { id = civspace.701 }
+		country_event = { id = civspace.100 days = 1 }
+	}
+	option = {
+		name = civspace.maintenance.defaults
+		civspace_apply_preset_vanilla_plus = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}
+
+country_event = {
+	id = civspace.107
+	title = civspace.107.name
+	desc = civspace.107.desc
+	picture = GFX_evt_ship_travel
+	is_triggered_only = yes
+
+	option = {
+		name = civspace.exploration.disabled
+		civspace_clear_exploration_flags = yes
+		set_country_flag = civspace_exploration_disabled
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.exploration.approval
+		civspace_clear_exploration_flags = yes
+		set_country_flag = civspace_exploration_approval
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.exploration.automatic
+		civspace_clear_exploration_flags = yes
+		set_country_flag = civspace_exploration_automatic
+		civspace_mark_custom_preset = yes
+		country_event = { id = civspace.100 }
+	}
+	option = {
+		name = civspace.back
+		country_event = { id = civspace.100 }
+	}
+}

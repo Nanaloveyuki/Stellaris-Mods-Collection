@@ -1,0 +1,158 @@
+civspace_is_eligible_player = {
+	is_country_type = default
+	is_ai = no
+	is_gestalt = no
+	is_nomadic = no
+}
+
+civspace_has_valid_route = {
+	count_owned_planet = {
+		count >= 2
+		limit = {
+			is_colony = yes
+		}
+	}
+}
+
+civspace_can_start_colony_project = {
+	civspace_is_eligible_player = yes
+	has_technology = tech_colonization_1
+	NOT = { has_country_flag = civspace_colonization_cooldown }
+	NOT = { has_country_flag = civspace_colonization_disabled }
+	check_variable = {
+		which = civspace_colony_count
+		value < civspace_colony_cap
+	}
+}
+
+# Planet/body scope with the eligible Void Dweller player as root. Mirrors the
+# important vanilla Habitat Central Complex placement restrictions.
+civspace_can_host_habitat_anchor = {
+	NOT = { has_planet_flag = civspace_habitat_reserved }
+	is_surveyed = { who = root status = yes }
+	NOT = { has_anomaly = yes }
+	NOR = {
+		has_carrier_flag = megastructure
+		has_carrier_flag = has_megastructure
+		is_asteroid = yes
+		is_moon = yes
+		is_planet_class = pc_ringworld_habitable
+		is_planet_class = pc_ringworld_habitable_damaged
+		is_planet_class = pc_ringworld_tech
+		is_planet_class = pc_ringworld_tech_damaged
+		is_planet_class = pc_ringworld_seam
+		is_planet_class = pc_ringworld_seam_damaged
+		is_planet_class = pc_habitat
+		is_planet_class = pc_cosmogenesis_world
+	}
+	is_astral_scar = no
+	solar_system = {
+		exists = owner
+		owner = { is_same_value = root }
+		NOT = {
+			any_system_planet = {
+				OR = {
+					has_carrier_flag = habitat
+					has_carrier_flag = hold_the_line_habitat
+				}
+			}
+		}
+		NOT = { has_megastructure = habitat_central_complex_ruined }
+		NOT = {
+			any_system_megastructure = {
+				is_megastructure_type = ring_world_ruined
+			}
+		}
+		NOT = {
+			any_system_planet = { has_carrier_flag = has_orbital_debris }
+		}
+	}
+}
+
+# Planet scope with the eligible player as root.
+civspace_can_host_resource_station = {
+	NOT = { has_planet_flag = civspace_resource_station_reserved }
+	NOT = { has_carrier_flag = has_megastructure }
+	is_surveyed = { who = root status = yes }
+	exists = space_owner
+	space_owner = { is_same_value = root }
+	OR = {
+		AND = {
+			has_deposit_for = shipclass_mining_station
+			has_mining_station = no
+			has_research_station = no
+			# Script-created stations bypass the normal construction order, so
+			# explicitly retain the strategic-resource technology checks.
+			OR = {
+				NOT = { has_resource = { type = exotic_gases amount > 0 } }
+				root = { has_technology = tech_mine_exotic_gases }
+			}
+			OR = {
+				NOT = { has_resource = { type = rare_crystals amount > 0 } }
+				root = { has_technology = tech_mine_rare_crystals }
+			}
+			OR = {
+				NOT = { has_resource = { type = volatile_motes amount > 0 } }
+				root = { has_technology = tech_mine_volatile_motes }
+			}
+			OR = {
+				NOT = { has_resource = { type = sr_living_metal amount > 0 } }
+				root = { has_technology = tech_mine_living_metal }
+			}
+		}
+		AND = {
+			has_deposit_for = shipclass_research_station
+			has_mining_station = no
+			has_research_station = no
+			OR = {
+				NOT = { has_resource = { type = sr_zro amount > 0 } }
+				root = { has_technology = tech_mine_zro }
+			}
+			OR = {
+				NOT = { has_resource = { type = sr_dark_matter amount > 0 } }
+				root = { has_technology = tech_mine_dark_matter }
+			}
+		}
+	}
+}
+
+# Colony-scoped destination families for civilian interaction missions.
+civspace_has_medical_destination = {
+	OR = {
+		has_building = building_medical_1
+		has_building = building_medical_2
+		has_building = building_medical_3
+	}
+}
+
+civspace_has_tourism_destination = {
+	OR = {
+		has_building = building_holo_theatres
+		has_building = building_hyper_entertainment_forum
+		has_building = building_resort_capital
+		has_building = building_resort_major_capital
+	}
+}
+
+civspace_has_research_destination = {
+	OR = {
+		has_building = building_research_lab_1
+		has_building = building_research_lab_2
+		has_building = building_research_lab_3
+	}
+}
+
+civspace_has_diplomatic_destination = {
+	OR = {
+		has_building = building_embassy
+		has_building = building_grand_embassy
+	}
+}
+
+civspace_has_commercial_destination = {
+	OR = {
+		has_building = building_commercial_zone
+		has_building = building_commercial_megaplex
+		has_building = building_galactic_stock_exchange
+	}
+}
