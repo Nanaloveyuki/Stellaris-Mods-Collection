@@ -95,7 +95,7 @@ ship_design = {
 }
 
 ship_design = {
-	name = "civspace_Construction_Ship_NAME"
+	name = "civspace_Construction_Ship_DESIGN_NAME"
 	ship_size = constructor
 	country_type = civspace_civilian_authority
 	section = {

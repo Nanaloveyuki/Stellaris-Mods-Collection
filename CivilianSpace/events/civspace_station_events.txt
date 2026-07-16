@@ -75,7 +75,7 @@ country_event = {
 					set_owner = event_target:civspace_construction_sector
 					create_ship = {
 						name = "civspace_Construction_Ship_NAME"
-						design = "civspace_Construction_Ship_NAME"
+						design = "civspace_Construction_Ship_DESIGN_NAME"
 						graphical_culture = root
 					}
 				}

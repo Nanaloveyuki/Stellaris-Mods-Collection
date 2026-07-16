@@ -1,4 +1,4 @@
-version="0.1.0"
+version="0.2.2"
 tags={
 	"Events"
 	"Gameplay"
@@ -6,4 +6,3 @@ tags={
 }
 name="Civilian Space"
 supported_version="v4.4.6"
-remote_file_id="3765479276"
