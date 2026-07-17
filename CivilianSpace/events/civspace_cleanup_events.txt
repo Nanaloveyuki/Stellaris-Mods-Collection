@@ -90,6 +90,29 @@ country_event = {
 	}
 }
 
+# Annual activity scheduler. Each manager receives an independent date from
+# January 2 through December 1, preventing synchronized New Year activity while
+# preserving the existing once-per-year checks and their internal probabilities.
+country_event = {
+	id = civspace.704
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		civspace_is_eligible_player = yes
+		has_country_flag = civspace_initialized
+	}
+
+	immediate = {
+		country_event = { id = civspace.200 days = 1 random = 329 }
+		country_event = { id = civspace.300 days = 1 random = 329 }
+		country_event = { id = civspace.310 days = 1 random = 329 }
+		country_event = { id = civspace.400 days = 1 random = 329 }
+		country_event = { id = civspace.500 days = 1 random = 329 }
+		country_event = { id = civspace.600 days = 1 random = 329 }
+	}
+}
+
 # Recreate a missing civilian authority for this player.
 country_event = {
 	id = civspace.701

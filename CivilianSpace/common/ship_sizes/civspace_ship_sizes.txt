@@ -19,8 +19,9 @@ civspace_freight_terminal = {
 	components_add_to_cost = no
 	enable_default_design = no
 	is_designable = no
-	# Use the legacy orbital-station class so the galaxy map does not
-	# categorize this unarmed civilian terminal as a military station.
-	class = shipclass_orbital_station
+	# The terminal uses a mining-station entity and needs a valid civilian
+	# infrastructure class. Observation-station class hooks invoke pre-FTL
+	# outpost events, while military-station class mislabels it on the map.
+	class = shipclass_mining_station
 	valid_target_aggressive_stance = no
 }
