@@ -11,6 +11,7 @@
  civspace_resource_station_project_fleet: "Projeto de Recursos Civil"
  civspace_freight_terminal: "Terminal de Cargas Civil"
  civspace_freight_terminal_plural: "Terminais de Cargas Civis"
+ fleet_type_shipclass_orbital_station:0 "Terminal de Cargas Civil"
  civspace_privately_founded_colony: "Colônia de Fundação Privada"
  civspace_privately_founded_colony_desc: "Esta colônia foi estabelecida por uma associação civil de colonos sob uma licença colonial independente."
  civspace_private_station_host: "Terminal de Cargas Civil"

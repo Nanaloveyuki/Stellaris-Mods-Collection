@@ -11,6 +11,7 @@
  civspace_resource_station_project_fleet: "民用资源项目"
  civspace_freight_terminal: "民用货运站"
  civspace_freight_terminal_plural: "民用货运站"
+ fleet_type_shipclass_orbital_station:0 "民用货运站"
  civspace_privately_founded_colony: "私人建立的殖民地"
  civspace_privately_founded_colony_desc: "该殖民地由一个民间定居协会根据独立殖民特许建立。"
  civspace_private_station_host: "民用货运站"

@@ -11,6 +11,7 @@
  civspace_resource_station_project_fleet: "Civilian Resource Project"
  civspace_freight_terminal: "Civilian Freight Terminal"
  civspace_freight_terminal_plural: "Civilian Freight Terminals"
+ fleet_type_shipclass_orbital_station:0 "Civilian Freight Terminal"
  civspace_privately_founded_colony: "Privately Founded Colony"
  civspace_privately_founded_colony_desc: "This colony was established by a civilian settlement association under an independent colonial charter."
  civspace_private_station_host: "Civilian Freight Terminal"

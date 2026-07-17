@@ -11,6 +11,7 @@
  civspace_resource_station_project_fleet: "Гражданский ресурсный проект"
  civspace_freight_terminal: "Гражданский грузовой терминал"
  civspace_freight_terminal_plural: "Гражданские грузовые терминалы"
+ fleet_type_shipclass_orbital_station:0 "Гражданский грузовой терминал"
  civspace_privately_founded_colony: "Частная колония"
  civspace_privately_founded_colony_desc: "Эта колония основана гражданским поселенческим объединением по независимой колониальной хартии."
  civspace_private_station_host: "Гражданский грузовой терминал"

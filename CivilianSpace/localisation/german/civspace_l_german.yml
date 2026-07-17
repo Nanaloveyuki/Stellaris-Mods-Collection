@@ -11,6 +11,7 @@
  civspace_resource_station_project_fleet: "Ziviles Ressourcenprojekt"
  civspace_freight_terminal: "Ziviles Frachtterminal"
  civspace_freight_terminal_plural: "Zivile Frachtterminals"
+ fleet_type_shipclass_orbital_station:0 "Ziviles Frachtterminal"
  civspace_privately_founded_colony: "Privat gegründete Kolonie"
  civspace_privately_founded_colony_desc: "Diese Kolonie wurde von einem zivilen Siedlungsverband im Rahmen einer unabhängigen Koloniallizenz gegründet."
  civspace_private_station_host: "Ziviles Frachtterminal"

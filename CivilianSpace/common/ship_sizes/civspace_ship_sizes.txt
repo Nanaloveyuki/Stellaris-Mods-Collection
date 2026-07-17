@@ -19,6 +19,8 @@ civspace_freight_terminal = {
 	components_add_to_cost = no
 	enable_default_design = no
 	is_designable = no
-	class = shipclass_military_station
+	# Use the legacy orbital-station class so the galaxy map does not
+	# categorize this unarmed civilian terminal as a military station.
+	class = shipclass_orbital_station
 	valid_target_aggressive_stance = no
 }
