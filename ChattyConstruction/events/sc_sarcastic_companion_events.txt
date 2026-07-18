@@ -10,11 +10,11 @@ country_event = {
 		is_ai = no
 		NOT = { has_country_flag = sc_companion_assigned }
 		NOT = { has_country_flag = sc_companion_greeting_seen }
-		any_owned_ship = { is_ship_size = constructor }
+		any_owned_ship = { is_ship_class = shipclass_constructor }
 	}
 	immediate = {
 		random_owned_ship = {
-			limit = { is_ship_size = constructor }
+			limit = { is_ship_class = shipclass_constructor }
 			set_ship_flag = sc_sarcastic_companion
 			save_event_target_as = sc_companion_ship
 		}
@@ -39,11 +39,11 @@ country_event = {
 		is_ai = no
 		has_country_flag = sc_companion_greeting_seen
 		NOT = { has_country_flag = sc_companion_assigned }
-		any_owned_ship = { is_ship_size = constructor }
+		any_owned_ship = { is_ship_class = shipclass_constructor }
 	}
 	immediate = {
 		random_owned_ship = {
-			limit = { is_ship_size = constructor }
+			limit = { is_ship_class = shipclass_constructor }
 			set_ship_flag = sc_sarcastic_companion
 			save_event_target_as = sc_companion_ship
 		}
@@ -72,7 +72,7 @@ country_event = {
 		remove_country_flag = sc_companion_assigned
 		remove_country_flag = sc_transmission_scheduled
 		if = {
-			limit = { any_owned_ship = { is_ship_size = constructor } }
+			limit = { any_owned_ship = { is_ship_class = shipclass_constructor } }
 			country_event = { id = sc.2 days = 30 }
 		}
 		else = {
@@ -89,7 +89,7 @@ country_event = {
 	trigger = {
 		is_ai = no
 		NOT = { has_country_flag = sc_companion_assigned }
-		NOT = { any_owned_ship = { is_ship_size = constructor } }
+		NOT = { any_owned_ship = { is_ship_class = shipclass_constructor } }
 	}
 	immediate = {
 		remove_country_flag = sc_transmission_scheduled
@@ -600,7 +600,7 @@ country_event = {
 			remove_country_flag = sc_companion_assigned
 			remove_country_flag = sc_transmission_scheduled
 			if = {
-				limit = { any_owned_ship = { is_ship_size = constructor } }
+				limit = { any_owned_ship = { is_ship_class = shipclass_constructor } }
 				country_event = { id = sc.2 days = 30 }
 			}
 			else = {
@@ -7329,4 +7329,3 @@ country_event = {
 		name = sc_back_to_work
 	}
 }
-
