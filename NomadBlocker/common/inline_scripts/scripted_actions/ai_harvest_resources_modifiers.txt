@@ -1,0 +1,91 @@
+# Nomad Blocker override for Stellaris 4.4.6.
+#
+# This is the vanilla shared AI-weight include used by:
+# - arkship_harvest_resources
+# - logistic_harvest_resources
+# - arkship_strip_mine
+# - arkship_reprocess_planet
+#
+# Scope: planet (this = target planet, from = acting fleet)
+
+# AI Nomad empires must never harvest or destructively process a planet in a
+# human player's system. The acting-country check keeps player automation from
+# being blocked in the player's own systems.
+modifier = {
+	factor = 0
+	FROM.controller = { is_ai = yes }
+	space_owner? = { is_ai = no }
+}
+
+modifier = {
+	factor = value:arkship_harvest_resource_from_planet_class_base_value
+	is_surveyed = {
+		who = FROM.controller
+		status = yes
+	}
+}
+modifier = {
+	factor = @ai_action_weight_factor_5
+	is_surveyed = {
+		who = FROM.controller
+		status = yes
+	}
+}
+modifier = {
+	factor = @ai_action_weight_100
+	is_target_of_harvest_contract = {
+		COUNTRY = FROM.controller
+	}
+}
+modifier = {
+	factor = @ai_low_resource_harvest_factor
+	OR = {
+		is_planet_class = pc_gas_giant
+		is_planet_class = pc_toxic
+	}
+	FROM.controller = {
+		resource_stockpile_compare = {
+			resource = exotic_gases
+			value < @ai_low_resource_stockpile
+		}
+	}
+}
+modifier = {
+	factor = @ai_low_resource_harvest_factor
+	is_planet_class = pc_frozen
+	FROM.controller = {
+		resource_stockpile_compare = {
+			resource = rare_crystals
+			value < @ai_low_resource_stockpile
+		}
+	}
+}
+modifier = {
+	factor = @ai_low_resource_harvest_factor
+	is_planet_class = pc_molten
+	FROM.controller = {
+		resource_stockpile_compare = {
+			resource = volatile_motes
+			value < @ai_low_resource_stockpile
+		}
+	}
+}
+modifier = {
+	factor = @ai_action_weight_factor_0_05
+	OR = {
+		space_owner? = {
+			benefits_from_waystation_network = {
+				NOMAD = FROM.controller
+				SYSTEM_OWNER = this
+			}
+		}
+		AND = {
+			space_owner? = {
+				has_communications = FROM.controller
+				NOT = { is_hostile_to = FROM.controller }
+			}
+			exempt_from_harvest_resources_opinion_reduction_trigger = no
+		}
+	}
+}
+

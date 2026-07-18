@@ -24,6 +24,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3733815669
 - [Fateweaving](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/Fateweaving)
 - [Galactic Rumors Lore Pack](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/GalacticRumorsLorePack)
 - [Lucky Events](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/LuckyEvents)
+- [Nomad Blocker](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/NomadBlocker)
 - [Planetary Festivals](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/PlanetaryFestivals)
 - [The Mostly Harmless Guide to the Galaxy](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/TheMostlyHarmlessGuide)
 - [Unfortunate Events](https://github.com/non-npc/Stellaris-Mods-Collection/tree/master/UnfortunateEvents)
